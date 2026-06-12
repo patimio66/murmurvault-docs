@@ -1,47 +1,67 @@
 ---
 title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+description: "Create an account, set up a vault, and store your first secret."
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
-
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
+This guide takes you from a fresh account to your first stored secret. It should take about five minutes.
 
 ## Prerequisites
 
-Before you begin, you must have:
+- A modern browser with [WebAuthn](https://webauthn.guide/) support (current Chrome, Safari, Firefox, or Edge).
+- An authenticator for passkeys — a platform authenticator (Touch ID, Windows Hello, Android) or a security key.
+- Access to your email, used to verify your address and to release top-tier secrets.
 
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
+<Note>
+  murmurvault is served over HTTPS, which passkeys require. You don't need to configure anything for this.
+</Note>
 
 ## Get started
 
 <Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
+  <Step title="Create your account">
+    Register with your name, email, and a password, then confirm your email from the verification link.
 
-    ```bash
-    npm install your-package
-    ```
+    This password protects your **account** (signing in). It is separate from the **vault passphrase** you set next, which protects your **secrets**.
   </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
+  <Step title="Create a vault">
+    Open the vault and choose **Create vault**. Set a vault passphrase.
 
-    ```bash
-    your-cli init
-    ```
+    Your passphrase derives the key that unlocks your secrets. The strength meter helps you pick something strong. Choose carefully — it cannot be reset or recovered.
+
+    <Warning>
+      No one can recover your passphrase, including the server operator. Store it somewhere safe before you continue.
+    </Warning>
   </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
+  <Step title="Add a passkey (recommended)">
+    In **Settings → Vault**, link a passkey to the vault. A passkey lets you unlock without typing your passphrase and is required for top-tier secrets.
 
-    ```bash
-    your-cli start
-    ```
+    See [Passkeys](/vault/passkeys) for details.
+  </Step>
+  <Step title="Store your first secret">
+    Back in the vault, choose **Add secret**, pick a type (KV, Login, Recovery Codes, or Secure Note), name it, and fill in the fields. Save.
+
+    The secret is encrypted in your browser before it is sent. The server stores only ciphertext.
+  </Step>
+  <Step title="Lock and unlock">
+    Lock the vault, then unlock it again with your passphrase or passkey to confirm your setup works.
+
+    The vault also auto-locks after a period of inactivity (10 minutes by default). See [Unlocking](/vault/unlocking).
   </Step>
 </Steps>
 
-<Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
+## Next steps
 
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
-</Tip>
+<CardGroup cols={2}>
+  <Card title="Secret tiers" icon="layer-group" href="/concepts/secret-tiers">
+    Decide which secrets belong in the top tier.
+  </Card>
+  <Card title="Top-tier secrets" icon="lock" href="/vault/top-secrets">
+    Set up and reveal the highest-protection secrets.
+  </Card>
+  <Card title="Authentication" icon="user-shield" href="/settings/authentication">
+    Add two-factor authentication and sign-in passkeys.
+  </Card>
+  <Card title="Security model" icon="shield-halved" href="/concepts/security-model">
+    Learn what the server can and cannot see.
+  </Card>
+</CardGroup>

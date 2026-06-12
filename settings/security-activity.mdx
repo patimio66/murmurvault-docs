@@ -1,0 +1,33 @@
+---
+title: "Security activity"
+description: "Review recent account activity and new-device sign-in alerts."
+---
+
+**Settings → Security activity** shows a log of security-relevant events on your account, so you can spot a sign-in you don't recognize. Opening it requires a recent password confirmation.
+
+## What's recorded
+
+Each event captures details such as the IP address and browser (user agent) involved. This lets you tell your own sessions apart from one you don't recognize.
+
+## New-device alerts
+
+When you sign in from a device murmurvault hasn't seen recently, it treats that as a **new device** and alerts you. A device that has been idle longer than the retention window is treated as new again on its next sign-in.
+
+<Tip>
+  If you see activity you don't recognize, change your account password and **sign out other sessions** from [Settings → Authentication](/settings/authentication).
+</Tip>
+
+## Retention
+
+Security events are kept for **90 days**, then automatically pruned. Keeping IP addresses and user agents indefinitely would only create more data for a future breach to expose, so the log is deliberately short-lived.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Authentication" icon="user-shield" href="/settings/authentication">
+    Change your password and end other sessions.
+  </Card>
+  <Card title="Security model" icon="shield-halved" href="/concepts/security-model">
+    What the server stores about you.
+  </Card>
+</CardGroup>

@@ -1,0 +1,48 @@
+---
+title: "Account deletion"
+description: "Delete your account through a delayed, reversible freeze-then-erase flow."
+---
+
+Deleting your account is a delayed, reversible process: murmurvault freezes the account first and erases it later, giving you a window to change your mind.
+
+## How it works
+
+<Steps>
+  <Step title="Request deletion">
+    Start deletion from [Settings → Profile](/settings/profile). This schedules erasure for a fixed grace period in the future and **freezes** the account immediately.
+  </Step>
+  <Step title="Grace period">
+    The account stays frozen for **7 days**. During this time it is reachable only to confirm or cancel the deletion.
+  </Step>
+  <Step title="Reminder">
+    A reminder email is sent **3 days** before the scheduled erasure, so the deletion never happens without warning.
+  </Step>
+  <Step title="Erasure">
+    If you do nothing, the account and all its vaults and secrets are permanently deleted on the scheduled date.
+  </Step>
+</Steps>
+
+## Cancel a pending deletion
+
+To stop the process during the grace period, sign back in and **cancel** the deletion from the pending-deletion screen. The freeze lifts and your account returns to normal.
+
+<Note>
+  You can reach and cancel the freeze even if your email isn't verified — a frozen account must always be able to escape the freeze.
+</Note>
+
+## After erasure
+
+<Warning>
+  Once the grace period elapses and erasure runs, the account, its vaults, and every secret are gone permanently. There is no recovery after this point.
+</Warning>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Profile" icon="user" href="/settings/profile">
+    Where account deletion starts.
+  </Card>
+  <Card title="Security model" icon="shield-halved" href="/concepts/security-model">
+    What deletion removes and what was never stored.
+  </Card>
+</CardGroup>

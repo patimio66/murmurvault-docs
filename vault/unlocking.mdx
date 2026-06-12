@@ -1,0 +1,56 @@
+---
+title: "Unlocking & auto-lock"
+description: "How to unlock a vault, how it stays unlocked, and when it locks itself."
+---
+
+A vault is locked until you unlock it. Unlocking loads the [Master Key](/concepts/security-model#keys) into memory so soft secrets can be decrypted. The Top Key is never loaded during a normal unlock — see [Top-tier secrets](/vault/top-secrets).
+
+## Unlock a vault
+
+Unlock with either:
+
+- **Your passphrase** — the passphrase you set for this vault.
+- **Any linked passkey** — tap or authenticate with a passkey you've linked to the vault.
+
+Once unlocked, soft secrets decrypt as you open them, and the search palette can find secrets by name.
+
+## Staying unlocked
+
+To avoid re-entering credentials on every page, murmurvault caches the Master Key locally:
+
+- Wrapped with AES-GCM under a non-extractable WebCrypto key.
+- Stored in IndexedDB with a rolling expiry.
+
+This means the unlocked state **survives page navigation and reloads** until the vault auto-locks. The Top Key is never cached.
+
+## Auto-lock
+
+Each vault locks itself after a period of inactivity.
+
+- **Default:** 10 minutes.
+- **Configurable per vault** in [Settings → Vault](/settings/vault).
+
+When the vault locks:
+
+- The cached Master Key is cleared.
+- Any revealed top-secret plaintext held in the page is discarded.
+- You must unlock again to read secrets.
+
+## Lock manually
+
+Lock the vault yourself at any time — for example before stepping away from a shared machine. Locking immediately clears the in-memory and cached keys.
+
+<Tip>
+  On a shared or borrowed device, lock the vault and sign out when you're done. You can also end other browser sessions from [Settings → Authentication](/settings/authentication).
+</Tip>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Passkeys" icon="fingerprint" href="/vault/passkeys">
+    Link passkeys to unlock without a passphrase.
+  </Card>
+  <Card title="Vault settings" icon="gear" href="/settings/vault">
+    Adjust the auto-lock timeout.
+  </Card>
+</CardGroup>

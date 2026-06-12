@@ -1,0 +1,53 @@
+---
+title: "Authentication"
+description: "Protect account sign-in with a password, two-factor authentication, and passkeys."
+---
+
+**Settings → Authentication** controls how you sign in to your account. These protections are separate from your vault passphrase and vault passkeys, which protect your secrets.
+
+<Note>
+  Opening this page requires a recent password confirmation. murmurvault may ask you to re-enter your account password before showing it.
+</Note>
+
+## Password
+
+Change your account password from this page. Password updates are rate-limited to protect against abuse.
+
+This is your **account** password (sign-in). It is not the **vault passphrase** that unlocks your secrets — changing one does not affect the other.
+
+## Two-factor authentication (TOTP)
+
+Add time-based one-time password (TOTP) two-factor authentication:
+
+1. Start 2FA setup and scan the QR code with an authenticator app.
+2. Confirm with a generated code to enable it.
+3. Store the **recovery codes** somewhere safe — they let you sign in if you lose your authenticator.
+
+Once enabled, sign-in asks for a code from your authenticator app (or a recovery code).
+
+## Authentication passkeys
+
+Register passkeys to sign in to your account without a password.
+
+<Warning>
+  Passkey registration requires HTTPS. It fails on plain `http://`.
+</Warning>
+
+These **authentication passkeys** are distinct from the **vault passkeys** that unlock a vault and hold the Top Key. See [Passkeys](/vault/passkeys) for vault passkeys.
+
+## Browser sessions
+
+Review where you're signed in and **sign out other sessions**. This is the first thing to do after using a shared or borrowed device.
+
+Ending other sessions re-asserts your password in the request, so a confirmation from earlier is not enough on its own — protecting you when a confirmation window is still open on a machine you no longer control.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Security activity" icon="list-check" href="/settings/security-activity">
+    Review recent sign-ins and new-device alerts.
+  </Card>
+  <Card title="Vault passkeys" icon="fingerprint" href="/vault/passkeys">
+    Passkeys that unlock your vault.
+  </Card>
+</CardGroup>

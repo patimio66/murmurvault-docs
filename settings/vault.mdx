@@ -1,0 +1,53 @@
+---
+title: "Vault settings"
+description: "Change a vault's passphrase, auto-lock timeout, and top-secret passkeys."
+---
+
+**Settings → Vault** controls the protection settings for a vault. Opening it requires a recent account-password confirmation.
+
+## Passphrase
+
+Change the vault passphrase. Because the passphrase wraps the [Master Key](/concepts/security-model#keys), changing it re-wraps that key under the new passphrase.
+
+<Warning>
+  Choose carefully. The passphrase cannot be recovered or reset — if you forget it and have no linked passkey, the vault is unrecoverable.
+</Warning>
+
+Passphrase changes require a recent password confirmation (a short 15-minute window) and are rate-limited, because this action can lock you out of your own secrets.
+
+## Auto-lock
+
+Set how long the vault stays unlocked while idle before it locks itself.
+
+- **Default:** 10 minutes.
+- Applies per vault.
+
+When the timeout elapses, cached keys and any revealed top-secret plaintext are cleared. See [Unlocking & auto-lock](/vault/unlocking#auto-lock).
+
+## Top-secret passkeys
+
+Grant or manage which passkeys hold the [Top Key](/concepts/security-model#keys):
+
+- Granting the Top Key to a passkey **enables the top tier** for this vault.
+- Top secrets can then be created and revealed with that passkey.
+
+<Warning>
+  murmurvault blocks removing the **last** passkey that holds the Top Key while top secrets exist — otherwise those secrets would become permanently unreadable. Keep more than one Top-Key passkey.
+</Warning>
+
+See [Top-tier secrets](/vault/top-secrets) and [Passkeys](/vault/passkeys).
+
+## Delete the vault
+
+You can also delete the vault from its settings. Deletion is immediate and irreversible, and asks you to type the vault's confirmation name. See [Vaults → Delete a vault](/vault/vaults#delete-a-vault).
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Passkeys" icon="fingerprint" href="/vault/passkeys">
+    Link and manage vault passkeys.
+  </Card>
+  <Card title="Unlocking" icon="unlock" href="/vault/unlocking">
+    How auto-lock behaves.
+  </Card>
+</CardGroup>

@@ -1,0 +1,70 @@
+---
+title: "Passkeys"
+description: "Link passkeys to unlock your vault and hold the Top Key."
+---
+
+Passkeys are WebAuthn credentials backed by your device or a security key. murmurvault uses them in two ways:
+
+- **Vault passkeys** unlock the vault without a passphrase, and can hold the [Top Key](/concepts/security-model#keys) for top secrets.
+- **Authentication passkeys** sign you in to your account. These are managed in [Settings → Authentication](/settings/authentication) and are separate from vault passkeys.
+
+This page covers **vault passkeys**.
+
+## How vault passkeys work
+
+murmurvault uses the WebAuthn **PRF extension** to derive a secret from your passkey. That secret (via HKDF) wraps your keys:
+
+- Every linked passkey wraps the **Master Key**, so it can unlock the vault.
+- A passkey can additionally hold the **Top Key**, enabling top-secret reveals.
+
+The PRF output never leaves your browser; the server stores only the resulting wrapper ciphertext.
+
+## Requirements
+
+<Warning>
+  Passkey registration requires **HTTPS**. murmurvault is served over HTTPS, so this works out of the box.
+</Warning>
+
+- A platform authenticator (Touch ID, Windows Hello, Android) or a roaming security key.
+- A browser and authenticator that support the WebAuthn PRF extension.
+
+## Link a passkey to a vault
+
+1. Go to [Settings → Vault](/settings/vault).
+2. Add a passkey under the vault's passkey section and authenticate when prompted.
+3. The passkey can now unlock the vault.
+
+To enable top secrets, grant the **Top Key** to a passkey from the same screen. See [Top-tier secrets](/vault/top-secrets#enable-the-top-tier).
+
+## The PRF salt
+
+Each vault has **one PRF salt**, shared across all of its linked passkeys.
+
+- Changing the salt would invalidate every existing wrapper, so it is fixed for the life of the vault.
+- All passkeys you link to a vault derive from this shared salt.
+
+## Re-registering older passkeys
+
+<Note>
+  A passkey registered **before PRF support was enabled** cannot unlock the vault. Remove it and register it again so it picks up the PRF-based wrapper.
+</Note>
+
+## Removing passkeys
+
+- You can remove a vault passkey at any time, as long as another way in remains.
+- murmurvault **blocks removing the last passkey that holds the Top Key** while top secrets exist, because doing so would make those secrets unreadable forever.
+
+<Tip>
+  Link at least two passkeys to each vault, and grant the Top Key to more than one if you use top secrets. A single passkey is a single point of failure with no recovery.
+</Tip>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Top-tier secrets" icon="lock" href="/vault/top-secrets">
+    Use passkeys to reveal top secrets.
+  </Card>
+  <Card title="Authentication" icon="user-shield" href="/settings/authentication">
+    Sign-in passkeys and two-factor authentication.
+  </Card>
+</CardGroup>

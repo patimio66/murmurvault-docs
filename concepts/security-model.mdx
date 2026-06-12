@@ -1,0 +1,82 @@
+---
+title: "Security model"
+description: "What murmurvault encrypts, where keys live, and what a server breach would expose."
+---
+
+murmurvault is end-to-end encrypted. All encryption and decryption happen in your browser. The server stores ciphertext and the parameters needed to derive keys, and never sees plaintext.
+
+## Keys
+
+murmurvault uses two independent 256-bit keys, both generated in your browser.
+
+<CardGroup cols={2}>
+  <Card title="Master Key (MK)" icon="key">
+    Encrypts all vault metadata (secret names and types) and every **soft** secret value. Loaded into memory while the vault is unlocked.
+  </Card>
+  <Card title="Top Key (TK)" icon="lock">
+    Encrypts **top**-tier values only. Held exclusively by passkeys, never cached, and discarded immediately after use.
+  </Card>
+</CardGroup>
+
+Because the Top Key is separate and passkey-only, your passphrase alone can never reveal a top-tier value.
+
+## Key wrapping
+
+Your keys are never stored directly. They are encrypted ("wrapped") by material derived from your credentials:
+
+| Key | Wrapped by | Derivation |
+|-----|-----------|------------|
+| Master Key | Your passphrase | Argon2id KEK (libsodium MODERATE parameters) |
+| Master Key | Each linked passkey | WebAuthn PRF → HKDF |
+| Top Key | Linked passkeys only | WebAuthn PRF → HKDF |
+
+A vault can hold several wrappers of the same key — one per passphrase and one per passkey — so any single credential can unlock it. The passphrase cannot wrap the Top Key, which is why top secrets require a passkey.
+
+## Cipher
+
+- **Algorithm** — XChaCha20-Poly1305, authenticated encryption.
+- **Nonces** — a fresh 192-bit random nonce per encrypted blob.
+- **Library** — `libsodium-wrappers-sumo` (WebAssembly), which also provides Argon2id.
+
+Each stored secret is an independent ciphertext-and-nonce pair, so the server cannot link, group, or order secrets by their contents — only by their tier.
+
+## Key persistence
+
+To keep you unlocked across page navigations and reloads, the Master Key is cached locally:
+
+- Wrapped with AES-GCM under a **non-extractable** WebCrypto key.
+- Stored in **IndexedDB** with a rolling expiry (the auto-lock window).
+- The Top Key is **never** persisted.
+
+Because the WebCrypto wrapping key is non-extractable, the cached Master Key cannot be exported even by code running in the page.
+
+## What the server can see
+
+| Visible to the server | Hidden from the server |
+|-----------------------|------------------------|
+| Account email and password hash | Vault passphrase |
+| Per-vault KDF salt and parameters | Master Key and Top Key |
+| Number of secrets, grouped by tier | Secret names, types, and values |
+| Encrypted blobs (ciphertext + nonce) | Any plaintext or derived key |
+| Passkey wrapper records (all ciphertext) | WebAuthn PRF output |
+
+A complete server compromise yields only ciphertext and key-derivation parameters. Without your passphrase or a passkey, the data cannot be decrypted.
+
+## Recovery
+
+There is **none, by design**. Your passphrase and your passkeys are the only ways to unlock a vault. There is no reset link, no support override, and no operator backdoor.
+
+<Warning>
+  Lose every passphrase and passkey for a vault and its contents are permanently unrecoverable. Keep at least one passphrase recorded safely and more than one passkey linked.
+</Warning>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Secret tiers" icon="layer-group" href="/concepts/secret-tiers">
+    How soft and top secrets differ.
+  </Card>
+  <Card title="Passkeys" icon="fingerprint" href="/vault/passkeys">
+    PRF support, salts, and registration requirements.
+  </Card>
+</CardGroup>

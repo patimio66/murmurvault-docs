@@ -1,0 +1,59 @@
+---
+title: "Vaults"
+description: "Create, organize, and delete vaults."
+---
+
+A vault is an encrypted container for your secrets, protected by its own passphrase and passkeys. You can keep several vaults — for example, one for personal credentials and one for work.
+
+## Create a vault
+
+1. Open the vault area. If you have none yet, you land on the setup screen.
+2. Choose **Create vault** and give it a name (optional) and a passphrase.
+3. Save. The vault's keys are generated in your browser and wrapped by your passphrase.
+
+A vault without a name is shown as `Vault {id}` in the sidebar.
+
+<Warning>
+  The passphrase you set here protects this vault's secrets and cannot be recovered. Record it safely before adding secrets.
+</Warning>
+
+## Multiple vaults
+
+You can create up to **50 vaults** per account. Each has independent keys, a passphrase, passkeys, and auto-lock settings.
+
+- Vaults appear in the sidebar in their saved order.
+- Drag to **reorder** them; the order is saved per account.
+- The first vault by position is your **default** — where you land when you open the app.
+
+When you reach the limit, the **Add vault** action is disabled and further creation is rejected by the server.
+
+## Switch and filter
+
+- Select a vault in the sidebar to open it.
+- Within a vault, filter the secret list by type (KV, Login, Recovery Codes, Secure Note).
+- Use the search palette to find a secret quickly. See [Manage secrets](/vault/secrets#search).
+
+## Delete a vault
+
+Deleting a vault permanently destroys it and every secret inside.
+
+1. Open the vault's settings.
+2. Choose to delete, and **type the vault's confirmation name** (its display name in kebab-case) to confirm.
+3. Re-confirm your **account password** if prompted.
+
+<Warning>
+  Deletion is immediate and irreversible. There is no trash and no recovery. Export or move anything you need first.
+</Warning>
+
+Because deletion can lock you out of your own data, murmurvault requires a recent password confirmation (a 15-minute window, much shorter than ordinary actions) before it proceeds.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Vault settings" icon="gear" href="/settings/vault">
+    Change the passphrase, auto-lock, and top-tier passkeys.
+  </Card>
+  <Card title="Manage secrets" icon="key" href="/vault/secrets">
+    Add and organize secrets within a vault.
+  </Card>
+</CardGroup>
