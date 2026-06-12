@@ -1,0 +1,33 @@
+---
+title: "Sicherheitsaktivität"
+description: "Prüfe letzte Konto-Aktivität und Warnungen zu Anmeldungen von neuen Geräten."
+---
+
+**Settings → Security activity** zeigt ein Protokoll sicherheitsrelevanter Ereignisse deines Kontos, sodass du eine Anmeldung erkennst, die du nicht wiedererkennst. Das Öffnen erfordert eine kürzliche Passwortbestätigung.
+
+## Was aufgezeichnet wird
+
+Jedes Ereignis erfasst Details wie die beteiligte IP-Adresse und den Browser (User-Agent). So kannst du deine eigenen Sitzungen von einer unterscheiden, die du nicht wiedererkennst.
+
+## Warnungen zu neuen Geräten
+
+Meldest du dich von einem Gerät an, das murmurvault zuletzt nicht gesehen hat, behandelt es das als **neues Gerät** und warnt dich. Ein Gerät, das länger als das Aufbewahrungsfenster untätig war, gilt bei seiner nächsten Anmeldung wieder als neu.
+
+<Tip>
+  Siehst du Aktivität, die du nicht wiedererkennst, ändere dein Konto-Passwort und **melde andere Sitzungen ab** unter [Settings → Authentication](/de/settings/authentication).
+</Tip>
+
+## Aufbewahrung
+
+Sicherheitsereignisse werden **90 Tage** aufbewahrt und dann automatisch bereinigt. IP-Adressen und User-Agents unbegrenzt zu halten würde nur mehr Daten schaffen, die ein künftiger Einbruch offenlegen könnte, daher ist das Protokoll bewusst kurzlebig.
+
+## Verwandt
+
+<CardGroup cols={2}>
+  <Card title="Authentifizierung" icon="user-shield" href="/de/settings/authentication">
+    Passwort ändern und andere Sitzungen beenden.
+  </Card>
+  <Card title="Sicherheitsmodell" icon="shield-halved" href="/de/concepts/security-model">
+    Was der Server über dich speichert.
+  </Card>
+</CardGroup>

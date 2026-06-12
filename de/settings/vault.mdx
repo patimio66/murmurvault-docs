@@ -1,0 +1,53 @@
+---
+title: "Tresor-Einstellungen"
+description: "Ändere Passphrase, Auto-Sperr-Zeitlimit und Streng-geheim-Passkeys eines Tresors."
+---
+
+**Settings → Vault** steuert die Schutzeinstellungen eines Tresors. Das Öffnen erfordert eine kürzliche Bestätigung des Konto-Passworts.
+
+## Passphrase
+
+Ändere die Tresor-Passphrase. Weil die Passphrase den [Hauptschlüssel](/de/concepts/security-model#keys) umschließt, umschließt ihre Änderung diesen Schlüssel neu unter der neuen Passphrase.
+
+<Warning>
+  Wähle sorgfältig. Die Passphrase lässt sich nicht wiederherstellen oder zurücksetzen – vergisst du sie und hast keinen verknüpften Passkey, ist der Tresor nicht wiederherstellbar.
+</Warning>
+
+Passphrase-Änderungen erfordern eine kürzliche Passwortbestätigung (ein kurzes 15-Minuten-Fenster) und sind ratenbegrenzt, weil diese Aktion dich aus deinen eigenen Geheimnissen aussperren kann.
+
+## Automatische Sperre
+
+Lege fest, wie lange der Tresor im Leerlauf entsperrt bleibt, bevor er sich selbst sperrt.
+
+- **Standard:** 10 Minuten.
+- Gilt pro Tresor.
+
+Läuft das Zeitlimit ab, werden zwischengespeicherte Schlüssel und jeglicher aufgedeckter Klartext streng geheimer Geheimnisse gelöscht. Siehe [Entsperren & automatische Sperre](/de/vault/unlocking#auto-lock).
+
+## Streng-geheim-Passkeys
+
+Gewähre oder verwalte, welche Passkeys den [Streng-geheim-Schlüssel](/de/concepts/security-model#keys) halten:
+
+- Einem Passkey den Streng-geheim-Schlüssel zu gewähren **aktiviert die streng geheime Stufe** für diesen Tresor.
+- Streng geheime Geheimnisse lassen sich dann mit diesem Passkey erstellen und aufdecken.
+
+<Warning>
+  murmurvault blockiert das Entfernen des **letzten** Passkeys, der den Streng-geheim-Schlüssel hält, solange streng geheime Geheimnisse existieren – andernfalls würden diese Geheimnisse dauerhaft unlesbar. Halte mehr als einen Streng-geheim-Passkey.
+</Warning>
+
+Siehe [Streng geheime Geheimnisse](/de/vault/top-secrets) und [Passkeys](/de/vault/passkeys).
+
+## Tresor löschen
+
+Du kannst den Tresor auch aus seinen Einstellungen löschen. Das Löschen ist sofortig und unumkehrbar und bittet dich, den Bestätigungsnamen des Tresors zu tippen. Siehe [Tresore → Tresor löschen](/de/vault/vaults#delete-a-vault).
+
+## Verwandt
+
+<CardGroup cols={2}>
+  <Card title="Passkeys" icon="fingerprint" href="/de/vault/passkeys">
+    Tresor-Passkeys verknüpfen und verwalten.
+  </Card>
+  <Card title="Entsperren" icon="unlock" href="/de/vault/unlocking">
+    Wie sich die automatische Sperre verhält.
+  </Card>
+</CardGroup>

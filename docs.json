@@ -13,39 +13,123 @@
     "strict": true
   },
   "navigation": {
-    "groups": [
+    "languages": [
       {
-        "group": "Getting started",
-        "pages": [
-          "index",
-          "quickstart"
+        "language": "en",
+        "groups": [
+          {
+            "group": "Getting started",
+            "pages": [
+              "index",
+              "quickstart"
+            ]
+          },
+          {
+            "group": "Core concepts",
+            "pages": [
+              "concepts/security-model",
+              "concepts/secret-tiers"
+            ]
+          },
+          {
+            "group": "Using your vault",
+            "pages": [
+              "vault/vaults",
+              "vault/secrets",
+              "vault/unlocking",
+              "vault/top-secrets",
+              "vault/passkeys"
+            ]
+          },
+          {
+            "group": "Settings & account",
+            "pages": [
+              "settings/profile",
+              "settings/authentication",
+              "settings/vault",
+              "settings/security-activity",
+              "settings/account"
+            ]
+          }
         ]
       },
       {
-        "group": "Core concepts",
-        "pages": [
-          "concepts/security-model",
-          "concepts/secret-tiers"
+        "language": "pl",
+        "default": true,
+        "groups": [
+          {
+            "group": "Pierwsze kroki",
+            "pages": [
+              "pl/index",
+              "pl/quickstart"
+            ]
+          },
+          {
+            "group": "Główne pojęcia",
+            "pages": [
+              "pl/concepts/security-model",
+              "pl/concepts/secret-tiers"
+            ]
+          },
+          {
+            "group": "Korzystanie z sejfu",
+            "pages": [
+              "pl/vault/vaults",
+              "pl/vault/secrets",
+              "pl/vault/unlocking",
+              "pl/vault/top-secrets",
+              "pl/vault/passkeys"
+            ]
+          },
+          {
+            "group": "Ustawienia i konto",
+            "pages": [
+              "pl/settings/profile",
+              "pl/settings/authentication",
+              "pl/settings/vault",
+              "pl/settings/security-activity",
+              "pl/settings/account"
+            ]
+          }
         ]
       },
       {
-        "group": "Using your vault",
-        "pages": [
-          "vault/vaults",
-          "vault/secrets",
-          "vault/unlocking",
-          "vault/top-secrets",
-          "vault/passkeys"
-        ]
-      },
-      {
-        "group": "Settings & account",
-        "pages": [
-          "settings/profile",
-          "settings/authentication",
-          "settings/vault",
-          "settings/security-activity",
-          "settings/account"
+        "language": "de",
+        "groups": [
+          {
+            "group": "Erste Schritte",
+            "pages": [
+              "de/index",
+              "de/quickstart"
+            ]
+          },
+          {
+            "group": "Kernkonzepte",
+            "pages": [
+              "de/concepts/security-model",
+              "de/concepts/secret-tiers"
+            ]
+          },
+          {
+            "group": "Tresor verwenden",
+            "pages": [
+              "de/vault/vaults",
+              "de/vault/secrets",
+              "de/vault/unlocking",
+              "de/vault/top-secrets",
+              "de/vault/passkeys"
+            ]
+          },
+          {
+            "group": "Einstellungen & Konto",
+            "pages": [
+              "de/settings/profile",
+              "de/settings/authentication",
+              "de/settings/vault",
+              "de/settings/security-activity",
+              "de/settings/account"
+            ]
+          }
         ]
       }
     ]

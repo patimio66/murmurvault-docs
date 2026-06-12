@@ -1,0 +1,59 @@
+---
+title: "Sejfy"
+description: "Twórz, porządkuj i usuwaj sejfy."
+---
+
+Sejf to zaszyfrowany pojemnik na Twoje sekrety, chroniony własną frazą dostępu i własnymi passkeys. Możesz mieć kilka sejfów — na przykład jeden na poświadczenia prywatne i jeden do pracy.
+
+## Utwórz sejf
+
+1. Otwórz obszar sejfu. Jeśli nie masz jeszcze żadnego, trafiasz na ekran konfiguracji.
+2. Wybierz **Create vault**, nadaj nazwę (opcjonalnie) i frazę dostępu.
+3. Zapisz. Klucze sejfu zostają wygenerowane w przeglądarce i opakowane Twoją frazą dostępu.
+
+Sejf bez nazwy jest pokazywany na pasku bocznym jako `Vault {id}`.
+
+<Warning>
+  Fraza dostępu, którą tu ustawisz, chroni sekrety tego sejfu i nie da się jej odzyskać. Zapisz ją bezpiecznie, zanim dodasz sekrety.
+</Warning>
+
+## Wiele sejfów
+
+Możesz utworzyć do **50 sejfów** na konto. Każdy ma niezależne klucze, frazę dostępu, passkeys i ustawienia automatycznej blokady.
+
+- Sejfy pojawiają się na pasku bocznym w zapisanej kolejności.
+- Przeciągnij, aby **zmienić kolejność**; kolejność jest zapisywana per konto.
+- Pierwszy sejf według pozycji jest Twoim **domyślnym** — na nim lądujesz po otwarciu aplikacji.
+
+Po osiągnięciu limitu akcja **Add vault** jest wyłączona, a dalsze tworzenie odrzuca serwer.
+
+## Przełączaj i filtruj
+
+- Wybierz sejf na pasku bocznym, aby go otworzyć.
+- W obrębie sejfu filtruj listę sekretów według typu (KV, Login, Kody odzyskiwania, Notatka chroniona).
+- Użyj palety wyszukiwania, aby szybko znaleźć sekret. Zobacz [Zarządzaj sekretami](/pl/vault/secrets#search).
+
+## Usuń sejf
+
+Usunięcie sejfu trwale niszczy go i każdy sekret w środku.
+
+1. Otwórz ustawienia sejfu.
+2. Wybierz usunięcie i **wpisz nazwę potwierdzającą sejfu** (jego nazwę wyświetlaną w kebab-case), aby potwierdzić.
+3. Potwierdź ponownie **hasło do konta**, jeśli pojawi się taka prośba.
+
+<Warning>
+  Usunięcie jest natychmiastowe i nieodwracalne. Nie ma kosza ani odzyskiwania. Najpierw wyeksportuj lub przenieś wszystko, czego potrzebujesz.
+</Warning>
+
+Ponieważ usunięcie może zamknąć Ci dostęp do Twoich własnych danych, murmurvault wymaga niedawnego potwierdzenia hasła (okno 15 minut, znacznie krótsze niż przy zwykłych akcjach), zanim je wykona.
+
+## Powiązane
+
+<CardGroup cols={2}>
+  <Card title="Ustawienia sejfu" icon="gear" href="/pl/settings/vault">
+    Zmień frazę dostępu, automatyczną blokadę i passkeys warstwy ściśle tajnej.
+  </Card>
+  <Card title="Zarządzaj sekretami" icon="key" href="/pl/vault/secrets">
+    Dodawaj i porządkuj sekrety w sejfie.
+  </Card>
+</CardGroup>

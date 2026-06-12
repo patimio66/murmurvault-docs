@@ -1,0 +1,53 @@
+---
+title: "Uwierzytelnianie"
+description: "Chroń logowanie do konta hasłem, uwierzytelnianiem dwuskładnikowym i passkeys."
+---
+
+**Settings → Authentication** steruje tym, jak logujesz się do konta. Te zabezpieczenia są oddzielne od frazy dostępu do sejfu i passkeys sejfu, które chronią Twoje sekrety.
+
+<Note>
+  Otwarcie tej strony wymaga niedawnego potwierdzenia hasła. murmurvault może poprosić o ponowne wpisanie hasła do konta, zanim ją pokaże.
+</Note>
+
+## Hasło
+
+Zmień hasło do konta z tej strony. Aktualizacje hasła są ograniczane częstotliwościowo, aby chronić przed nadużyciami.
+
+To Twoje hasło do **konta** (logowanie). Nie jest to **fraza dostępu do sejfu**, która odblokowuje sekrety — zmiana jednego nie wpływa na drugie.
+
+## Uwierzytelnianie dwuskładnikowe (TOTP)
+
+Dodaj uwierzytelnianie dwuskładnikowe oparte na jednorazowym haśle czasowym (TOTP):
+
+1. Rozpocznij konfigurację 2FA i zeskanuj kod QR aplikacją uwierzytelniającą.
+2. Potwierdź wygenerowanym kodem, aby je włączyć.
+3. Zapisz **kody odzyskiwania** w bezpiecznym miejscu — pozwalają zalogować się, jeśli stracisz uwierzytelniacz.
+
+Po włączeniu logowanie prosi o kod z aplikacji uwierzytelniającej (lub o kod odzyskiwania).
+
+## Passkeys uwierzytelniania
+
+Zarejestruj passkeys, aby logować się do konta bez hasła.
+
+<Warning>
+  Rejestracja passkey wymaga HTTPS. Nie zadziała na zwykłym `http://`.
+</Warning>
+
+Te **passkeys uwierzytelniania** różnią się od **passkeys sejfu**, które odblokowują sejf i przechowują Klucz ściśle tajny. Passkeys sejfu opisuje [Passkeys](/pl/vault/passkeys).
+
+## Sesje przeglądarki
+
+Przejrzyj, gdzie jesteś zalogowany, i **wyloguj inne sesje**. To pierwsza rzecz do zrobienia po użyciu współdzielonego lub pożyczonego urządzenia.
+
+Zakończenie innych sesji ponownie potwierdza Twoje hasło w żądaniu, więc wcześniejsze potwierdzenie samo w sobie nie wystarczy — chroni Cię to, gdy okno potwierdzenia wciąż jest otwarte na komputerze, którego już nie kontrolujesz.
+
+## Powiązane
+
+<CardGroup cols={2}>
+  <Card title="Aktywność bezpieczeństwa" icon="list-check" href="/pl/settings/security-activity">
+    Przejrzyj ostatnie logowania i alerty o nowych urządzeniach.
+  </Card>
+  <Card title="Passkeys sejfu" icon="fingerprint" href="/pl/vault/passkeys">
+    Passkeys, które odblokowują Twój sejf.
+  </Card>
+</CardGroup>

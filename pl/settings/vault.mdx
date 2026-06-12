@@ -1,0 +1,53 @@
+---
+title: "Ustawienia sejfu"
+description: "Zmień frazę dostępu sejfu, limit automatycznej blokady i passkeys sekretów ściśle tajnych."
+---
+
+**Settings → Vault** steruje ustawieniami ochrony sejfu. Otwarcie wymaga niedawnego potwierdzenia hasła do konta.
+
+## Fraza dostępu
+
+Zmień frazę dostępu do sejfu. Ponieważ fraza dostępu opakowuje [Klucz główny](/pl/concepts/security-model#keys), jej zmiana ponownie opakowuje ten klucz pod nową frazą.
+
+<Warning>
+  Wybieraj rozważnie. Frazy dostępu nie da się odzyskać ani zresetować — jeśli ją zapomnisz i nie masz powiązanego passkey, sejf będzie nie do odzyskania.
+</Warning>
+
+Zmiany frazy dostępu wymagają niedawnego potwierdzenia hasła (krótkie okno 15 minut) i są ograniczane częstotliwościowo, ponieważ ta akcja może zamknąć Ci dostęp do Twoich własnych sekretów.
+
+## Automatyczna blokada
+
+Ustaw, jak długo sejf pozostaje odblokowany w bezczynności, zanim zablokuje się sam.
+
+- **Domyślnie:** 10 minut.
+- Dotyczy pojedynczego sejfu.
+
+Gdy limit czasu upłynie, zbuforowane klucze i każdy odsłonięty tekst jawny sekretu ściśle tajnego zostają wyczyszczone. Zobacz [Odblokowywanie i automatyczna blokada](/pl/vault/unlocking#auto-lock).
+
+## Passkeys sekretów ściśle tajnych
+
+Nadawaj lub zarządzaj tym, które passkeys przechowują [Klucz ściśle tajny](/pl/concepts/security-model#keys):
+
+- Nadanie Klucza ściśle tajnego passkey **włącza warstwę ściśle tajną** dla tego sejfu.
+- Sekrety ściśle tajne można wtedy tworzyć i odsłaniać tym passkey.
+
+<Warning>
+  murmurvault blokuje usunięcie **ostatniego** passkey, który przechowuje Klucz ściśle tajny, dopóki istnieją sekrety ściśle tajne — w przeciwnym razie te sekrety stałyby się trwale nieodczytywalne. Trzymaj więcej niż jeden passkey z Kluczem ściśle tajnym.
+</Warning>
+
+Zobacz [Sekrety ściśle tajne](/pl/vault/top-secrets) i [Passkeys](/pl/vault/passkeys).
+
+## Usuń sejf
+
+Sejf możesz też usunąć z jego ustawień. Usunięcie jest natychmiastowe i nieodwracalne, a w jego trakcie prosi o wpisanie nazwy potwierdzającej sejfu. Zobacz [Sejfy → Usuń sejf](/pl/vault/vaults#delete-a-vault).
+
+## Powiązane
+
+<CardGroup cols={2}>
+  <Card title="Passkeys" icon="fingerprint" href="/pl/vault/passkeys">
+    Powiąż passkeys sejfu i nimi zarządzaj.
+  </Card>
+  <Card title="Odblokowywanie" icon="unlock" href="/pl/vault/unlocking">
+    Jak zachowuje się automatyczna blokada.
+  </Card>
+</CardGroup>

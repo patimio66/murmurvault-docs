@@ -1,0 +1,53 @@
+---
+title: "Authentifizierung"
+description: "Schütze die Konto-Anmeldung mit Passwort, Zwei-Faktor-Authentifizierung und Passkeys."
+---
+
+**Settings → Authentication** steuert, wie du dich bei deinem Konto anmeldest. Diese Schutzmaßnahmen sind getrennt von deiner Tresor-Passphrase und deinen Tresor-Passkeys, die deine Geheimnisse schützen.
+
+<Note>
+  Das Öffnen dieser Seite erfordert eine kürzliche Passwortbestätigung. murmurvault bittet dich womöglich, dein Konto-Passwort erneut einzugeben, bevor es sie zeigt.
+</Note>
+
+## Passwort
+
+Ändere dein Konto-Passwort auf dieser Seite. Passwort-Aktualisierungen sind ratenbegrenzt, um vor Missbrauch zu schützen.
+
+Das ist dein **Konto**-Passwort (Anmeldung). Es ist nicht die **Tresor-Passphrase**, die deine Geheimnisse entsperrt – das eine zu ändern wirkt sich nicht auf das andere aus.
+
+## Zwei-Faktor-Authentifizierung (TOTP)
+
+Füge zeitbasierte Einmalpasswort-Zwei-Faktor-Authentifizierung (TOTP) hinzu:
+
+1. Starte die 2FA-Einrichtung und scanne den QR-Code mit einer Authentifikator-App.
+2. Bestätige mit einem erzeugten Code, um sie zu aktivieren.
+3. Bewahre die **Wiederherstellungscodes** an einem sicheren Ort auf – sie lassen dich anmelden, falls du deinen Authentifikator verlierst.
+
+Einmal aktiviert, fragt die Anmeldung nach einem Code aus deiner Authentifikator-App (oder einem Wiederherstellungscode).
+
+## Authentifizierungs-Passkeys
+
+Registriere Passkeys, um dich ohne Passwort bei deinem Konto anzumelden.
+
+<Warning>
+  Die Passkey-Registrierung erfordert HTTPS. Über einfaches `http://` schlägt sie fehl.
+</Warning>
+
+Diese **Authentifizierungs-Passkeys** sind verschieden von den **Tresor-Passkeys**, die einen Tresor entsperren und den Streng-geheim-Schlüssel halten. Siehe [Passkeys](/de/vault/passkeys) für Tresor-Passkeys.
+
+## Browser-Sitzungen
+
+Prüfe, wo du angemeldet bist, und **melde andere Sitzungen ab**. Das ist das Erste, was du nach Nutzung eines geteilten oder geliehenen Geräts tun solltest.
+
+Andere Sitzungen zu beenden bekräftigt dein Passwort erneut in der Anfrage, eine frühere Bestätigung reicht also für sich allein nicht aus – das schützt dich, wenn ein Bestätigungsfenster noch auf einem Rechner offen ist, den du nicht mehr kontrollierst.
+
+## Verwandt
+
+<CardGroup cols={2}>
+  <Card title="Sicherheitsaktivität" icon="list-check" href="/de/settings/security-activity">
+    Prüfe letzte Anmeldungen und Warnungen zu neuen Geräten.
+  </Card>
+  <Card title="Tresor-Passkeys" icon="fingerprint" href="/de/vault/passkeys">
+    Passkeys, die deinen Tresor entsperren.
+  </Card>
+</CardGroup>

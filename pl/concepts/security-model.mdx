@@ -1,0 +1,82 @@
+---
+title: "Model bezpieczeństwa"
+description: "Co murmurvault szyfruje, gdzie żyją klucze i co ujawniłoby włamanie na serwer."
+---
+
+murmurvault jest szyfrowany end-to-end. Całe szyfrowanie i odszyfrowywanie odbywa się w Twojej przeglądarce. Serwer przechowuje szyfrogram oraz parametry potrzebne do wyprowadzenia kluczy i nigdy nie widzi tekstu jawnego.
+
+## Klucze
+
+murmurvault używa dwóch niezależnych kluczy 256-bitowych, oba generowane w Twojej przeglądarce.
+
+<CardGroup cols={2}>
+  <Card title="Klucz główny (MK)" icon="key">
+    Szyfruje wszystkie metadane sejfu (nazwy i typy sekretów) oraz każdą wartość sekretu **zwykłego**. Wczytywany do pamięci, gdy sejf jest odblokowany.
+  </Card>
+  <Card title="Klucz ściśle tajny (TK)" icon="lock">
+    Szyfruje wyłącznie wartości warstwy **ściśle tajnej**. Przechowywany jedynie przez passkeys, nigdy nie buforowany i odrzucany natychmiast po użyciu.
+  </Card>
+</CardGroup>
+
+Ponieważ Klucz ściśle tajny jest osobny i dostępny tylko przez passkey, sama fraza dostępu nigdy nie odsłoni wartości ściśle tajnej.
+
+## Opakowywanie kluczy
+
+Twoje klucze nigdy nie są przechowywane wprost. Są szyfrowane („opakowywane") materiałem wyprowadzonym z Twoich poświadczeń:
+
+| Klucz | Opakowany przez | Wyprowadzenie |
+|-----|-----------|------------|
+| Klucz główny | Twoją frazę dostępu | KEK Argon2id (parametry MODERATE z libsodium) |
+| Klucz główny | Każdy powiązany passkey | WebAuthn PRF → HKDF |
+| Klucz ściśle tajny | Wyłącznie powiązane passkeys | WebAuthn PRF → HKDF |
+
+Sejf może przechowywać kilka opakowań tego samego klucza — po jednym na frazę dostępu i po jednym na passkey — więc dowolne pojedyncze poświadczenie może go odblokować. Fraza dostępu nie może opakować Klucza ściśle tajnego i dlatego właśnie sekrety ściśle tajne wymagają passkey.
+
+## Szyfr
+
+- **Algorytm** — XChaCha20-Poly1305, szyfrowanie uwierzytelnione.
+- **Nonce** — świeży, losowy 192-bitowy nonce dla każdego zaszyfrowanego bloku.
+- **Biblioteka** — `libsodium-wrappers-sumo` (WebAssembly), która dostarcza też Argon2id.
+
+Każdy zapisany sekret to niezależna para szyfrogram–nonce, więc serwer nie może łączyć, grupować ani porządkować sekretów po ich treści — jedynie po warstwie.
+
+## Trwałość kluczy
+
+Żebyś pozostał odblokowany mimo przechodzenia między stronami i przeładowań, Klucz główny jest buforowany lokalnie:
+
+- Opakowany za pomocą AES-GCM pod **nieeksportowalnym** kluczem WebCrypto.
+- Przechowywany w **IndexedDB** z przesuwającym się terminem wygaśnięcia (okno automatycznej blokady).
+- Klucz ściśle tajny **nigdy** nie jest utrwalany.
+
+Ponieważ klucz opakowujący WebCrypto jest nieeksportowalny, zbuforowanego Klucza głównego nie da się wyeksportować nawet z poziomu kodu działającego na stronie.
+
+## Co widzi serwer
+
+| Widoczne dla serwera | Ukryte przed serwerem |
+|-----------------------|------------------------|
+| E-mail konta i hash hasła | Fraza dostępu do sejfu |
+| Sól KDF i parametry dla każdego sejfu | Klucz główny i Klucz ściśle tajny |
+| Liczba sekretów w podziale na warstwy | Nazwy, typy i wartości sekretów |
+| Zaszyfrowane bloki (szyfrogram + nonce) | Jakikolwiek tekst jawny lub wyprowadzony klucz |
+| Rekordy opakowań passkeys (sam szyfrogram) | Wynik WebAuthn PRF |
+
+Pełne przejęcie serwera daje wyłącznie szyfrogram i parametry wyprowadzania kluczy. Bez Twojej frazy dostępu lub passkey danych nie da się odszyfrować.
+
+## Odzyskiwanie
+
+Nie ma go, **zgodnie z założeniem**. Twoja fraza dostępu i Twoje passkeys to jedyne sposoby odblokowania sejfu. Nie ma linku resetującego, obejścia po stronie wsparcia ani furtki operatora.
+
+<Warning>
+  Stracisz każdą frazę dostępu i każdy passkey do sejfu i jego zawartość będzie trwale nie do odzyskania. Zapisz bezpiecznie przynajmniej jedną frazę dostępu i powiąż więcej niż jeden passkey.
+</Warning>
+
+## Powiązane
+
+<CardGroup cols={2}>
+  <Card title="Warstwy sekretów" icon="layer-group" href="/pl/concepts/secret-tiers">
+    Czym różnią się sekrety zwykłe i ściśle tajne.
+  </Card>
+  <Card title="Passkeys" icon="fingerprint" href="/pl/vault/passkeys">
+    Obsługa PRF, sole i wymagania rejestracji.
+  </Card>
+</CardGroup>

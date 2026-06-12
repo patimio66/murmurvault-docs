@@ -1,0 +1,56 @@
+---
+title: "Entsperren & automatische Sperre"
+description: "Wie du einen Tresor entsperrst, wie er entsperrt bleibt und wann er sich selbst sperrt."
+---
+
+Ein Tresor ist gesperrt, bis du ihn entsperrst. Das Entsperren lädt den [Hauptschlüssel](/de/concepts/security-model#keys) in den Speicher, damit einfache Geheimnisse entschlüsselt werden können. Der Streng-geheim-Schlüssel wird bei einem normalen Entsperren nie geladen – siehe [Streng geheime Geheimnisse](/de/vault/top-secrets).
+
+## Tresor entsperren
+
+Entsperre auf eine von zwei Arten:
+
+- **Deine Passphrase** – die Passphrase, die du für diesen Tresor festgelegt hast.
+- **Ein beliebiger verknüpfter Passkey** – berühre oder authentifiziere dich mit einem Passkey, den du mit dem Tresor verknüpft hast.
+
+Einmal entsperrt, entschlüsseln einfache Geheimnisse beim Öffnen, und die Suchpalette kann Geheimnisse per Name finden.
+
+## Entsperrt bleiben
+
+Damit du nicht auf jeder Seite Anmeldedaten neu eingeben musst, speichert murmurvault den Hauptschlüssel lokal zwischen:
+
+- Umschlossen mit AES-GCM unter einem nicht exportierbaren WebCrypto-Schlüssel.
+- In IndexedDB gespeichert mit rollierendem Ablauf.
+
+Das heißt, der entsperrte Zustand **überdauert Seitenwechsel und Neuladen**, bis der Tresor automatisch sperrt. Der Streng-geheim-Schlüssel wird nie zwischengespeichert.
+
+## Automatische Sperre
+
+Jeder Tresor sperrt sich nach einer Phase der Inaktivität selbst.
+
+- **Standard:** 10 Minuten.
+- **Pro Tresor konfigurierbar** unter [Settings → Vault](/de/settings/vault).
+
+Wenn der Tresor sperrt:
+
+- Der zwischengespeicherte Hauptschlüssel wird gelöscht.
+- Jeglicher auf der Seite gehaltene Klartext aufgedeckter streng geheimer Geheimnisse wird verworfen.
+- Du musst erneut entsperren, um Geheimnisse zu lesen.
+
+## Manuell sperren
+
+Sperre den Tresor jederzeit selbst – etwa bevor du dich von einem geteilten Rechner entfernst. Das Sperren löscht sofort die Schlüssel im Speicher und im Zwischenspeicher.
+
+<Tip>
+  Sperre an einem geteilten oder geliehenen Gerät den Tresor und melde dich ab, wenn du fertig bist. Du kannst auch andere Browser-Sitzungen unter [Settings → Authentication](/de/settings/authentication) beenden.
+</Tip>
+
+## Verwandt
+
+<CardGroup cols={2}>
+  <Card title="Passkeys" icon="fingerprint" href="/de/vault/passkeys">
+    Passkeys verknüpfen, um ohne Passphrase zu entsperren.
+  </Card>
+  <Card title="Tresor-Einstellungen" icon="gear" href="/de/settings/vault">
+    Das Auto-Sperr-Zeitlimit anpassen.
+  </Card>
+</CardGroup>

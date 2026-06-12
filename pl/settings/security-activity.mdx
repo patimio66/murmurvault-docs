@@ -1,0 +1,33 @@
+---
+title: "Aktywność bezpieczeństwa"
+description: "Przeglądaj ostatnią aktywność konta i alerty o logowaniu z nowego urządzenia."
+---
+
+**Settings → Security activity** pokazuje dziennik zdarzeń istotnych dla bezpieczeństwa Twojego konta, dzięki czemu wychwycisz logowanie, którego nie rozpoznajesz. Otwarcie wymaga niedawnego potwierdzenia hasła.
+
+## Co jest zapisywane
+
+Każde zdarzenie zawiera szczegóły, takie jak adres IP i przeglądarka (user agent), których dotyczyło. Pozwala to odróżnić Twoje własne sesje od takiej, której nie rozpoznajesz.
+
+## Alerty o nowych urządzeniach
+
+Gdy logujesz się z urządzenia, którego murmurvault nie widział od niedawna, traktuje to jako **nowe urządzenie** i ostrzega Cię. Urządzenie bezczynne dłużej niż okno retencji jest przy kolejnym logowaniu znów traktowane jako nowe.
+
+<Tip>
+  Jeśli widzisz aktywność, której nie rozpoznajesz, zmień hasło do konta i **wyloguj inne sesje** w [Settings → Authentication](/pl/settings/authentication).
+</Tip>
+
+## Retencja
+
+Zdarzenia bezpieczeństwa są przechowywane przez **90 dni**, a potem automatycznie usuwane. Trzymanie adresów IP i user agentów bez końca tworzyłoby tylko więcej danych do ujawnienia w razie przyszłego włamania, więc dziennik jest celowo krótkotrwały.
+
+## Powiązane
+
+<CardGroup cols={2}>
+  <Card title="Uwierzytelnianie" icon="user-shield" href="/pl/settings/authentication">
+    Zmień hasło i zakończ inne sesje.
+  </Card>
+  <Card title="Model bezpieczeństwa" icon="shield-halved" href="/pl/concepts/security-model">
+    Co serwer przechowuje na Twój temat.
+  </Card>
+</CardGroup>

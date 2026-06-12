@@ -1,0 +1,67 @@
+---
+title: "Szybki start"
+description: "Załóż konto, skonfiguruj sejf i zapisz swój pierwszy sekret."
+---
+
+Ten przewodnik prowadzi Cię od świeżego konta do pierwszego zapisanego sekretu. Zajmie to około pięciu minut.
+
+## Wymagania wstępne
+
+- Nowoczesna przeglądarka z obsługą [WebAuthn](https://webauthn.guide/) (aktualny Chrome, Safari, Firefox lub Edge).
+- Uwierzytelniacz do passkeys — wbudowany w platformę (Touch ID, Windows Hello, Android) albo klucz sprzętowy.
+- Dostęp do skrzynki e-mail, której używasz do potwierdzenia adresu i do uwalniania sekretów ściśle tajnych.
+
+<Note>
+  murmurvault działa przez HTTPS, którego wymagają passkeys. Nie musisz w tym celu niczego konfigurować.
+</Note>
+
+## Pierwsze kroki
+
+<Steps>
+  <Step title="Załóż konto">
+    Zarejestruj się, podając imię, e-mail i hasło, a następnie potwierdź adres e-mail, klikając link weryfikacyjny.
+
+    To hasło chroni Twoje **konto** (logowanie). Jest oddzielne od **frazy dostępu do sejfu**, którą ustawisz w kolejnym kroku i która chroni Twoje **sekrety**.
+  </Step>
+  <Step title="Utwórz sejf">
+    Otwórz sejf i wybierz **Create vault**. Ustaw frazę dostępu do sejfu.
+
+    Twoja fraza dostępu wyprowadza klucz, który odblokowuje sekrety. Wskaźnik siły pomaga wybrać coś mocnego. Wybieraj rozważnie — nie da się jej zresetować ani odzyskać.
+
+    <Warning>
+      Nikt nie odzyska Twojej frazy dostępu, łącznie z operatorem serwera. Zapisz ją w bezpiecznym miejscu, zanim przejdziesz dalej.
+    </Warning>
+  </Step>
+  <Step title="Dodaj passkey (zalecane)">
+    W **Settings → Vault** powiąż passkey z sejfem. Passkey pozwala odblokować sejf bez wpisywania frazy dostępu i jest wymagany dla sekretów ściśle tajnych.
+
+    Szczegóły znajdziesz w [Passkeys](/pl/vault/passkeys).
+  </Step>
+  <Step title="Zapisz pierwszy sekret">
+    Wróć do sejfu, wybierz **Add secret**, wskaż typ (KV, Login, Kody odzyskiwania lub Notatka chroniona), nadaj nazwę i wypełnij pola. Zapisz.
+
+    Sekret zostaje zaszyfrowany w przeglądarce, zanim trafi na serwer. Serwer przechowuje wyłącznie szyfrogram.
+  </Step>
+  <Step title="Zablokuj i odblokuj">
+    Zablokuj sejf, a potem odblokuj go ponownie frazą dostępu lub passkey, żeby sprawdzić, że wszystko działa.
+
+    Sejf blokuje się też automatycznie po okresie bezczynności (domyślnie 10 minut). Zobacz [Odblokowywanie](/pl/vault/unlocking).
+  </Step>
+</Steps>
+
+## Następne kroki
+
+<CardGroup cols={2}>
+  <Card title="Warstwy sekretów" icon="layer-group" href="/pl/concepts/secret-tiers">
+    Zdecyduj, które sekrety należą do warstwy ściśle tajnej.
+  </Card>
+  <Card title="Sekrety ściśle tajne" icon="lock" href="/pl/vault/top-secrets">
+    Skonfiguruj i odsłaniaj sekrety o najwyższej ochronie.
+  </Card>
+  <Card title="Uwierzytelnianie" icon="user-shield" href="/pl/settings/authentication">
+    Dodaj uwierzytelnianie dwuskładnikowe i passkeys do logowania.
+  </Card>
+  <Card title="Model bezpieczeństwa" icon="shield-halved" href="/pl/concepts/security-model">
+    Dowiedz się, co serwer może, a czego nie może zobaczyć.
+  </Card>
+</CardGroup>

@@ -1,0 +1,70 @@
+---
+title: "Passkeys"
+description: "Powiąż passkeys, aby odblokowywać sejf i przechowywać Klucz ściśle tajny."
+---
+
+Passkeys to poświadczenia WebAuthn oparte na Twoim urządzeniu lub kluczu sprzętowym. murmurvault używa ich na dwa sposoby:
+
+- **Passkeys sejfu** odblokowują sejf bez frazy dostępu i mogą przechowywać [Klucz ściśle tajny](/pl/concepts/security-model#keys) na potrzeby sekretów ściśle tajnych.
+- **Passkeys uwierzytelniania** logują Cię do konta. Tymi zarządzasz w [Settings → Authentication](/pl/settings/authentication) i są oddzielne od passkeys sejfu.
+
+Ta strona omawia **passkeys sejfu**.
+
+## Jak działają passkeys sejfu
+
+murmurvault używa **rozszerzenia PRF** WebAuthn, aby wyprowadzić sekret z Twojego passkey. Ten sekret (przez HKDF) opakowuje Twoje klucze:
+
+- Każdy powiązany passkey opakowuje **Klucz główny**, więc może odblokować sejf.
+- Passkey może dodatkowo przechowywać **Klucz ściśle tajny**, umożliwiając odsłanianie sekretów ściśle tajnych.
+
+Wynik PRF nigdy nie opuszcza Twojej przeglądarki; serwer przechowuje wyłącznie powstały szyfrogram opakowania.
+
+## Wymagania
+
+<Warning>
+  Rejestracja passkey wymaga **HTTPS**. murmurvault działa przez HTTPS, więc działa to od razu.
+</Warning>
+
+- Uwierzytelniacz wbudowany w platformę (Touch ID, Windows Hello, Android) lub przenośny klucz sprzętowy.
+- Przeglądarka i uwierzytelniacz, które obsługują rozszerzenie PRF WebAuthn.
+
+## Powiąż passkey z sejfem
+
+1. Przejdź do [Settings → Vault](/pl/settings/vault).
+2. Dodaj passkey w sekcji passkeys sejfu i uwierzytelnij się, gdy pojawi się prośba.
+3. Passkey może teraz odblokować sejf.
+
+Aby włączyć sekrety ściśle tajne, nadaj **Klucz ściśle tajny** passkey z tego samego ekranu. Zobacz [Sekrety ściśle tajne](/pl/vault/top-secrets#enable-the-top-tier).
+
+## Sól PRF
+
+Każdy sejf ma **jedną sól PRF**, współdzieloną przez wszystkie powiązane z nim passkeys.
+
+- Zmiana soli unieważniłaby każde istniejące opakowanie, więc jest ona ustalona na cały czas życia sejfu.
+- Wszystkie passkeys, które powiążesz z sejfem, wyprowadzają się z tej współdzielonej soli.
+
+## Ponowna rejestracja starszych passkeys
+
+<Note>
+  Passkey zarejestrowany **przed włączeniem obsługi PRF** nie może odblokować sejfu. Usuń go i zarejestruj ponownie, żeby pobrał opakowanie oparte na PRF.
+</Note>
+
+## Usuwanie passkeys
+
+- Możesz usunąć passkey sejfu w dowolnej chwili, o ile pozostaje inna droga do środka.
+- murmurvault **blokuje usunięcie ostatniego passkey, który przechowuje Klucz ściśle tajny**, dopóki istnieją sekrety ściśle tajne, ponieważ uczyniłoby to te sekrety nieodczytywalnymi na zawsze.
+
+<Tip>
+  Powiąż z każdym sejfem co najmniej dwa passkeys, a Klucz ściśle tajny nadaj więcej niż jednemu, jeśli używasz sekretów ściśle tajnych. Pojedynczy passkey to pojedynczy punkt awarii bez możliwości odzyskania.
+</Tip>
+
+## Powiązane
+
+<CardGroup cols={2}>
+  <Card title="Sekrety ściśle tajne" icon="lock" href="/pl/vault/top-secrets">
+    Używaj passkeys, aby odsłaniać sekrety ściśle tajne.
+  </Card>
+  <Card title="Uwierzytelnianie" icon="user-shield" href="/pl/settings/authentication">
+    Passkeys do logowania i uwierzytelnianie dwuskładnikowe.
+  </Card>
+</CardGroup>

@@ -1,0 +1,67 @@
+---
+title: "Schnellstart"
+description: "Erstelle ein Konto, richte einen Tresor ein und speichere dein erstes Geheimnis."
+---
+
+Diese Anleitung führt dich von einem frischen Konto zu deinem ersten gespeicherten Geheimnis. Das dauert etwa fünf Minuten.
+
+## Voraussetzungen
+
+- Ein moderner Browser mit [WebAuthn](https://webauthn.guide/)-Unterstützung (aktueller Chrome, Safari, Firefox oder Edge).
+- Ein Authentifikator für Passkeys – ein Plattform-Authentifikator (Touch ID, Windows Hello, Android) oder ein Sicherheitsschlüssel.
+- Zugriff auf deine E-Mail, mit der du deine Adresse bestätigst und streng geheime Geheimnisse freigibst.
+
+<Note>
+  murmurvault wird über HTTPS ausgeliefert, das Passkeys voraussetzen. Dafür musst du nichts konfigurieren.
+</Note>
+
+## Loslegen
+
+<Steps>
+  <Step title="Konto erstellen">
+    Registriere dich mit Name, E-Mail und einem Passwort und bestätige dann deine E-Mail über den Verifizierungslink.
+
+    Dieses Passwort schützt dein **Konto** (Anmeldung). Es ist getrennt von der **Tresor-Passphrase**, die du als Nächstes festlegst und die deine **Geheimnisse** schützt.
+  </Step>
+  <Step title="Tresor erstellen">
+    Öffne den Tresor und wähle **Create vault**. Lege eine Tresor-Passphrase fest.
+
+    Deine Passphrase leitet den Schlüssel ab, der deine Geheimnisse entsperrt. Die Stärkeanzeige hilft dir, etwas Starkes zu wählen. Wähle sorgfältig – sie lässt sich nicht zurücksetzen oder wiederherstellen.
+
+    <Warning>
+      Niemand kann deine Passphrase wiederherstellen, auch der Serverbetreiber nicht. Bewahre sie an einem sicheren Ort auf, bevor du weitermachst.
+    </Warning>
+  </Step>
+  <Step title="Passkey hinzufügen (empfohlen)">
+    Verknüpfe unter **Settings → Vault** einen Passkey mit dem Tresor. Ein Passkey entsperrt ohne Eingabe deiner Passphrase und ist für streng geheime Geheimnisse erforderlich.
+
+    Siehe [Passkeys](/de/vault/passkeys) für Details.
+  </Step>
+  <Step title="Erstes Geheimnis speichern">
+    Wähle zurück im Tresor **Add secret**, suche einen Typ aus (KV, Login, Wiederherstellungscodes oder Sichere Notiz), benenne es und fülle die Felder aus. Speichern.
+
+    Das Geheimnis wird in deinem Browser verschlüsselt, bevor es gesendet wird. Der Server speichert nur Chiffretext.
+  </Step>
+  <Step title="Sperren und entsperren">
+    Sperre den Tresor und entsperre ihn dann erneut mit deiner Passphrase oder einem Passkey, um zu prüfen, dass deine Einrichtung funktioniert.
+
+    Der Tresor sperrt sich außerdem nach einer Phase der Inaktivität automatisch (standardmäßig 10 Minuten). Siehe [Entsperren](/de/vault/unlocking).
+  </Step>
+</Steps>
+
+## Nächste Schritte
+
+<CardGroup cols={2}>
+  <Card title="Geheimnis-Stufen" icon="layer-group" href="/de/concepts/secret-tiers">
+    Entscheide, welche Geheimnisse in die streng geheime Stufe gehören.
+  </Card>
+  <Card title="Streng geheime Geheimnisse" icon="lock" href="/de/vault/top-secrets">
+    Richte die am stärksten geschützten Geheimnisse ein und decke sie auf.
+  </Card>
+  <Card title="Authentifizierung" icon="user-shield" href="/de/settings/authentication">
+    Füge Zwei-Faktor-Authentifizierung und Anmelde-Passkeys hinzu.
+  </Card>
+  <Card title="Sicherheitsmodell" icon="shield-halved" href="/de/concepts/security-model">
+    Erfahre, was der Server sehen kann und was nicht.
+  </Card>
+</CardGroup>

@@ -1,0 +1,62 @@
+---
+title: "Wprowadzenie"
+description: "murmurvault to sejf szyfrowany end-to-end na sekrety, których nie możesz pozwolić sobie ujawnić."
+---
+
+murmurvault to sejf na sekrety, szyfrowany end-to-end. Przechowujesz w nim klucze API, dane logowania, kody odzyskiwania i notatki, a serwer w każdej chwili widzi wyłącznie szyfrogram. Szyfrowanie i odszyfrowywanie odbywa się w Twojej przeglądarce, więc tekst jawny, fraza dostępu i klucze nigdy nie opuszczają Twojego urządzenia.
+
+Pełne włamanie na serwer ujawnia jedynie zaszyfrowane dane i parametry potrzebne do wyprowadzenia kluczy.
+
+<Card title="Szybki start" icon="rocket" href="/pl/quickstart" horizontal>
+  Załóż konto, skonfiguruj pierwszy sejf i zapisz sekret w kilka minut.
+</Card>
+
+## Co możesz przechowywać
+
+| Typ | Pola |
+|------|--------|
+| KV | wartość, notatki |
+| Login | nazwa użytkownika, hasło, adres URL, notatki |
+| Kody odzyskiwania | kody (jeden w wierszu) |
+| Notatka chroniona | notatka |
+
+Każdy sekret ma też nazwę. Nazwa, typ i wartości pól są w całości zaszyfrowane — serwer nie może ich odczytać ani po nich grupować.
+
+## Dwie warstwy sekretów
+
+Każdy sekret trafia do jednej z dwóch warstw:
+
+- **Zwykła (soft)** — odblokowywana frazą dostępu lub dowolnym powiązanym passkey.
+- **Ściśle tajna (top)** — dodatkowo zabezpieczona dotknięciem passkey i jednorazowym kodem wysłanym na Twój e-mail.
+
+Zobacz [Warstwy sekretów](/pl/concepts/secret-tiers), żeby poznać różnice i dowiedzieć się, kiedy używać której.
+
+## Jak chronione są Twoje dane
+
+- Wygenerowany po stronie klienta **Klucz główny (Master Key)** szyfruje wszystkie metadane i sekrety zwykłe.
+- Osobny **Klucz ściśle tajny (Top Key)**, przechowywany wyłącznie przez passkeys, szyfruje wartości warstwy ściśle tajnej.
+- Klucze są opakowane przez Twoją frazę dostępu (Argon2id) i Twoje passkeys (WebAuthn PRF).
+- Szyfr to XChaCha20-Poly1305 z biblioteki libsodium.
+
+Pełny opis architektury znajdziesz w [Modelu bezpieczeństwa](/pl/concepts/security-model).
+
+<Warning>
+  Nie ma odzyskiwania konta. Twoja fraza dostępu i passkeys to jedyna droga do środka. Stracisz wszystkie z nich i Twoje dane przepadną na zawsze — zgodnie z założeniem.
+</Warning>
+
+## Dokąd dalej
+
+<CardGroup cols={2}>
+  <Card title="Szybki start" icon="rocket" href="/pl/quickstart">
+    Przejdź od zera do pierwszego zapisanego sekretu.
+  </Card>
+  <Card title="Model bezpieczeństwa" icon="shield-halved" href="/pl/concepts/security-model">
+    Zrozum dokładnie, co serwer może, a czego nie może zobaczyć.
+  </Card>
+  <Card title="Zarządzaj sekretami" icon="key" href="/pl/vault/secrets">
+    Dodawaj, edytuj, wyszukuj i usuwaj sekrety.
+  </Card>
+  <Card title="Sekrety ściśle tajne" icon="lock" href="/pl/vault/top-secrets">
+    Zamknij najwrażliwsze wartości za passkey i kodem e-mail.
+  </Card>
+</CardGroup>
