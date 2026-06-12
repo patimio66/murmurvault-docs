@@ -1,0 +1,62 @@
+---
+title: "Einführung"
+description: "murmurvault ist ein Ende-zu-Ende-verschlüsselter Tresor für die Geheimnisse, deren Verlust du dir nicht leisten kannst."
+---
+
+murmurvault ist ein Ende-zu-Ende-verschlüsselter Tresor für Geheimnisse. Du speicherst API-Schlüssel, Logins, Wiederherstellungscodes und Notizen – der Server hält zu jedem Zeitpunkt nur Chiffretext. Ver- und Entschlüsselung passieren in deinem Browser, sodass dein Klartext, deine Passphrase und deine Schlüssel dein Gerät nie verlassen.
+
+Ein vollständiger Server-Einbruch legt nichts offen außer verschlüsselten Blobs und Parametern zur Schlüsselableitung.
+
+<Card title="Schnellstart" icon="rocket" href="/de/quickstart" horizontal>
+  Erstelle ein Konto, richte deinen ersten Tresor ein und speichere ein Geheimnis in wenigen Minuten.
+</Card>
+
+## Was du speichern kannst
+
+| Typ | Felder |
+|------|--------|
+| KV | Wert, Notizen |
+| Login | Benutzername, Passwort, URL, Notizen |
+| Wiederherstellungscodes | Codes (einer pro Zeile) |
+| Sichere Notiz | Notiz |
+
+Jedes Geheimnis hat außerdem einen Namen. Name, Typ und Feldwerte sind vollständig verschlüsselt – der Server kann sie weder lesen noch danach gruppieren.
+
+## Zwei Geheimnis-Stufen
+
+Jedes Geheimnis wird in einer von zwei Stufen abgelegt:
+
+- **Einfach (soft)** – entsperrt mit deiner Passphrase oder einem beliebigen verknüpften Passkey.
+- **Streng geheim (top)** – zusätzlich abgesichert durch eine Passkey-Berührung und einen Einmalcode, der dir per E-Mail zugeschickt wird.
+
+Siehe [Geheimnis-Stufen](/de/concepts/secret-tiers), wie sich beide unterscheiden und wann du welche nutzt.
+
+## Wie deine Daten geschützt sind
+
+- Ein clientseitig erzeugter **Hauptschlüssel (Master Key)** verschlüsselt alle Metadaten und einfachen Geheimnisse.
+- Ein separater **Streng-geheim-Schlüssel (Top Key)**, der nur von Passkeys gehalten wird, verschlüsselt die Werte der streng geheimen Stufe.
+- Die Schlüssel werden von deiner Passphrase (Argon2id) und deinen Passkeys (WebAuthn PRF) umschlossen.
+- Die Chiffre ist XChaCha20-Poly1305 über libsodium.
+
+Der vollständige Aufbau ist im [Sicherheitsmodell](/de/concepts/security-model) beschrieben.
+
+<Warning>
+  Es gibt keine Konto-Wiederherstellung. Deine Passphrase und deine Passkeys sind der einzige Weg hinein. Verlierst du sie alle, sind deine Daten für immer verloren – so gewollt.
+</Warning>
+
+## Wie es weitergeht
+
+<CardGroup cols={2}>
+  <Card title="Schnellstart" icon="rocket" href="/de/quickstart">
+    Geh von null zu deinem ersten gespeicherten Geheimnis.
+  </Card>
+  <Card title="Sicherheitsmodell" icon="shield-halved" href="/de/concepts/security-model">
+    Verstehe genau, was der Server sehen kann und was nicht.
+  </Card>
+  <Card title="Geheimnisse verwalten" icon="key" href="/de/vault/secrets">
+    Geheimnisse hinzufügen, bearbeiten, suchen und löschen.
+  </Card>
+  <Card title="Streng geheime Geheimnisse" icon="lock" href="/de/vault/top-secrets">
+    Sichere deine sensibelsten Werte hinter Passkey und E-Mail-Code.
+  </Card>
+</CardGroup>

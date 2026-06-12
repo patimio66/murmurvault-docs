@@ -1,0 +1,82 @@
+---
+title: "Sicherheitsmodell"
+description: "Was murmurvault verschlüsselt, wo die Schlüssel leben und was ein Server-Einbruch offenlegen würde."
+---
+
+murmurvault ist Ende-zu-Ende-verschlüsselt. Alle Ver- und Entschlüsselung passiert in deinem Browser. Der Server speichert Chiffretext und die Parameter, die zur Schlüsselableitung nötig sind, und sieht niemals Klartext.
+
+## Schlüssel
+
+murmurvault verwendet zwei unabhängige 256-Bit-Schlüssel, beide in deinem Browser erzeugt.
+
+<CardGroup cols={2}>
+  <Card title="Hauptschlüssel (MK)" icon="key">
+    Verschlüsselt alle Tresor-Metadaten (Namen und Typen der Geheimnisse) und jeden Wert eines **einfachen** Geheimnisses. Wird in den Speicher geladen, solange der Tresor entsperrt ist.
+  </Card>
+  <Card title="Streng-geheim-Schlüssel (TK)" icon="lock">
+    Verschlüsselt nur Werte der **streng geheimen** Stufe. Ausschließlich von Passkeys gehalten, nie zwischengespeichert und sofort nach Gebrauch verworfen.
+  </Card>
+</CardGroup>
+
+Weil der Streng-geheim-Schlüssel separat und nur per Passkey verfügbar ist, kann deine Passphrase allein niemals einen streng geheimen Wert offenlegen.
+
+## Schlüssel-Umschließung
+
+Deine Schlüssel werden nie direkt gespeichert. Sie werden mit Material verschlüsselt („umschlossen"), das aus deinen Anmeldedaten abgeleitet wird:
+
+| Schlüssel | Umschlossen von | Ableitung |
+|-----|-----------|------------|
+| Hauptschlüssel | Deiner Passphrase | Argon2id-KEK (libsodium-Parameter MODERATE) |
+| Hauptschlüssel | Jedem verknüpften Passkey | WebAuthn PRF → HKDF |
+| Streng-geheim-Schlüssel | Nur verknüpften Passkeys | WebAuthn PRF → HKDF |
+
+Ein Tresor kann mehrere Umschließungen desselben Schlüssels halten – eine pro Passphrase und eine pro Passkey – sodass jede einzelne Anmeldung ihn entsperren kann. Die Passphrase kann den Streng-geheim-Schlüssel nicht umschließen, weshalb streng geheime Geheimnisse einen Passkey erfordern.
+
+## Chiffre
+
+- **Algorithmus** – XChaCha20-Poly1305, authentifizierte Verschlüsselung.
+- **Nonces** – ein frischer, zufälliger 192-Bit-Nonce pro verschlüsseltem Blob.
+- **Bibliothek** – `libsodium-wrappers-sumo` (WebAssembly), die auch Argon2id bereitstellt.
+
+Jedes gespeicherte Geheimnis ist ein eigenständiges Paar aus Chiffretext und Nonce, sodass der Server Geheimnisse nicht anhand ihres Inhalts verknüpfen, gruppieren oder ordnen kann – nur anhand ihrer Stufe.
+
+## Schlüssel-Persistenz
+
+Damit du über Seitenwechsel und Neuladen hinweg entsperrt bleibst, wird der Hauptschlüssel lokal zwischengespeichert:
+
+- Umschlossen mit AES-GCM unter einem **nicht exportierbaren** WebCrypto-Schlüssel.
+- In **IndexedDB** gespeichert mit rollierendem Ablauf (dem Auto-Sperr-Fenster).
+- Der Streng-geheim-Schlüssel wird **niemals** persistiert.
+
+Weil der WebCrypto-Umschließungsschlüssel nicht exportierbar ist, lässt sich der zwischengespeicherte Hauptschlüssel selbst durch Code, der auf der Seite läuft, nicht exportieren.
+
+## Was der Server sehen kann
+
+| Sichtbar für den Server | Verborgen vor dem Server |
+|-----------------------|------------------------|
+| Konto-E-Mail und Passwort-Hash | Tresor-Passphrase |
+| KDF-Salt und -Parameter pro Tresor | Hauptschlüssel und Streng-geheim-Schlüssel |
+| Anzahl der Geheimnisse, gruppiert nach Stufe | Namen, Typen und Werte der Geheimnisse |
+| Verschlüsselte Blobs (Chiffretext + Nonce) | Jeglicher Klartext oder abgeleiteter Schlüssel |
+| Passkey-Umschließungsdatensätze (alles Chiffretext) | WebAuthn-PRF-Ausgabe |
+
+Ein vollständiger Server-Einbruch liefert nur Chiffretext und Schlüsselableitungsparameter. Ohne deine Passphrase oder einen Passkey lassen sich die Daten nicht entschlüsseln.
+
+## Wiederherstellung
+
+Es gibt **keine, so gewollt**. Deine Passphrase und deine Passkeys sind die einzigen Wege, einen Tresor zu entsperren. Es gibt keinen Reset-Link, kein Support-Override und keine Betreiber-Hintertür.
+
+<Warning>
+  Verlierst du jede Passphrase und jeden Passkey eines Tresors, ist sein Inhalt dauerhaft nicht wiederherstellbar. Halte mindestens eine Passphrase sicher festgehalten und mehr als einen Passkey verknüpft.
+</Warning>
+
+## Verwandt
+
+<CardGroup cols={2}>
+  <Card title="Geheimnis-Stufen" icon="layer-group" href="/de/concepts/secret-tiers">
+    Wie sich einfache und streng geheime Geheimnisse unterscheiden.
+  </Card>
+  <Card title="Passkeys" icon="fingerprint" href="/de/vault/passkeys">
+    PRF-Unterstützung, Salts und Registrierungsvoraussetzungen.
+  </Card>
+</CardGroup>

@@ -1,0 +1,56 @@
+---
+title: "Odblokowywanie i automatyczna blokada"
+description: "Jak odblokować sejf, jak pozostaje odblokowany i kiedy blokuje się sam."
+---
+
+Sejf jest zablokowany, dopóki go nie odblokujesz. Odblokowanie wczytuje [Klucz główny](/pl/concepts/security-model#keys) do pamięci, żeby można było odszyfrować sekrety zwykłe. Klucz ściśle tajny nigdy nie jest wczytywany podczas zwykłego odblokowania — zobacz [Sekrety ściśle tajne](/pl/vault/top-secrets).
+
+## Odblokuj sejf
+
+Odblokuj jednym z dwóch sposobów:
+
+- **Twoja fraza dostępu** — fraza dostępu ustawiona dla tego sejfu.
+- **Dowolny powiązany passkey** — dotknij lub uwierzytelnij się passkey powiązanym z sejfem.
+
+Po odblokowaniu sekrety zwykłe odszyfrowują się w miarę otwierania, a paleta wyszukiwania znajduje sekrety po nazwie.
+
+## Pozostawanie odblokowanym
+
+Żeby nie wpisywać poświadczeń na każdej stronie, murmurvault buforuje Klucz główny lokalnie:
+
+- Opakowany za pomocą AES-GCM pod nieeksportowalnym kluczem WebCrypto.
+- Przechowywany w IndexedDB z przesuwającym się terminem wygaśnięcia.
+
+Oznacza to, że stan odblokowania **przetrwa przejście między stronami i przeładowania**, dopóki sejf nie zablokuje się automatycznie. Klucz ściśle tajny nigdy nie jest buforowany.
+
+## Automatyczna blokada
+
+Każdy sejf blokuje się sam po okresie bezczynności.
+
+- **Domyślnie:** 10 minut.
+- **Konfigurowalne per sejf** w [Settings → Vault](/pl/settings/vault).
+
+Gdy sejf się blokuje:
+
+- Zbuforowany Klucz główny zostaje wyczyszczony.
+- Każdy odsłonięty tekst jawny sekretu ściśle tajnego przechowywany na stronie zostaje odrzucony.
+- Musisz odblokować ponownie, aby odczytać sekrety.
+
+## Zablokuj ręcznie
+
+Zablokuj sejf samodzielnie w dowolnej chwili — na przykład zanim odejdziesz od współdzielonego komputera. Zablokowanie natychmiast czyści klucze z pamięci i z bufora.
+
+<Tip>
+  Na współdzielonym lub pożyczonym urządzeniu zablokuj sejf i wyloguj się, gdy skończysz. Możesz też zakończyć inne sesje przeglądarki w [Settings → Authentication](/pl/settings/authentication).
+</Tip>
+
+## Powiązane
+
+<CardGroup cols={2}>
+  <Card title="Passkeys" icon="fingerprint" href="/pl/vault/passkeys">
+    Powiąż passkeys, aby odblokowywać bez frazy dostępu.
+  </Card>
+  <Card title="Ustawienia sejfu" icon="gear" href="/pl/settings/vault">
+    Dostosuj limit czasu automatycznej blokady.
+  </Card>
+</CardGroup>

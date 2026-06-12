@@ -1,0 +1,59 @@
+---
+title: "Tresore"
+description: "Tresore erstellen, organisieren und löschen."
+---
+
+Ein Tresor ist ein verschlüsselter Container für deine Geheimnisse, geschützt durch eine eigene Passphrase und eigene Passkeys. Du kannst mehrere Tresore halten – etwa einen für private Anmeldedaten und einen für die Arbeit.
+
+## Tresor erstellen
+
+1. Öffne den Tresor-Bereich. Hast du noch keinen, landest du auf dem Einrichtungsbildschirm.
+2. Wähle **Create vault** und gib einen Namen (optional) und eine Passphrase an.
+3. Speichern. Die Schlüssel des Tresors werden in deinem Browser erzeugt und von deiner Passphrase umschlossen.
+
+Ein Tresor ohne Namen wird in der Seitenleiste als `Vault {id}` angezeigt.
+
+<Warning>
+  Die Passphrase, die du hier festlegst, schützt die Geheimnisse dieses Tresors und lässt sich nicht wiederherstellen. Halte sie sicher fest, bevor du Geheimnisse hinzufügst.
+</Warning>
+
+## Mehrere Tresore
+
+Du kannst bis zu **50 Tresore** pro Konto erstellen. Jeder hat unabhängige Schlüssel, eine Passphrase, Passkeys und Auto-Sperr-Einstellungen.
+
+- Tresore erscheinen in der Seitenleiste in ihrer gespeicherten Reihenfolge.
+- Ziehe, um sie **umzuordnen**; die Reihenfolge wird pro Konto gespeichert.
+- Der erste Tresor nach Position ist dein **Standard** – dort landest du, wenn du die App öffnest.
+
+Erreichst du das Limit, ist die Aktion **Add vault** deaktiviert, und weiteres Erstellen wird vom Server abgelehnt.
+
+## Wechseln und filtern
+
+- Wähle einen Tresor in der Seitenleiste, um ihn zu öffnen.
+- Filtere innerhalb eines Tresors die Geheimnisliste nach Typ (KV, Login, Wiederherstellungscodes, Sichere Notiz).
+- Nutze die Suchpalette, um schnell ein Geheimnis zu finden. Siehe [Geheimnisse verwalten](/de/vault/secrets#search).
+
+## Tresor löschen
+
+Einen Tresor zu löschen zerstört ihn und jedes Geheimnis darin dauerhaft.
+
+1. Öffne die Einstellungen des Tresors.
+2. Wähle Löschen und **tippe den Bestätigungsnamen des Tresors** (seinen Anzeigenamen in Kebab-Case), um zu bestätigen.
+3. Bestätige bei Aufforderung erneut dein **Konto-Passwort**.
+
+<Warning>
+  Das Löschen ist sofortig und unumkehrbar. Es gibt keinen Papierkorb und keine Wiederherstellung. Exportiere oder verschiebe vorher alles, was du brauchst.
+</Warning>
+
+Weil das Löschen dich aus deinen eigenen Daten aussperren kann, verlangt murmurvault eine kürzliche Passwortbestätigung (ein 15-Minuten-Fenster, deutlich kürzer als bei gewöhnlichen Aktionen), bevor es fortfährt.
+
+## Verwandt
+
+<CardGroup cols={2}>
+  <Card title="Tresor-Einstellungen" icon="gear" href="/de/settings/vault">
+    Passphrase, Auto-Sperre und Streng-geheim-Passkeys ändern.
+  </Card>
+  <Card title="Geheimnisse verwalten" icon="key" href="/de/vault/secrets">
+    Geheimnisse in einem Tresor hinzufügen und organisieren.
+  </Card>
+</CardGroup>

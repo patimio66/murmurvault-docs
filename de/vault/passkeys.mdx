@@ -1,0 +1,70 @@
+---
+title: "Passkeys"
+description: "Verknüpfe Passkeys, um deinen Tresor zu entsperren und den Streng-geheim-Schlüssel zu halten."
+---
+
+Passkeys sind WebAuthn-Anmeldedaten, gestützt auf dein Gerät oder einen Sicherheitsschlüssel. murmurvault nutzt sie auf zwei Arten:
+
+- **Tresor-Passkeys** entsperren den Tresor ohne Passphrase und können den [Streng-geheim-Schlüssel](/de/concepts/security-model#keys) für streng geheime Geheimnisse halten.
+- **Authentifizierungs-Passkeys** melden dich bei deinem Konto an. Diese verwaltest du unter [Settings → Authentication](/de/settings/authentication) und sind von Tresor-Passkeys getrennt.
+
+Diese Seite behandelt **Tresor-Passkeys**.
+
+## Wie Tresor-Passkeys funktionieren
+
+murmurvault nutzt die WebAuthn-**PRF-Erweiterung**, um aus deinem Passkey ein Geheimnis abzuleiten. Dieses Geheimnis umschließt (über HKDF) deine Schlüssel:
+
+- Jeder verknüpfte Passkey umschließt den **Hauptschlüssel**, kann also den Tresor entsperren.
+- Ein Passkey kann zusätzlich den **Streng-geheim-Schlüssel** halten und so das Aufdecken streng geheimer Geheimnisse ermöglichen.
+
+Die PRF-Ausgabe verlässt nie deinen Browser; der Server speichert nur den resultierenden Umschließungs-Chiffretext.
+
+## Voraussetzungen
+
+<Warning>
+  Die Passkey-Registrierung erfordert **HTTPS**. murmurvault wird über HTTPS ausgeliefert, daher funktioniert das von Haus aus.
+</Warning>
+
+- Ein Plattform-Authentifikator (Touch ID, Windows Hello, Android) oder ein mobiler Sicherheitsschlüssel.
+- Ein Browser und Authentifikator, die die WebAuthn-PRF-Erweiterung unterstützen.
+
+## Passkey mit einem Tresor verknüpfen
+
+1. Geh zu [Settings → Vault](/de/settings/vault).
+2. Füge im Passkey-Bereich des Tresors einen Passkey hinzu und authentifiziere dich, wenn du dazu aufgefordert wirst.
+3. Der Passkey kann nun den Tresor entsperren.
+
+Um streng geheime Geheimnisse zu aktivieren, gewähre einem Passkey vom selben Bildschirm aus den **Streng-geheim-Schlüssel**. Siehe [Streng geheime Geheimnisse](/de/vault/top-secrets#enable-the-top-tier).
+
+## Der PRF-Salt
+
+Jeder Tresor hat **einen PRF-Salt**, geteilt über alle seine verknüpften Passkeys.
+
+- Den Salt zu ändern würde jede bestehende Umschließung ungültig machen, daher ist er für die Lebensdauer des Tresors fest.
+- Alle Passkeys, die du mit einem Tresor verknüpfst, leiten sich aus diesem geteilten Salt ab.
+
+## Ältere Passkeys neu registrieren
+
+<Note>
+  Ein Passkey, der **vor Aktivierung der PRF-Unterstützung** registriert wurde, kann den Tresor nicht entsperren. Entferne ihn und registriere ihn neu, damit er die PRF-basierte Umschließung erhält.
+</Note>
+
+## Passkeys entfernen
+
+- Du kannst einen Tresor-Passkey jederzeit entfernen, solange ein anderer Weg hinein verbleibt.
+- murmurvault **blockiert das Entfernen des letzten Passkeys, der den Streng-geheim-Schlüssel hält**, solange streng geheime Geheimnisse existieren, weil das diese Geheimnisse für immer unlesbar machen würde.
+
+<Tip>
+  Verknüpfe mindestens zwei Passkeys mit jedem Tresor und gewähre den Streng-geheim-Schlüssel mehr als einem, wenn du streng geheime Geheimnisse nutzt. Ein einzelner Passkey ist ein Single Point of Failure ohne Wiederherstellung.
+</Tip>
+
+## Verwandt
+
+<CardGroup cols={2}>
+  <Card title="Streng geheime Geheimnisse" icon="lock" href="/de/vault/top-secrets">
+    Passkeys nutzen, um streng geheime Geheimnisse aufzudecken.
+  </Card>
+  <Card title="Authentifizierung" icon="user-shield" href="/de/settings/authentication">
+    Anmelde-Passkeys und Zwei-Faktor-Authentifizierung.
+  </Card>
+</CardGroup>
