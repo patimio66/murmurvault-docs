@@ -8,12 +8,8 @@ keywords: ["privacy", "data retention", "Android"]
 
 This policy covers the murmurvault website and Android app: what we collect, why, where it goes and how long we keep it. murmurvault is built so the server cannot read what you store in your vaults, so most of this page is about the little it can see.
 
-<Warning>
-
-- **Operator and data controller** `[PLACEHOLDER: operator]`
-- **Contact** `[PLACEHOLDER: contact email]`
-
-</Warning>
+- **Operator and data controller** Patryk Imioła, Poland
+- **Contact** [info@murmurvault.com](mailto:info@murmurvault.com)
 
 ## What the server can never read
 
@@ -59,13 +55,11 @@ We only use cookies the service needs to work. There are no advertising, analyti
 
 We email you only about your account: address verification, password resets, reveal codes for top secrets, security alerts (such as a new device signing in or a change to your password, email, two-factor authentication, vault passphrase or passkeys) and account deletion notices. No newsletters or marketing.
 
-<Warning>
-  **Email delivery provider** `[PLACEHOLDER: email provider]`
-</Warning>
+The app sends these emails over SMTP through seohost.pl, a Polish hosting provider.
 
 ## Where your data is processed
 
-- Hosting: the service and its database run on servers rented from Hetzner Online GmbH, administered through Laravel Forge.
+- The service and its database run on servers rented from Hetzner Online GmbH at the Falkenstein data centre in Germany (EU). We administer the servers through Laravel Forge.
 - Network: all traffic passes through Cloudflare, which protects the site against attacks. Cloudflare processes your IP address and request details. Vault contents are already encrypted before they reach it.
 - Monitoring: we watch the service for errors and slow requests with Laravel Nightwatch. For signed-in requests this includes your account id, name, email address and IP address. Request contents and query strings are stripped from the requests it records.
 - Email delivery and push notifications: the providers named above.
@@ -103,4 +97,4 @@ When this policy changes, we update it here and change the date at the top.
 
 ## Contact
 
-Questions about privacy or your data? Email us: `[PLACEHOLDER: contact email]`
+Questions about privacy or your data? Email us at [info@murmurvault.com](mailto:info@murmurvault.com).
