@@ -7,7 +7,7 @@ description: "Zmień frazę dostępu sejfu, limit automatycznej blokady i passke
 
 ## Fraza dostępu
 
-Zmień frazę dostępu do sejfu. Ponieważ fraza dostępu opakowuje [Klucz główny](/pl/concepts/security-model#keys), jej zmiana ponownie opakowuje ten klucz pod nową frazą.
+Zmień frazę dostępu do sejfu. Ponieważ fraza dostępu opakowuje [Klucz główny](/pl/concepts/security-model#klucze), jej zmiana ponownie opakowuje ten klucz pod nową frazą.
 
 <Warning>
   Wybieraj rozważnie. Frazy dostępu nie da się odzyskać ani zresetować — jeśli ją zapomnisz i nie masz powiązanego passkey, sejf będzie nie do odzyskania.
@@ -22,11 +22,11 @@ Ustaw, jak długo sejf pozostaje odblokowany w bezczynności, zanim zablokuje si
 - **Domyślnie:** 10 minut.
 - Dotyczy pojedynczego sejfu.
 
-Gdy limit czasu upłynie, zbuforowane klucze i każdy odsłonięty tekst jawny sekretu ściśle tajnego zostają wyczyszczone. Zobacz [Odblokowywanie i automatyczna blokada](/pl/vault/unlocking#auto-lock).
+Gdy limit czasu upłynie, zbuforowane klucze i każdy odsłonięty tekst jawny sekretu ściśle tajnego zostają wyczyszczone. Zobacz [Odblokowywanie i automatyczna blokada](/pl/vault/unlocking#automatyczna-blokada).
 
 ## Passkeys sekretów ściśle tajnych
 
-Nadawaj lub zarządzaj tym, które passkeys przechowują [Klucz ściśle tajny](/pl/concepts/security-model#keys):
+Nadawaj lub zarządzaj tym, które passkeys przechowują [Klucz ściśle tajny](/pl/concepts/security-model#klucze):
 
 - Nadanie Klucza ściśle tajnego passkey **włącza warstwę ściśle tajną** dla tego sejfu.
 - Sekrety ściśle tajne można wtedy tworzyć i odsłaniać tym passkey.
@@ -39,7 +39,7 @@ Zobacz [Sekrety ściśle tajne](/pl/vault/top-secrets) i [Passkeys](/pl/vault/pa
 
 ## Usuń sejf
 
-Sejf możesz też usunąć z jego ustawień. Usunięcie jest natychmiastowe i nieodwracalne, a w jego trakcie prosi o wpisanie nazwy potwierdzającej sejfu. Zobacz [Sejfy → Usuń sejf](/pl/vault/vaults#delete-a-vault).
+Sejf możesz też usunąć z jego ustawień. Usunięcie jest natychmiastowe i nieodwracalne, a w jego trakcie prosi o wpisanie nazwy potwierdzającej sejfu. Zobacz [Sejfy → Usuń sejf](/pl/vault/vaults#usuń-sejf).
 
 ## Powiązane
 

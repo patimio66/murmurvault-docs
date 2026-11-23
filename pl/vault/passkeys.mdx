@@ -5,7 +5,7 @@ description: "Powiąż passkeys, aby odblokowywać sejf i przechowywać Klucz ś
 
 Passkeys to poświadczenia WebAuthn oparte na Twoim urządzeniu lub kluczu sprzętowym. murmurvault używa ich na dwa sposoby:
 
-- **Passkeys sejfu** odblokowują sejf bez frazy dostępu i mogą przechowywać [Klucz ściśle tajny](/pl/concepts/security-model#keys) na potrzeby sekretów ściśle tajnych.
+- **Passkeys sejfu** odblokowują sejf bez frazy dostępu i mogą przechowywać [Klucz ściśle tajny](/pl/concepts/security-model#klucze) na potrzeby sekretów ściśle tajnych.
 - **Passkeys uwierzytelniania** logują Cię do konta. Tymi zarządzasz w [Settings → Authentication](/pl/settings/authentication) i są oddzielne od passkeys sejfu.
 
 Ta strona omawia **passkeys sejfu**.
@@ -34,7 +34,7 @@ Wynik PRF nigdy nie opuszcza Twojej przeglądarki; serwer przechowuje wyłączni
 2. Dodaj passkey w sekcji passkeys sejfu i uwierzytelnij się, gdy pojawi się prośba.
 3. Passkey może teraz odblokować sejf.
 
-Aby włączyć sekrety ściśle tajne, nadaj **Klucz ściśle tajny** passkey z tego samego ekranu. Zobacz [Sekrety ściśle tajne](/pl/vault/top-secrets#enable-the-top-tier).
+Aby włączyć sekrety ściśle tajne, nadaj **Klucz ściśle tajny** passkey z tego samego ekranu. Zobacz [Sekrety ściśle tajne](/pl/vault/top-secrets#włącz-warstwę-ściśle-tajną).
 
 ## Sól PRF
 
