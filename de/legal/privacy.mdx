@@ -1,0 +1,106 @@
+---
+title: "Datenschutzerklärung"
+description: "Wie murmurvault deine Daten auf der Website und in der Android-App verarbeitet."
+keywords: ["Datenschutz", "Datenspeicherung", "Android"]
+---
+
+**Zuletzt aktualisiert: 23. November 2026**
+
+Diese Erklärung gilt für die murmurvault-Website und die Android-App: was wir erheben, warum, wohin es geht und wie lange wir es speichern. murmurvault ist so gebaut, dass der Server nicht lesen kann, was du in deinen Tresoren speicherst – daher geht es auf dieser Seite vor allem um das Wenige, das er sieht.
+
+<Warning>
+
+- **Betreiber und Verantwortlicher für die Datenverarbeitung** `[PLACEHOLDER: operator]`
+- **Kontakt** `[PLACEHOLDER: contact email]`
+
+</Warning>
+
+## Was der Server niemals lesen kann
+
+- Alles, was du in einem Tresor speicherst, wird auf deinem Gerät verschlüsselt, bevor es gesendet wird: Wert, Name und Typ jedes Geheimnisses.
+- Der Server speichert nur Chiffretext, verschlüsselte Kopien deiner Schlüssel, Salts und Einstellungen zur Schlüsselableitung. Deine Tresor-Passphrase und deine Entschlüsselungsschlüssel verlassen dein Gerät nie.
+- Was der Server über einen Tresor sieht: seinen Namen (er wird vor dem Entsperren angezeigt, damit du einen Tresor wählen kannst – schreib also nichts Vertrauliches hinein), seine Einstellungen, wie viele Geheimnisse er pro Stufe enthält, die Stufe jedes Geheimnisses und wann etwas erstellt und geändert wurde.
+
+## Kontodaten
+
+- Dein Name und deine E-Mail-Adresse – zum Anmelden, für Sicherheitscodes und -warnungen und um dich wegen deines Kontos zu kontaktieren.
+- Dein Passwort, nur als Einweg-Hash gespeichert.
+- Zwei-Faktor-Authentifizierung, falls du sie aktivierst: das Authenticator-Geheimnis und die Wiederherstellungscodes, verschlüsselt gespeichert.
+- Passkeys, die du registrierst: der öffentliche Schlüssel, die Credential-ID, der Name, den du vergibst, und wann er zuletzt verwendet wurde. Der private Schlüssel bleibt in deinem Authenticator oder Passwort-Manager.
+- Deine Spracheinstellung und ob deine E-Mail-Adresse bestätigt ist.
+
+## Sicherheitsaktivität
+
+Damit du Missbrauch erkennen kannst, protokollieren wir Sicherheitsereignisse: Anmeldungen und fehlgeschlagene Anmeldungen, Änderungen an Passwort, E-Mail und Zwei-Faktor-Authentifizierung, Änderungen an Tresoren und Passkeys, geöffnete Freigabefenster, An- und Abmeldungen von Mobilgeräten sowie Anträge auf Kontolöschung.
+
+Jedes Ereignis speichert die Uhrzeit, die IP-Adresse und den User-Agent des Browsers oder der App, dazu Details wie den betroffenen Tresor- oder Gerätenamen und bei einer E-Mail-Änderung die alte und neue Adresse. Anhand dieser Einträge erkennen wir auch Anmeldungen von neuen Geräten und informieren dich per E-Mail.
+
+Sicherheitsereignisse werden nach 90 Tagen automatisch gelöscht. Du kannst sie in den Einstellungen einsehen.
+
+## Sitzungen, Cookies und Browserspeicher
+
+Wir verwenden nur Cookies, die der Dienst zum Funktionieren braucht. Es gibt keine Werbe-, Analyse- oder Tracking-Cookies.
+
+- Sitzungs-Cookie: hält dich angemeldet und endet nach 120 Minuten Inaktivität. Sein serverseitiger Eintrag enthält deine IP-Adresse, den User-Agent und die Zeit der letzten Aktivität, damit du deine Sitzungen in den Einstellungen sehen und beenden kannst.
+- Sicherheits-Cookie (XSRF-TOKEN): schützt Formulare vor Cross-Site-Request-Forgery.
+- Cookie für „Angemeldet bleiben“: nur wenn du die Option ankreuzt, damit du in diesem Browser angemeldet bleibst.
+- Sprach- und Seitenleisten-Cookies: merken sich deine Sprache für ein Jahr und ob die Seitenleiste geöffnet ist.
+- Der Browserspeicher enthält keine Geheimnisse, nur Hinweise wie etwa, welche Passkeys in diesem Browser keinen Tresor entsperren konnten. Entschlüsselungsschlüssel liegen nur im Arbeitsspeicher und werden beim Sperren des Tresors gelöscht.
+
+## Android-App
+
+- Bei der Anmeldung in der App wird ein Geräte-Token für dein Konto erstellt. Wir speichern den Gerätenamen und die Plattform, die die App meldet, wann das Token zuletzt verwendet wurde und – wenn du Benachrichtigungen erlaubst – ein Push-Token.
+- Du kannst jedes Gerät in den Einstellungen sehen und abmelden. Wenn du dein Passwort änderst oder zurücksetzt, werden alle Geräte abgemeldet.
+- Push-Benachrichtigungen werden über den Expo-Push-Dienst und Google Firebase Cloud Messaging zugestellt. Sie enthalten einen allgemeinen Satz über eine Sicherheitsänderung – nie Tresornamen, Inhalte von Geheimnissen, Gerätenamen, IP-Adressen oder Codes.
+- Die App speichert deine Tresore verschlüsselt auf dem Telefon. Wenn du die biometrische Entsperrung aktivierst, wird der Schlüssel, der sie öffnet, von der sicheren Hardware des Telefons geschützt und verlässt das Gerät nie.
+- Absturzberichte sind aus, bis du sie in der App einschaltest. Dann gehen sie an Sentry in der EU-Region und enthalten nur Fehlercodes: keine Tresorinhalte, Kontodaten oder IP-Adresse.
+
+## E-Mail
+
+Wir schreiben dir nur zu deinem Konto: Adressbestätigung, Passwort-Zurücksetzung, Freigabecodes für Top-Geheimnisse, Sicherheitswarnungen (etwa bei einer Anmeldung von einem neuen Gerät oder einer Änderung an Passwort, E-Mail, Zwei-Faktor-Authentifizierung, Tresor-Passphrase oder Passkeys) und Hinweise zur Kontolöschung. Keine Newsletter, kein Marketing.
+
+<Warning>
+  **Anbieter für den E-Mail-Versand** `[PLACEHOLDER: email provider]`
+</Warning>
+
+## Wo deine Daten verarbeitet werden
+
+- Hosting: Der Dienst und seine Datenbank laufen auf bei der Hetzner Online GmbH gemieteten Servern, verwaltet über Laravel Forge.
+- Netzwerk: Der gesamte Datenverkehr läuft über Cloudflare, das die Website vor Angriffen schützt. Cloudflare verarbeitet deine IP-Adresse und Anfragedetails. Tresorinhalte sind bereits verschlüsselt, bevor sie dort ankommen.
+- Monitoring: Wir überwachen den Dienst mit Laravel Nightwatch auf Fehler und langsame Anfragen. Bei angemeldeten Anfragen umfasst das deine Konto-ID, deinen Namen, deine E-Mail-Adresse und IP-Adresse. Anfrageinhalte und Query-Strings werden aus den erfassten Anfragen entfernt.
+- E-Mail-Zustellung und Push-Benachrichtigungen: die oben genannten Anbieter.
+
+## Was wir nicht tun
+
+- Keine Werbung und keine Werbenetzwerke.
+- Keine Analyse- oder Tracking-Skripte.
+- Wir verkaufen oder vermieten deine Daten nie und nutzen sie nicht für Profiling.
+- Wir geben Daten nur an die hier genannten Anbieter weiter, die sie in unserem Auftrag verarbeiten, oder wenn das Gesetz es verlangt.
+
+## Keine Wiederherstellung
+
+Wir können deine Tresore absichtlich nicht wiederherstellen. Wenn du die Passphrase eines Tresors vergisst und alle damit verknüpften Passkeys verlierst, ist sein Inhalt dauerhaft unlesbar – für dich und für uns. Das Zurücksetzen deines Kontopassworts stellt den Tresorzugang nicht wieder her.
+
+## Wie lange wir Daten speichern
+
+- Kontodaten, Tresore und Passkeys: bis du sie oder dein Konto löschst.
+- Sicherheitsereignisse: 90 Tage.
+- Sitzungen: bis sie ablaufen oder du dich abmeldest. Geräte-Tokens: bis das Gerät abgemeldet oder das Konto gelöscht wird.
+
+## Konto löschen
+
+Du kannst dein Konto jederzeit in den Einstellungen löschen. Wir frieren dein Konto sofort ein und planen die Löschung für 7 Tage später. Bis zum geplanten Datum kannst du die Löschung durch Anmelden abbrechen. Die Löschung entfernt dein Konto mit seinen Tresoren, Geheimnissen, Passkeys, Geräte-Tokens und Sicherheitsaktivitäten und meldet alle Mobilgeräte ab.
+
+[So funktioniert die Kontolöschung](/de/legal/account-deletion)
+
+## Deine Rechte
+
+In den Einstellungen kannst du deinen Namen und deine E-Mail-Adresse sehen und korrigieren, deine Sicherheitsaktivität prüfen, Sitzungen und Geräte abmelden und dein Konto löschen. Je nach Wohnort, etwa in der EU nach der DSGVO, hast du außerdem das Recht auf Auskunft, Berichtigung oder Löschung deiner Daten, auf Einschränkung der Verarbeitung oder Widerspruch dagegen und auf Beschwerde bei einer Datenschutzbehörde. Um diese Rechte auszuüben, kontaktiere uns.
+
+## Änderungen dieser Erklärung
+
+Wenn sich diese Erklärung ändert, aktualisieren wir sie hier und passen das Datum oben an.
+
+## Kontakt
+
+Fragen zum Datenschutz oder zu deinen Daten? Schreib uns: `[PLACEHOLDER: contact email]`

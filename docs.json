@@ -50,6 +50,13 @@
               "settings/security-activity",
               "settings/account"
             ]
+          },
+          {
+            "group": "Legal",
+            "pages": [
+              "legal/privacy",
+              "legal/account-deletion"
+            ]
           }
         ]
       },
@@ -90,6 +97,13 @@
               "pl/settings/security-activity",
               "pl/settings/account"
             ]
+          },
+          {
+            "group": "Informacje prawne",
+            "pages": [
+              "pl/legal/privacy",
+              "pl/legal/account-deletion"
+            ]
           }
         ]
       },
@@ -128,6 +142,13 @@
               "de/settings/vault",
               "de/settings/security-activity",
               "de/settings/account"
+            ]
+          },
+          {
+            "group": "Rechtliches",
+            "pages": [
+              "de/legal/privacy",
+              "de/legal/account-deletion"
             ]
           }
         ]

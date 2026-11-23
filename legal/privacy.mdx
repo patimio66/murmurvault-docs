@@ -1,0 +1,106 @@
+---
+title: "Privacy policy"
+description: "How murmurvault handles your data on the website and Android app."
+keywords: ["privacy", "data retention", "Android"]
+---
+
+**Last updated: 23 November 2026**
+
+This policy covers the murmurvault website and Android app: what we collect, why, where it goes and how long we keep it. murmurvault is built so the server cannot read what you store in your vaults, so most of this page is about the little it can see.
+
+<Warning>
+
+- **Operator and data controller** `[PLACEHOLDER: operator]`
+- **Contact** `[PLACEHOLDER: contact email]`
+
+</Warning>
+
+## What the server can never read
+
+- Everything you store in a vault is encrypted on your device before it is sent: each secret’s value, name and type.
+- The server keeps only ciphertext, encrypted copies of your keys, salts and key-derivation settings. Your vault passphrase and your decryption keys never leave your device.
+- What the server can see about a vault: its name (shown before unlock so you can pick a vault, so do not put anything sensitive in it), its settings, how many secrets it holds per tier, each secret’s tier, and when things were created and changed.
+
+## Account data
+
+- Your name and email address, to sign you in, send you security codes and alerts, and contact you about your account.
+- Your password, stored only as a one-way hash.
+- Two-factor authentication, if you turn it on: the authenticator secret and recovery codes, stored encrypted.
+- Passkeys you register: the public key, credential id, the name you give it and when it was last used. The private key stays in your authenticator or password manager.
+- Your language preference and whether your email address is verified.
+
+## Security activity
+
+So you can spot misuse, we record security events: sign-ins and failed sign-ins, password, email and two-factor changes, vault and passkey changes, opened reveal windows, mobile device sign-ins and sign-outs, and account deletion requests.
+
+Each event stores the time, the IP address and the browser or app user agent, plus details such as the vault or device name involved and, for an email change, the old and new address. We also use these records to detect sign-ins from a new device and email you about them.
+
+Security events are deleted automatically after 90 days. You can review them in Settings.
+
+## Sessions, cookies and browser storage
+
+We only use cookies the service needs to work. There are no advertising, analytics or tracking cookies.
+
+- Session cookie: keeps you signed in and ends after 120 minutes of inactivity. Its server-side record holds your IP address, user agent and last activity time, so you can see and end your sessions in Settings.
+- Security cookie (XSRF-TOKEN): protects forms against cross-site request forgery.
+- Remember-me cookie: only if you tick “Remember me”, to keep you signed in on that browser.
+- Language and sidebar cookies: remember your language for a year and whether the sidebar is open.
+- Browser storage holds no secrets: only notes such as which passkeys could not unlock a vault in that browser. Decryption keys live in memory and are cleared when the vault locks.
+
+## Android app
+
+- Signing in to the app creates a device token for your account. We store the device name and platform the app reports, when the token was last used and, if you allow notifications, a push token.
+- You can see and sign out each device in Settings. Changing or resetting your password signs out every device.
+- Push notifications are delivered through the Expo push service and Google Firebase Cloud Messaging. They contain one generic sentence about a security change, never vault names, secret contents, device names, IP addresses or codes.
+- The app keeps your vaults on the phone in encrypted form. If you turn on biometric unlock, the key that opens them is protected by the phone’s secure hardware and never leaves the device.
+- Crash reports are off unless you turn them on in the app. When on, they go to Sentry in its EU region and contain error codes only: no vault contents, account details or IP address.
+
+## Email
+
+We email you only about your account: address verification, password resets, reveal codes for top secrets, security alerts (such as a new device signing in or a change to your password, email, two-factor authentication, vault passphrase or passkeys) and account deletion notices. No newsletters or marketing.
+
+<Warning>
+  **Email delivery provider** `[PLACEHOLDER: email provider]`
+</Warning>
+
+## Where your data is processed
+
+- Hosting: the service and its database run on servers rented from Hetzner Online GmbH, administered through Laravel Forge.
+- Network: all traffic passes through Cloudflare, which protects the site against attacks. Cloudflare processes your IP address and request details. Vault contents are already encrypted before they reach it.
+- Monitoring: we watch the service for errors and slow requests with Laravel Nightwatch. For signed-in requests this includes your account id, name, email address and IP address. Request contents and query strings are stripped from the requests it records.
+- Email delivery and push notifications: the providers named above.
+
+## What we do not do
+
+- No advertising and no ad networks.
+- No analytics or tracking scripts.
+- We never sell or rent your data, and we do not use it for profiling.
+- We share data only with the providers listed here, which process it on our behalf, or when the law requires it.
+
+## No recovery
+
+We cannot recover your vaults, by design. If you forget a vault’s passphrase and lose every passkey linked to it, its contents are permanently unreadable, to you and to us. Resetting your account password does not restore vault access.
+
+## How long we keep data
+
+- Account data, vaults and passkeys: until you delete them or your account.
+- Security events: 90 days.
+- Sessions: until they expire or you sign out. Device tokens: until the device is signed out or the account is erased.
+
+## Deleting your account
+
+You can delete your account in Settings at any time. We freeze your account right away and schedule erasure for 7 days later. You can cancel by signing in before the scheduled date. Erasure removes your account with its vaults, secrets, passkeys, device tokens and security activity, and signs out every mobile device.
+
+[How account deletion works](/legal/account-deletion)
+
+## Your rights
+
+You can see and correct your name and email in Settings, review your security activity, sign out sessions and devices, and delete your account. Depending on where you live, for example in the EU under the GDPR, you also have the right to access your data, have it corrected or erased, restrict or object to its processing, and complain to a data protection authority. To exercise these rights, contact us.
+
+## Changes to this policy
+
+When this policy changes, we update it here and change the date at the top.
+
+## Contact
+
+Questions about privacy or your data? Email us: `[PLACEHOLDER: contact email]`
