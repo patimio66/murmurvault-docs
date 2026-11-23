@@ -1,0 +1,106 @@
+---
+title: "Polityka prywatności"
+description: "Jak murmurvault przetwarza Twoje dane w serwisie internetowym i aplikacji na Androida."
+keywords: ["prywatność", "przechowywanie danych", "Android"]
+---
+
+**Ostatnia aktualizacja: 23 listopada 2026**
+
+Ta polityka dotyczy strony murmurvault i aplikacji na Androida: co zbieramy, po co, dokąd to trafia i jak długo to przechowujemy. murmurvault jest zbudowany tak, że serwer nie może odczytać tego, co trzymasz w swoich sejfach, więc większość tej strony dotyczy tego niewiele, co serwer widzi.
+
+<Warning>
+
+- **Operator i administrator danych** `[PLACEHOLDER: operator]`
+- **Kontakt** `[PLACEHOLDER: contact email]`
+
+</Warning>
+
+## Czego serwer nigdy nie odczyta
+
+- Wszystko, co przechowujesz w sejfie, jest szyfrowane na Twoim urządzeniu przed wysłaniem: wartość, nazwa i typ każdego sekretu.
+- Serwer przechowuje wyłącznie szyfrogramy, zaszyfrowane kopie Twoich kluczy, sole i ustawienia wyprowadzania kluczy. Fraza dostępu do sejfu i klucze deszyfrujące nigdy nie opuszczają Twojego urządzenia.
+- Co serwer widzi o sejfie: jego nazwę (wyświetlaną przed odblokowaniem, żebyś mógł wybrać sejf – nie umieszczaj w niej nic poufnego), jego ustawienia, liczbę sekretów na każdym poziomie, poziom każdego sekretu oraz daty utworzenia i zmian.
+
+## Dane konta
+
+- Twoje imię i adres e-mail – do logowania, wysyłania kodów i alertów bezpieczeństwa oraz kontaktu w sprawie konta.
+- Twoje hasło, przechowywane wyłącznie jako jednokierunkowy skrót.
+- Uwierzytelnianie dwuskładnikowe, jeśli je włączysz: sekret aplikacji uwierzytelniającej i kody odzyskiwania, przechowywane w postaci zaszyfrowanej.
+- Zarejestrowane klucze dostępu: klucz publiczny, identyfikator poświadczenia, nadana nazwa i czas ostatniego użycia. Klucz prywatny pozostaje w Twoim uwierzytelniaczu lub menedżerze haseł.
+- Preferowany język oraz informacja, czy adres e-mail został zweryfikowany.
+
+## Aktywność
+
+Abyś mógł wykryć nadużycia, zapisujemy zdarzenia bezpieczeństwa: logowania i nieudane logowania, zmiany hasła, adresu e-mail i uwierzytelniania dwuskładnikowego, zmiany sejfów i kluczy dostępu, otwarte okna odsłaniania, logowania i wylogowania urządzeń mobilnych oraz prośby o usunięcie konta.
+
+Każde zdarzenie zawiera czas, adres IP i identyfikator przeglądarki lub aplikacji (user agent), a także szczegóły, takie jak nazwa sejfu lub urządzenia, a przy zmianie adresu e-mail – stary i nowy adres. Na tej podstawie wykrywamy też logowania z nowego urządzenia i powiadamiamy Cię o nich e-mailem.
+
+Zdarzenia bezpieczeństwa są automatycznie usuwane po 90 dniach. Możesz je przejrzeć w Ustawieniach.
+
+## Sesje, pliki cookie i pamięć przeglądarki
+
+Używamy wyłącznie plików cookie niezbędnych do działania usługi. Nie ma żadnych plików cookie reklamowych, analitycznych ani śledzących.
+
+- Plik cookie sesji: utrzymuje zalogowanie i wygasa po 120 minutach bezczynności. Jego zapis po stronie serwera zawiera Twój adres IP, user agent i czas ostatniej aktywności, dzięki czemu możesz przeglądać i kończyć sesje w Ustawieniach.
+- Plik cookie bezpieczeństwa (XSRF-TOKEN): chroni formularze przed atakami CSRF.
+- Plik cookie „Zapamiętaj mnie”: tylko jeśli zaznaczysz tę opcję – utrzymuje zalogowanie w tej przeglądarce.
+- Pliki cookie języka i paska bocznego: zapamiętują Twój język przez rok oraz to, czy pasek boczny jest otwarty.
+- Pamięć przeglądarki nie przechowuje żadnych sekretów, a jedynie notatki, np. które klucze dostępu nie mogły odblokować sejfu w tej przeglądarce. Klucze deszyfrujące istnieją tylko w pamięci i są czyszczone po zablokowaniu sejfu.
+
+## Aplikacja na Androida
+
+- Zalogowanie w aplikacji tworzy token urządzenia dla Twojego konta. Przechowujemy nazwę urządzenia i platformę zgłaszane przez aplikację, czas ostatniego użycia tokenu oraz – jeśli zezwolisz na powiadomienia – token push.
+- Każde urządzenie możesz zobaczyć i wylogować w Ustawieniach. Zmiana lub zresetowanie hasła wylogowuje wszystkie urządzenia.
+- Powiadomienia push są dostarczane przez usługę push Expo i Google Firebase Cloud Messaging. Zawierają jedno ogólne zdanie o zmianie bezpieczeństwa – nigdy nazw sejfów, treści sekretów, nazw urządzeń, adresów IP ani kodów.
+- Aplikacja przechowuje Twoje sejfy na telefonie w postaci zaszyfrowanej. Jeśli włączysz odblokowanie biometryczne, klucz, który je otwiera, jest chroniony przez bezpieczny sprzęt telefonu i nigdy nie opuszcza urządzenia.
+- Raporty awarii są wyłączone, dopóki nie włączysz ich w aplikacji. Po włączeniu trafiają do Sentry w regionie UE i zawierają wyłącznie kody błędów: bez zawartości sejfów, danych konta ani adresu IP.
+
+## E-mail
+
+Wysyłamy Ci e-maile wyłącznie w sprawie konta: weryfikacja adresu, reset hasła, kody odsłaniania sekretów top, alerty bezpieczeństwa (np. logowanie z nowego urządzenia albo zmiana hasła, adresu e-mail, uwierzytelniania dwuskładnikowego, frazy dostępu lub kluczy dostępu) oraz powiadomienia o usunięciu konta. Żadnych newsletterów ani marketingu.
+
+<Warning>
+  **Dostawca usług poczty elektronicznej** `[PLACEHOLDER: email provider]`
+</Warning>
+
+## Gdzie przetwarzamy Twoje dane
+
+- Hosting: usługa i jej baza danych działają na serwerach wynajmowanych od Hetzner Online GmbH, administrowanych przez Laravel Forge.
+- Sieć: cały ruch przechodzi przez Cloudflare, który chroni stronę przed atakami. Cloudflare przetwarza Twój adres IP i szczegóły żądań. Zawartość sejfów jest zaszyfrowana, zanim tam dotrze.
+- Monitoring: błędy i wolne żądania śledzimy za pomocą Laravel Nightwatch. W przypadku żądań zalogowanych użytkowników obejmuje to identyfikator konta, imię, adres e-mail i adres IP. Treść żądań i parametry zapytań są usuwane z rejestrowanych żądań.
+- Dostarczanie e-maili i powiadomień push: dostawcy wymienieni powyżej.
+
+## Czego nie robimy
+
+- Żadnych reklam ani sieci reklamowych.
+- Żadnych skryptów analitycznych ani śledzących.
+- Nigdy nie sprzedajemy ani nie wynajmujemy Twoich danych i nie używamy ich do profilowania.
+- Udostępniamy dane wyłącznie wymienionym tu dostawcom, którzy przetwarzają je w naszym imieniu, lub gdy wymaga tego prawo.
+
+## Brak odzyskiwania
+
+Celowo nie możemy odzyskać Twoich sejfów. Jeśli zapomnisz frazę dostępu do sejfu i stracisz wszystkie połączone z nim klucze dostępu, jego zawartość staje się trwale nieczytelna – dla Ciebie i dla nas. Zresetowanie hasła do konta nie przywraca dostępu do sejfu.
+
+## Jak długo przechowujemy dane
+
+- Dane konta, sejfy i klucze dostępu: dopóki ich nie usuniesz lub nie usuniesz konta.
+- Zdarzenia bezpieczeństwa: 90 dni.
+- Sesje: do wygaśnięcia lub wylogowania. Tokeny urządzeń: do wylogowania urządzenia lub usunięcia konta.
+
+## Usuwanie konta
+
+Konto możesz usunąć w dowolnej chwili w Ustawieniach. Od razu zamrażamy konto i planujemy jego usunięcie za 7 dni. Przed zaplanowaną datą możesz anulować usunięcie, logując się. Usunięcie kasuje konto wraz z sejfami, sekretami, kluczami dostępu, tokenami urządzeń i aktywnością bezpieczeństwa oraz wylogowuje wszystkie urządzenia mobilne.
+
+[Jak działa usuwanie konta](/pl/legal/account-deletion)
+
+## Twoje prawa
+
+W Ustawieniach możesz zobaczyć i poprawić swoje imię i adres e-mail, przejrzeć aktywność bezpieczeństwa, wylogować sesje i urządzenia oraz usunąć konto. W zależności od miejsca zamieszkania, np. w UE na podstawie RODO, masz też prawo dostępu do swoich danych, ich sprostowania lub usunięcia, ograniczenia przetwarzania lub sprzeciwu wobec niego oraz wniesienia skargi do organu ochrony danych. Aby skorzystać z tych praw, skontaktuj się z nami.
+
+## Zmiany tej polityki
+
+Gdy ta polityka się zmieni, zaktualizujemy ją tutaj i zmienimy datę na górze strony.
+
+## Kontakt
+
+Pytania o prywatność lub Twoje dane? Napisz do nas: `[PLACEHOLDER: contact email]`
