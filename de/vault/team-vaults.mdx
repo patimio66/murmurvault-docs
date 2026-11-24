@@ -1,0 +1,186 @@
+---
+title: "Team-Tresore"
+description: "Teile Einträge mit anderen, lege fest, was jede Person sehen und tun darf, und verwalte ihren Zugriff."
+keywords: ["Team-Tresor", "Teilen", "Einladungen", "Zugriff"]
+---
+
+Ein Team-Tresor ist ein Tresor, den du mit anderen teilst. Deine übrigen Tresore sind **privat**: Nur du kannst sie öffnen. Erstelle einen Team-Tresor, wenn du mit anderen zusammenarbeiten willst.
+
+Alle mit Zugriff entsperren einen Team-Tresor mit ihrer **eigenen** Passphrase oder ihrem eigenen Passkey. Niemand teilt eine Passphrase. Der Browser des Besitzers versiegelt die Schlüssel für jede Person, und der Server speichert nur die versiegelten Kopien. In der App heißen die Elemente eines Team-Tresors **Einträge**. Sie funktionieren wie die Geheimnisse in einem privaten Tresor.
+
+<Note>
+  Team-Tresore sind im Web verfügbar. Die Android-App zeigt sie noch nicht an; die Unterstützung in der App folgt separat. Der Zugriff wird im Web verwaltet (einladen, bestätigen, ändern, entfernen und Besitz übertragen).
+</Note>
+
+## Wer was darf
+
+- **Der Besitzer** erstellt den Team-Tresor und verwaltet als Einziger den Zugriff. Ein Team-Tresor hat jeweils einen Besitzer.
+- **Mitglieder** sehen den Namen des Tresors, den Namen des Besitzers und ihren eigenen Zugriff. Mitglieder sehen einander nicht. Nur der Besitzer sieht, wer Zugriff hat.
+
+Jedes Mitglied hat zwei Einstellungen, die der Besitzer wählt:
+
+| Einstellung | Optionen |
+|-------------|----------|
+| Worauf die Person zugreifen kann | **Ganzer Tresor**: jeder aktuelle Eintrag und jeder später hinzugefügte. **Ausgewählte Einträge**: nur die Einträge, die der Besitzer auswählt. |
+| Was die Person tun kann | **Ansehen**: nur lesen. **Bearbeiten**: beim ganzen Tresor Einträge hinzufügen, ändern und löschen. Bei ausgewählten Einträgen nur diese Einträge ändern, ohne hinzuzufügen oder zu löschen. |
+
+## Team-Tresor erstellen
+
+<Steps>
+  <Step title="Neuen Team-Tresor anlegen">
+    Wähle in der Seitenleiste neben **Team-Tresore** die Aktion **Neuer Team-Tresor**.
+  </Step>
+  <Step title="Namen vergeben">
+    Gib unter **Name des Team-Tresors** einen Namen ein. Er ist Pflicht. Alle, die du einlädst, sehen ihn, und der Server auch, also benenne einen Tresor nicht nach seinem Inhalt.
+  </Step>
+  <Step title="Passphrase festlegen">
+    Lege deine eigene Passphrase für diesen Tresor fest und wähle **Team-Tresor erstellen**. Dein Browser erzeugt die Schlüssel des Tresors.
+  </Step>
+  <Step title="Passkeys hinzufügen (empfohlen)">
+    Öffne die Einstellungen des Tresors (das Zahnrad im Tresor) und verknüpfe unter **Tresor-Passkeys** einen Passkey. Mit einem Passkey entsperrst du ohne Passphrase, und für Top-Einträge ist er Pflicht. Siehe [Passkeys](/de/vault/passkeys).
+  </Step>
+</Steps>
+
+<Warning>
+  Deine Passphrase für einen Team-Tresor gehört nur dir. Niemand sonst im Tresor kennt sie, und niemand kann sie zurücksetzen, auch nicht der Besitzer oder der Betreiber des Servers. Vergisst du sie und hast keinen verknüpften Passkey, verlierst du deinen Zugriff.
+</Warning>
+
+## Jemanden einladen
+
+Du musst der Besitzer sein, und der Tresor muss entsperrt sein.
+
+1. Öffne den Team-Tresor und wähle **Zugriff verwalten**.
+2. Wähle **Einladen** und gib die **E-Mail-Adresse** der Person ein.
+3. Wähle unter **Worauf die Person zugreifen kann** entweder **Ganzer Tresor** oder **Ausgewählte Einträge**. Bei ausgewählten Einträgen kreuzt du die Einträge an, die du teilen willst.
+4. Wähle unter **Was die Person tun kann** entweder **Ansehen** oder **Bearbeiten**.
+5. Wähle **Einladung senden**.
+
+Die Person bekommt eine E-Mail mit einem Link. Der Link enthält keine Schlüssel. Die Einladung läuft nach **7 Tagen** ab. Bis dahin steht sie in der Zugriffsübersicht unter **Einladungen**, wo du **Einladung zurückziehen** wählen kannst.
+
+Die Person braucht noch kein Konto. Sie kann eines mit der eingeladenen E-Mail-Adresse erstellen und den Link dann erneut öffnen.
+
+## Einladung annehmen
+
+1. Öffne den Link in der Einladungs-E-Mail.
+2. Melde dich mit der E-Mail-Adresse an, an die die Einladung ging. Hast du noch kein Konto, erstelle eines mit dieser Adresse und bestätige sie. Eine Einladung an eine andere Adresse kannst du nicht annehmen.
+3. Lege deine eigene Passphrase für diesen Tresor fest und wähle **Einladung annehmen**.
+
+Der Tresor erscheint in deiner Seitenleiste unter **Team-Tresore** mit dem Hinweis **Wartet**. Dein Zugriff beginnt, sobald der Besitzer ihn bestätigt; dann bekommst du eine E-Mail. In der Zwischenzeit kannst du in den Einstellungen des Tresors einen Passkey verknüpfen, damit der Besitzer auch Top-Einträge mit dir teilen kann.
+
+## Zugriff bestätigen
+
+Nimmt jemand an, bekommst du eine E-Mail, und die Person erscheint unter **Personen** mit dem Status **Wartet auf dich**.
+
+1. Öffne **Zugriff verwalten** bei entsperrtem Tresor.
+2. Wähle **Bestätigen** neben der Person.
+3. [Vergleiche ihren Fingerabdruck](#fingerabdrücke-vergleichen) mit ihr.
+4. Prüfe ihren Zugriff. Hat sie schon einen Top-Schlüssel, kannst du **Auch Top-Geheimnis-Schlüssel teilen** ankreuzen. Dafür berührst du deinen Passkey.
+5. Wähle **Zugriff bestätigen**. Dein Browser versiegelt die Schlüssel für die Person, und sie bekommt eine E-Mail.
+
+## Fingerabdrücke vergleichen
+
+Ein Fingerabdruck besteht aus 20 Ziffern in fünf Gruppen. Der Besitzer sieht den Fingerabdruck jeder Person in der Zugriffsübersicht und im Bestätigungsdialog (**Fingerabdruck ihres Schlüssels**). Jedes Mitglied sieht seinen eigenen auf dem Warte-Bildschirm und in den Einstellungen des Tresors (**Fingerabdruck deines Schlüssels**).
+
+Der Server liefert die öffentlichen Schlüssel jeder Person an den Browser des Besitzers, und der Browser des Besitzers versiegelt die Tresorschlüssel für sie. Stimmen die Fingerabdrücke überein, gehören die Schlüssel, für die der Browser des Besitzers versiegelt, wirklich dieser Person, und niemand hat sie ausgetauscht, auch nicht der Server.
+
+So vergleichst du:
+
+1. Nutze einen Kanal, dem du schon vertraust und der nicht murmurvault ist, etwa einen Anruf oder ein persönliches Treffen.
+2. Lass das Mitglied die Ziffern unter **Fingerabdruck deines Schlüssels** laut vorlesen.
+3. Prüfe, ob jede Gruppe mit dem übereinstimmt, was du unter **Fingerabdruck ihres Schlüssels** siehst.
+
+Weicht auch nur eine Ziffer ab, bestätige nicht. Wähle stattdessen **Entfernen**.
+
+<Note>
+  murmurvault zwingt dich nicht, Fingerabdrücke zu vergleichen. Ohne Vergleich verlässt du dich darauf, dass der Server die richtigen Schlüssel liefert. Vergleiche sie, bevor du jemandem Zugriff auf sensible Einträge gibst.
+</Note>
+
+## Top-Einträge in einem Team-Tresor
+
+Top-Einträge in einem Team-Tresor behalten den zusätzlichen Freigabeschritt, und jede Person erledigt ihn selbst. Um einen Top-Eintrag freizugeben, braucht jede Person:
+
+1. Einen Einmalcode an die E-Mail-Adresse **ihres eigenen** Kontos.
+2. Eine Berührung **ihres eigenen** Passkeys.
+
+Das Freigeben eines Werts öffnet ein Freigabefenster nur für diese Person. Wie eine Freigabe abläuft, steht unter [Streng geheime Geheimnisse](/de/vault/top-secrets#top-einträge-in-einem-team-tresor).
+
+So bekommt ein Mitglied Zugriff auf Top-Einträge:
+
+1. Das Mitglied verknüpft in den Einstellungen des Team-Tresors einen Passkey und gibt ihm den Top-Schlüssel. So entsteht sein eigener Top-Schlüssel.
+2. In der Zugriffsübersicht sieht der Besitzer neben ihm **Top-Zugriff ausstehend** und wählt **Top-Geheimnis-Schlüssel teilen**. Dafür berührt der Besitzer einmal seinen Passkey.
+
+## Zugriff verwalten
+
+Nur der Besitzer kann **Zugriff verwalten** öffnen, und der Tresor muss entsperrt sein. Die Zugriffsübersicht zeigt alle mit Zugriff: Name, E-Mail-Adresse, Status, worauf sie zugreifen und was sie tun können, und ihren Fingerabdruck.
+
+| Aktion | Was sie bewirkt |
+|--------|-----------------|
+| **Bestätigen** | Gibt einer Person, die eine Einladung angenommen hat, ihre Schlüssel. |
+| **Ändern** | Ändert, worauf die Person zugreifen oder was sie tun kann. Dein Browser versiegelt neu benötigte Schlüssel. |
+| **Top-Geheimnis-Schlüssel teilen** | Gibt ihr die Schlüssel für Top-Einträge. Erfordert eine Berührung deines Passkeys. |
+| **Zum Besitzer machen** | Überträgt ihr den Besitz. |
+| **Entfernen** | Beendet ihren Zugriff sofort. |
+| **Einladung zurückziehen** | Zieht eine noch nicht angenommene Einladung zurück. |
+
+Schränkst du den Zugriff einer Person ein, etwa vom ganzen Tresor auf ausgewählte Einträge, gilt das als Entfernen ihres Zugriffs auf die Einträge, die sie verliert. Diese Einträge erscheinen unter **Zu ändernde Einträge**, wie unter [Was das Entfernen des Zugriffs bewirkt](#was-das-entfernen-des-zugriffs-bewirkt) beschrieben.
+
+Jemanden entfernen, den Besitz übertragen und den Tresor löschen erfordern eine kürzliche Bestätigung deines Konto-Passworts.
+
+### Besitz übertragen
+
+Du kannst jemanden zum Besitzer machen, der bestätigten Zugriff auf den ganzen Tresor hat. Enthält der Tresor Top-Einträge, teile zuerst die Top-Geheimnis-Schlüssel mit der Person.
+
+Wähle **Zum Besitzer machen** neben ihr und bestätige. Danach verwaltet sie den Zugriff. Du behältst Zugriff auf den ganzen Tresor mit Bearbeitungsrecht und kannst danach gehen. Ihr bekommt beide eine E-Mail.
+
+### Einen Team-Tresor verlassen
+
+Öffne als Mitglied die Einstellungen des Tresors und wähle **Tresor verlassen**. Dein Zugriff endet sofort, und der Besitzer bekommt eine E-Mail, damit er die Tresorschlüssel rotieren kann. Um zurückzukommen, muss der Besitzer dich erneut einladen.
+
+Der Besitzer kann nicht gehen. Übertrage zuerst den Besitz oder lösche den Tresor.
+
+## Was das Entfernen des Zugriffs bewirkt
+
+Wenn du jemanden entfernst oder die Person geht oder ihr Konto löscht:
+
+- **Ihr Zugriff endet sofort.** Der Server löscht ihre Mitgliedschaft, und sie kann den Tresor und seine Einträge nicht mehr laden.
+- **Du rotierst den Tresorschlüssel.** Hatte sie Zugriff auf den ganzen Tresor, zeigt die Zugriffsübersicht **Tresorschlüssel rotieren**. Wähle **Schlüssel jetzt rotieren**. Dein Browser erzeugt einen neuen Tresorschlüssel und verpackt den Schlüssel jedes Eintrags neu damit, sodass ab dann hinzugefügte Einträge außer ihrer Reichweite bleiben. Bei Top-Einträgen erfordert das eine Berührung deines Passkeys. Bis du rotierst, werden neue Einträge noch mit dem alten Schlüssel verpackt, also rotiere sofort.
+
+Das Entfernen des Zugriffs nimmt nicht zurück, was die Person schon gesehen hat. Solange sie Zugriff hatte, konnte sie Werte freigeben, kopieren oder sich merken, und die Rotation ändert die Schlüssel bestehender Einträge nicht. Deshalb listet murmurvault diese Einträge unter **Zu ändernde Einträge**:
+
+1. Ändere jedes Passwort und jeden Schlüssel an der Quelle, also bei der Website oder dem Dienst, zu dem er gehört.
+2. Bearbeite den Eintrag in murmurvault und speichere den neuen Wert. Eine Bearbeitung durch den Besitzer gibt dem Eintrag einen neuen Schlüssel. Eine Bearbeitung durch ein Mitglied behält den alten Schlüssel.
+3. Den Wert eines Top-Eintrags kannst du nicht bearbeiten. Um einem Top-Eintrag einen neuen Schlüssel zu geben, lösche ihn und erstelle ihn neu.
+4. Wähle **Als erledigt markieren**, um die Person aus der Liste auszublenden.
+
+## Team-Tresor löschen
+
+Öffne als Besitzer die Einstellungen des Tresors und geh zu **Team-Tresor löschen**. Gib den Bestätigungsnamen des Tresors ein und bestätige dein Konto-Passwort. Das löscht jeden Eintrag für alle mit Zugriff, und jedes Mitglied bekommt eine E-Mail.
+
+Um zu gehen, ohne den Tresor zu löschen, übertrage zuerst den Besitz.
+
+## Team-Tresore und Kontolöschung
+
+Du kannst die Löschung deines Kontos nicht planen, solange du einen Team-Tresor besitzt, auf den jemand anderes zugreifen kann, auch jemand, der auf deine Bestätigung wartet, oder eine offene Einladung. Übertrage zuerst den Besitz oder lösche den Tresor. Siehe [Konto löschen](/de/legal/account-deletion).
+
+## Limits
+
+- Bis zu **25 Personen** pro Team-Tresor, dich und offene Einladungen mitgezählt.
+- Bis zu **50 Team-Tresore** pro Konto, eigene und mit dir geteilte zusammen. Dieses Limit gilt unabhängig vom Limit für private Tresore.
+- Einladungen laufen nach **7 Tagen** ab.
+
+## Verwandt
+
+<CardGroup cols={2}>
+  <Card title="Sicherheitsmodell" icon="shield-halved" href="/de/concepts/security-model#team-tresore">
+    Wie die Schlüssel eines Team-Tresors funktionieren und wo ihre Grenzen liegen.
+  </Card>
+  <Card title="Streng geheime Geheimnisse" icon="lock" href="/de/vault/top-secrets">
+    Wie der zusätzliche Freigabeschritt funktioniert.
+  </Card>
+  <Card title="Tresore" icon="vault" href="/de/vault/vaults">
+    Private und Team-Tresore.
+  </Card>
+  <Card title="Datenschutzerklärung" icon="user-shield" href="/de/legal/privacy">
+    Welche Daten Team-Tresore speichern und wie lange.
+  </Card>
+</CardGroup>

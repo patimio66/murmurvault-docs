@@ -7,7 +7,7 @@ murmurvault ist Ende-zu-Ende-verschlüsselt. Alle Ver- und Entschlüsselung pass
 
 ## Schlüssel
 
-murmurvault verwendet zwei unabhängige 256-Bit-Schlüssel, beide in deinem Browser erzeugt.
+Ein privater Tresor verwendet zwei unabhängige 256-Bit-Schlüssel, beide in deinem Browser erzeugt. Team-Tresore verwenden andere Schlüssel; siehe [Team-Tresore](#team-tresore).
 
 <CardGroup cols={2}>
   <Card title="Hauptschlüssel (MK)" icon="key">
@@ -62,9 +62,60 @@ Weil der WebCrypto-Umschließungsschlüssel nicht exportierbar ist, lässt sich 
 
 Ein vollständiger Server-Einbruch liefert nur Chiffretext und Schlüsselableitungsparameter. Ohne deine Passphrase oder einen Passkey lassen sich die Daten nicht entschlüsseln.
 
+## Team-Tresore
+
+Ein [Team-Tresor](/de/vault/team-vaults) nutzt dieselbe Chiffre und dieselben Entsperrmethoden wie ein privater Tresor, teilt die Schlüssel aber so auf, dass jede Person nur öffnen kann, was mit ihr geteilt wurde. Alle Schlüsseloperationen passieren in Browsern. Der Server speichert öffentliche Schlüssel, versiegelte Kopien und umschlossene Schlüssel und sieht nie Klartext oder einen Schlüssel, den er nutzen könnte.
+
+In der App heißen die Elemente eines Team-Tresors Einträge, und der Streng-geheim-Schlüssel heißt Top-Schlüssel.
+
+### Schlüssel in einem Team-Tresor
+
+| Schlüssel | Wer ihn hat | Wie er gespeichert wird |
+|-----------|-------------|-------------------------|
+| Mitgliedsschlüssel | Jede Person mit Zugriff, auch der Besitzer | Umschlossen von der eigenen Passphrase und den eigenen Passkeys dieser Person, wie der Hauptschlüssel eines privaten Tresors |
+| Identitäts-Schlüsselpaare | Jede Person | Ein Verschlüsselungs-Schlüsselpaar (X25519) und ein Signatur-Schlüsselpaar (Ed25519), abgeleitet aus einem Seed, den der Mitgliedsschlüssel umschließt. Die öffentlichen Schlüssel werden im Klartext gespeichert. |
+| Tresorschlüssel | Alle mit Zugriff auf den ganzen Tresor | Für den öffentlichen Schlüssel jeder dieser Personen versiegelt (Sealed Box von libsodium) |
+| Eintragsschlüssel | Einer pro Eintrag | Vom Tresorschlüssel umschlossen. Für Personen mit Zugriff auf ausgewählte Einträge zusätzlich direkt für jede von ihnen versiegelt. |
+| Top-Schlüssel | Personen mit Zugriff auf Top-Einträge | Der Wert eines Top-Eintrags hat einen zweiten Schlüssel, umschlossen vom Top-Schlüssel des Tresors. Der Top-Schlüssel des Tresors, bei Zugriff auf ausgewählte Einträge der Top-Schlüssel jedes Eintrags, wird für den öffentlichen Top-Schlüssel der Person versiegelt. Ihren privaten Top-Schlüssel umschließen nur ihre Passkeys. |
+
+Jeder umschlossene Eintragsschlüssel ist an seinen Tresor, seinen Eintrag und die Schlüsselversion gebunden, und jeder versiegelte Schlüssel nennt den Tresor, zu dem er gehört. Ein Schlüssel, der woandershin verschoben wird, lässt sich daher nicht öffnen. Der öffentliche Top-Schlüssel jeder Person ist mit ihrem Signaturschlüssel signiert, und der Browser des Besitzers prüft diese Signatur, bevor er einen Top-Schlüssel dafür versiegelt.
+
+### Schlüssel für Personen versiegeln
+
+Wenn du eine Einladung annimmst, erzeugt dein Browser deinen Mitgliedsschlüssel und deine Identitätsschlüssel. Kein Schlüssel wird per E-Mail verschickt. Wenn der Besitzer deinen Zugriff bestätigt, versiegelt sein Browser die Schlüssel, die du brauchst, für deinen öffentlichen Schlüssel. Nur dein Browser kann öffnen, was für dich versiegelt wurde.
+
+### Fingerabdrücke
+
+Ein Fingerabdruck ist eine 20-stellige Zahl, berechnet aus dem öffentlichen Signatur- und Verschlüsselungsschlüssel einer Person (BLAKE2b). Der Besitzer sieht ihn beim Bestätigen, und jedes Mitglied sieht seinen eigenen in den Einstellungen des Tresors. Lesen beide über einen vertrauenswürdigen Kanal dieselben Ziffern, hat der Browser des Besitzers die echten öffentlichen Schlüssel dieser Person. Siehe [Fingerabdrücke vergleichen](/de/vault/team-vaults#fingerabdrücke-vergleichen).
+
+### Schlüsselrotation
+
+Verliert jemand, der den Tresorschlüssel hatte, den Zugriff, markiert der Server den Tresor. Das passiert, wenn der Besitzer die Person entfernt, wenn sie geht oder ihr Konto löscht und wenn ihr Zugriff vom ganzen Tresor auf ausgewählte Einträge eingeschränkt wird. Der Browser des Besitzers erzeugt dann einen neuen Tresorschlüssel, umschließt damit jeden Eintragsschlüssel neu und versiegelt den neuen Schlüssel für alle, die weiter Zugriff auf den ganzen Tresor haben. Enthält der Tresor Top-Einträge, wird der Top-Schlüssel des Tresors genauso ersetzt, was eine Passkey-Berührung erfordert. Die Schlüsselversion steigt, sodass die alten Umschließungen nicht mehr passen.
+
+Die Rotation umschließt die Eintragsschlüssel neu, ersetzt sie aber nicht. Bearbeitet der Besitzer einen Eintrag, bekommt dieser einen neuen Eintragsschlüssel, der erneut für alle versiegelt wird, mit denen der Eintrag geteilt ist. Bearbeitungen durch Mitglieder behalten den Eintragsschlüssel, damit alle mit Zugriff den aktuellen Wert sehen.
+
+### Was der Server in einem Team-Tresor sehen kann
+
+| Sichtbar für den Server | Verborgen vor dem Server |
+|-----------------------|------------------------|
+| Der Name des Tresors und wem er gehört | Namen, Typen und Werte der Einträge |
+| Wer Zugriff hat, worauf und mit welchen Rechten, und der Status dieses Zugriffs | Jeder Mitglieds-, Tresor-, Top- und Eintragsschlüssel |
+| Welche Einträge jede Person mit Zugriff auf ausgewählte Einträge öffnen kann | Jeder private Schlüssel |
+| Öffentliche Schlüssel, versiegelte Kopien und umschlossene Schlüssel | Die Passphrase jeder Person und die WebAuthn-PRF-Ausgabe |
+| Anzahl der Einträge pro Stufe und die Stufe jedes Eintrags | Jeglicher Klartext |
+
+### Bekannte Grenzen
+
+- **Schlüsseltausch bei der Einladung.** Der Server liefert die öffentlichen Schlüssel jeder Person an den Browser des Besitzers. Ein bösartiger oder kompromittierter Server könnte stattdessen eigene Schlüssel liefern, und der Browser des Besitzers würde die Tresorschlüssel dann für den Server versiegeln. Ein Vergleich der Fingerabdrücke deckt das auf. murmurvault erzwingt diesen Vergleich nicht.
+- **Mitglieder können nicht prüfen, was der Server ihnen liefert.** Der Besitzer signiert weder Freigaben noch Einträge, daher können Mitglieder nicht kryptografisch prüfen, ob das, was sie sehen, aus dem Tresor stammt. Ein bösartiger Server könnte einem Mitglied erfundene Einträge zeigen. Die echten kann er trotzdem nicht lesen.
+- **Ansehen und Bearbeiten setzt der Server durch.** Wer einen Eintrag entschlüsseln kann, könnte auch gültigen Chiffretext dafür erzeugen. Der Server lehnt Änderungen von Personen ab, die nur ansehen dürfen, aber die Verschlüsselung allein verhindert sie nicht.
+- **Entfernen macht Gesehenes nicht ungeschehen.** Eine entfernte Person behält alles, was sie schon entschlüsselt hat, und die Eintragsschlüssel, die sie hatte, öffnen weiterhin den Chiffretext dieser Einträge. Die Rotation schützt danach hinzugefügte Einträge. Ein bestehender Eintrag bekommt erst einen neuen Schlüssel, wenn der Besitzer ihn bearbeitet, ein Top-Eintrag erst, wenn er gelöscht und neu erstellt wird.
+
 ## Wiederherstellung
 
 Es gibt **keine, so gewollt**. Deine Passphrase und deine Passkeys sind die einzigen Wege, einen Tresor zu entsperren. Es gibt keinen Reset-Link, kein Support-Override und keine Betreiber-Hintertür.
+
+Das gilt auch für deinen Zugriff auf einen Team-Tresor. Verlierst du deine eigene Passphrase und deine Passkeys dafür, kann der Besitzer dich entfernen und erneut einladen. Um den Zugriff zu verwalten, muss der Besitzer den Tresor entsperren, daher sollte er mehr als einen Passkey verknüpfen.
 
 <Warning>
   Verlierst du jede Passphrase und jeden Passkey eines Tresors, ist sein Inhalt dauerhaft nicht wiederherstellbar. Halte mindestens eine Passphrase sicher festgehalten und mehr als einen Passkey verknüpft.

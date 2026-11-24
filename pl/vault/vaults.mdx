@@ -5,6 +5,15 @@ description: "Twórz, porządkuj i usuwaj sejfy."
 
 Sejf to zaszyfrowany pojemnik na Twoje sekrety, chroniony własną frazą dostępu i własnymi passkeys. Możesz mieć kilka sejfów — na przykład jeden na poświadczenia prywatne i jeden do pracy.
 
+## Sejfy prywatne i zespołowe
+
+Są dwa rodzaje sejfów:
+
+- **Sejfy prywatne** to sejfy opisane na tej stronie. Tylko Ty możesz je otworzyć, a ich klucze należą wyłącznie do Ciebie. Każdy sejf utworzony przez **Create vault** jest prywatny i taki pozostaje.
+- **Sejfy zespołowe** są wspólne. Właściciel zaprasza osoby e-mailem i decyduje, do czego każda z nich ma dostęp i co może robić. Każdy odblokowuje sejf własną frazą dostępu lub własnym kluczem dostępu (passkey). Sejfy zespołowe są widoczne na pasku bocznym w sekcji **Sejfy zespołowe**. Zobacz [Sejfy zespołowe](/pl/vault/team-vaults).
+
+Sejfu prywatnego nie da się zamienić w sejf zespołowy. Aby udostępnić sekrety, utwórz sejf zespołowy i dodaj je tam.
+
 ## Utwórz sejf
 
 1. Otwórz obszar sejfu. Jeśli nie masz jeszcze żadnego, trafiasz na ekran konfiguracji.
@@ -19,7 +28,7 @@ Sejf bez nazwy jest pokazywany na pasku bocznym jako `Vault {id}`.
 
 ## Wiele sejfów
 
-Możesz utworzyć do **50 sejfów** na konto. Każdy ma niezależne klucze, frazę dostępu, passkeys i ustawienia automatycznej blokady.
+Możesz utworzyć do **50 sejfów prywatnych** na konto. Każdy ma niezależne klucze, frazę dostępu, passkeys i ustawienia automatycznej blokady. Sejfy zespołowe mają własny limit; zobacz [Sejfy zespołowe](/pl/vault/team-vaults#limity).
 
 - Sejfy pojawiają się na pasku bocznym w zapisanej kolejności.
 - Przeciągnij, aby **zmienić kolejność**; kolejność jest zapisywana per konto.
@@ -35,7 +44,7 @@ Po osiągnięciu limitu akcja **Add vault** jest wyłączona, a dalsze tworzenie
 
 ## Usuń sejf
 
-Usunięcie sejfu trwale niszczy go i każdy sekret w środku.
+Usunięcie sejfu trwale niszczy go i każdy sekret w środku. Usuwanie sejfu zespołowego opisuje strona [Sejfy zespołowe](/pl/vault/team-vaults#usuń-sejf-zespołowy).
 
 1. Otwórz ustawienia sejfu.
 2. Wybierz usunięcie i **wpisz nazwę potwierdzającą sejfu** (jego nazwę wyświetlaną w kebab-case), aby potwierdzić.

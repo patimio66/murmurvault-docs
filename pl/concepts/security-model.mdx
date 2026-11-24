@@ -7,7 +7,7 @@ murmurvault jest szyfrowany end-to-end. Całe szyfrowanie i odszyfrowywanie odby
 
 ## Klucze
 
-murmurvault używa dwóch niezależnych kluczy 256-bitowych, oba generowane w Twojej przeglądarce.
+Sejf prywatny używa dwóch niezależnych kluczy 256-bitowych, oba generowane w Twojej przeglądarce. Sejfy zespołowe używają innego zestawu kluczy; zobacz [Sejfy zespołowe](#sejfy-zespołowe).
 
 <CardGroup cols={2}>
   <Card title="Klucz główny (MK)" icon="key">
@@ -62,9 +62,60 @@ Ponieważ klucz opakowujący WebCrypto jest nieeksportowalny, zbuforowanego Kluc
 
 Pełne przejęcie serwera daje wyłącznie szyfrogram i parametry wyprowadzania kluczy. Bez Twojej frazy dostępu lub passkey danych nie da się odszyfrować.
 
+## Sejfy zespołowe
+
+[Sejf zespołowy](/pl/vault/team-vaults) używa tego samego szyfru i tych samych metod odblokowania co sejf prywatny, ale dzieli klucze tak, aby każda osoba mogła otworzyć tylko to, co jej udostępniono. Wszystkie operacje na kluczach odbywają się w przeglądarkach. Serwer przechowuje klucze publiczne, zapieczętowane kopie i opakowane klucze, nigdy nie widzi tekstu jawnego ani klucza, którego mógłby użyć.
+
+W aplikacji elementy sejfu zespołowego nazywają się wpisami, Klucz ściśle tajny to klucz top, a passkey to klucz dostępu.
+
+### Klucze w sejfie zespołowym
+
+| Klucz | Kto go ma | Jak jest przechowywany |
+|-------|-----------|------------------------|
+| Klucz członka | Każda osoba z dostępem, także właściciel | Opakowany własną frazą dostępu i własnymi kluczami dostępu tej osoby, jak Klucz główny sejfu prywatnego |
+| Pary kluczy tożsamości | Każda osoba | Para kluczy szyfrujących (X25519) i para kluczy podpisujących (Ed25519), wyprowadzone z ziarna opakowanego kluczem członka. Klucze publiczne są przechowywane jawnie. |
+| Klucz sejfu | Każdy z dostępem do całego sejfu | Zapieczętowany dla klucza publicznego każdej z tych osób (sealed box z libsodium) |
+| Klucz wpisu | Osobny dla każdego wpisu | Opakowany kluczem sejfu. Dla osób z dostępem do wybranych wpisów dodatkowo zapieczętowany bezpośrednio dla każdej z nich. |
+| Klucze top | Osoby z dostępem do wpisów top | Wartość wpisu top ma drugi klucz, opakowany kluczem top sejfu. Klucz top sejfu, a przy dostępie do wybranych wpisów klucz top każdego wpisu, jest pieczętowany dla publicznego klucza top tej osoby. Jej prywatny klucz top opakowują wyłącznie jej klucze dostępu. |
+
+Każdy opakowany klucz wpisu jest powiązany ze swoim sejfem, swoim wpisem i wersją klucza, a każdy zapieczętowany klucz wskazuje sejf, do którego należy, więc klucz przeniesiony gdziekolwiek indziej nie da się otworzyć. Publiczny klucz top każdej osoby jest podpisany jej kluczem podpisującym, a przeglądarka właściciela sprawdza ten podpis, zanim zapieczętuje dla niego jakikolwiek klucz top.
+
+### Pieczętowanie kluczy dla osób
+
+Gdy przyjmujesz zaproszenie, Twoja przeglądarka tworzy Twój klucz członka i klucze tożsamości. Żaden klucz nie podróżuje e-mailem. Gdy właściciel potwierdza Twój dostęp, jego przeglądarka pieczętuje potrzebne Ci klucze dla Twojego klucza publicznego. Tylko Twoja przeglądarka może otworzyć to, co zapieczętowano dla Ciebie.
+
+### Odciski kluczy
+
+Odcisk klucza to 20-cyfrowa liczba obliczana z publicznych kluczy podpisującego i szyfrującego danej osoby (BLAKE2b). Właściciel widzi go, gdy potwierdza dostęp, a każdy członek widzi swój w ustawieniach sejfu. Jeśli obie strony odczytają te same cyfry zaufanym kanałem, przeglądarka właściciela ma prawdziwe klucze publiczne tej osoby. Zobacz [Porównaj odciski kluczy](/pl/vault/team-vaults#porównaj-odciski-kluczy).
+
+### Wymiana kluczy
+
+Gdy osoba, która miała klucz sejfu, traci dostęp, serwer oznacza sejf. Dzieje się tak, gdy właściciel ją usuwa, gdy ona sama odchodzi lub usuwa konto i gdy jej dostęp zawęża się z całego sejfu do wybranych wpisów. Przeglądarka właściciela tworzy wtedy nowy klucz sejfu, ponownie opakowuje nim klucz każdego wpisu i pieczętuje nowy klucz dla każdego, kto nadal ma dostęp do całego sejfu. Jeśli sejf zawiera wpisy top, klucz top sejfu jest wymieniany tak samo, co wymaga dotknięcia klucza dostępu. Wersja klucza rośnie, więc stare opakowania przestają pasować.
+
+Wymiana ponownie opakowuje klucze wpisów, ale ich nie zastępuje. Gdy właściciel edytuje wpis, wpis dostaje nowy klucz, zapieczętowany ponownie dla każdego, komu jest udostępniony. Edycje członków zachowują klucz wpisu, aby każdy z dostępem widział aktualną wartość.
+
+### Co serwer widzi w sejfie zespołowym
+
+| Widoczne dla serwera | Ukryte przed serwerem |
+|-----------------------|------------------------|
+| Nazwa sejfu i jego właściciel | Nazwy, typy i wartości wpisów |
+| Kto ma dostęp, do czego i z jakimi uprawnieniami oraz status tego dostępu | Każdy klucz członka, klucz sejfu, klucz top i klucz wpisu |
+| Które wpisy może otworzyć każda osoba z dostępem do wybranych wpisów | Każdy klucz prywatny |
+| Klucze publiczne, zapieczętowane kopie i opakowane klucze | Fraza dostępu każdej osoby i wynik WebAuthn PRF |
+| Liczba wpisów na każdym poziomie i poziom każdego wpisu | Jakikolwiek tekst jawny |
+
+### Znane ograniczenia
+
+- **Podmiana kluczy przy zaproszeniu.** Serwer dostarcza przeglądarce właściciela klucze publiczne każdej osoby. Złośliwy lub przejęty serwer mógłby podać zamiast nich własne klucze, a przeglądarka właściciela zapieczętowałaby wtedy klucze sejfu dla serwera. Porównanie odcisków kluczy to wykrywa. murmurvault nie wymusza tego porównania.
+- **Członkowie nie mogą zweryfikować tego, co dostają od serwera.** Właściciel nie podpisuje udostępnień ani wpisów, więc członkowie nie mogą kryptograficznie sprawdzić, czy to, co widzą, pochodzi z sejfu. Złośliwy serwer mógłby pokazać członkowi zmyślone wpisy. Nadal nie może odczytać prawdziwych.
+- **Podgląd i edycję egzekwuje serwer.** Każdy, kto może odszyfrować wpis, mógłby też wytworzyć dla niego poprawny szyfrogram. Serwer odrzuca zmiany od osób, które mogą tylko przeglądać, ale samo szyfrowanie im nie zapobiega.
+- **Odebranie dostępu nie cofa tego, co już zobaczono.** Usunięta osoba zachowuje wszystko, co już odszyfrowała, a klucze wpisów, które miała, nadal otwierają szyfrogramy tych wpisów. Wymiana kluczy chroni wpisy dodane później. Istniejący wpis dostaje nowy klucz dopiero, gdy właściciel go edytuje, a wpis top dopiero, gdy zostanie usunięty i utworzony ponownie.
+
 ## Odzyskiwanie
 
 Nie ma go, **zgodnie z założeniem**. Twoja fraza dostępu i Twoje passkeys to jedyne sposoby odblokowania sejfu. Nie ma linku resetującego, obejścia po stronie wsparcia ani furtki operatora.
+
+Dotyczy to także Twojego dostępu do sejfu zespołowego. Jeśli stracisz własną frazę dostępu i klucze dostępu do niego, właściciel może Cię usunąć i zaprosić ponownie. Aby zarządzać dostępem, właściciel musi odblokować sejf, więc powinien mieć połączony więcej niż jeden klucz dostępu.
 
 <Warning>
   Stracisz każdą frazę dostępu i każdy passkey do sejfu i jego zawartość będzie trwale nie do odzyskania. Zapisz bezpiecznie przynajmniej jedną frazę dostępu i powiąż więcej niż jeden passkey.

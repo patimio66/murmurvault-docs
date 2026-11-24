@@ -4,7 +4,7 @@ description: "Jak murmurvault przetwarza Twoje dane w serwisie internetowym i ap
 keywords: ["prywatność", "przechowywanie danych", "Android"]
 ---
 
-**Ostatnia aktualizacja: 23 listopada 2026**
+**Ostatnia aktualizacja: 24 listopada 2026**
 
 Ta polityka dotyczy strony murmurvault i aplikacji na Androida: co zbieramy, po co, dokąd to trafia i jak długo to przechowujemy. murmurvault jest zbudowany tak, że serwer nie może odczytać tego, co trzymasz w swoich sejfach, więc większość tej strony dotyczy tego niewiele, co serwer widzi.
 
@@ -16,6 +16,7 @@ Ta polityka dotyczy strony murmurvault i aplikacji na Androida: co zbieramy, po 
 - Wszystko, co przechowujesz w sejfie, jest szyfrowane na Twoim urządzeniu przed wysłaniem: wartość, nazwa i typ każdego sekretu.
 - Serwer przechowuje wyłącznie szyfrogramy, zaszyfrowane kopie Twoich kluczy, sole i ustawienia wyprowadzania kluczy. Fraza dostępu do sejfu i klucze deszyfrujące nigdy nie opuszczają Twojego urządzenia.
 - Co serwer widzi o sejfie: jego nazwę (wyświetlaną przed odblokowaniem, żebyś mógł wybrać sejf – nie umieszczaj w niej nic poufnego), jego ustawienia, liczbę sekretów na każdym poziomie, poziom każdego sekretu oraz daty utworzenia i zmian.
+- Sejfy zespołowe działają tak samo. Szyfruje i odszyfrowuje przeglądarka każdej osoby, a klucze są pieczętowane dla każdego członka w przeglądarce, więc serwer nigdy nie widzi tekstu jawnego ani klucza, którego mógłby użyć. Nazwę sejfu zespołowego widzi też każda osoba do niego zaproszona.
 
 ## Dane konta
 
@@ -25,13 +26,27 @@ Ta polityka dotyczy strony murmurvault i aplikacji na Androida: co zbieramy, po 
 - Zarejestrowane klucze dostępu: klucz publiczny, identyfikator poświadczenia, nadana nazwa i czas ostatniego użycia. Klucz prywatny pozostaje w Twoim uwierzytelniaczu lub menedżerze haseł.
 - Preferowany język oraz informacja, czy adres e-mail został zweryfikowany.
 
+## Sejfy zespołowe
+
+Sejf zespołowy to sejf, który właściciel udostępnia innym osobom. Jeśli tworzysz taki sejf, dołączasz do niego lub dostajesz do niego zaproszenie, przechowujemy też:
+
+- **Zaproszenia:** adres e-mail zaproszonej osoby, który może należeć do kogoś bez konta, kto wysłał zaproszenie, jaki dostęp ono daje (cały sejf lub wybrane wpisy oraz podgląd lub edycja) i kiedy wygasa. Link z zaproszeniem wysyłamy e-mailem na ten adres. Link zawiera wyłącznie losowy token, a my przechowujemy tylko jego skrót. Zaproszenia wygasają po 7 dniach. Każde zaproszenie usuwamy 30 dni po jego przyjęciu, anulowaniu lub wygaśnięciu.
+- **Członkostwa:** kto ma dostęp do którego sejfu zespołowego i czy jest jego właścicielem, do czego ma dostęp (cały sejf lub wybrane wpisy i które), co może robić (podgląd lub edycja), czy jego dostęp nadal czeka na potwierdzenie właściciela oraz jego klucze publiczne. Klucze przechowywane z członkostwem są szyfrowane na urządzeniu członka, jak klucze każdego sejfu.
+- **Zapisy o odebraniu dostępu:** gdy ktoś traci dostęp do wpisów, które mógł czytać, bo właściciel go usunął lub zawęził jego dostęp, sam odszedł albo usunął konto, sejf zachowuje jego imię, adres e-mail, powód i to, które wpisy mógł czytać. Właściciel widzi te zapisy na ekranie dostępu, aby wiedzieć, które hasła zmienić. Nie są usuwane według harmonogramu. Pozostają do usunięcia sejfu zespołowego, także po oznaczeniu ich przez właściciela jako załatwione i po usunięciu konta przez tę osobę. Lista wpisów w zapisie skraca się, gdy właściciel edytuje któryś z tych wpisów lub ktoś go usunie, ale imię i adres e-mail pozostają.
+
+Kto co widzi:
+
+- Właściciel widzi imię i adres e-mail każdej osoby, która ma dostęp lub czeka na potwierdzenie, adres e-mail każdego oczekującego zaproszenia oraz zapisy o odebraniu dostępu.
+- Członkowie i zaproszone osoby widzą nazwę sejfu zespołowego i imię właściciela. Członkowie nie widzą siebie nawzajem.
+- Serwer widzi wszystko z tej sekcji, ale nie zawartość sejfu.
+
 ## Aktywność
 
-Abyś mógł wykryć nadużycia, zapisujemy zdarzenia bezpieczeństwa: logowania i nieudane logowania, zmiany hasła, adresu e-mail i uwierzytelniania dwuskładnikowego, zmiany sejfów i kluczy dostępu, otwarte okna odsłaniania, logowania i wylogowania urządzeń mobilnych oraz prośby o usunięcie konta.
+Abyś mógł wykryć nadużycia, zapisujemy zdarzenia bezpieczeństwa: logowania i nieudane logowania, zmiany hasła, adresu e-mail i uwierzytelniania dwuskładnikowego, zmiany sejfów i kluczy dostępu, otwarte okna odsłaniania, logowania i wylogowania urządzeń mobilnych, prośby o usunięcie konta oraz zmiany w sejfach zespołowych (utworzenie i usunięcie sejfu, wysłanie, anulowanie i przyjęcie zaproszenia, potwierdzenie, zmianę i odebranie dostępu, opuszczenie sejfu, przekazanie własności i wymianę kluczy).
 
-Każde zdarzenie zawiera czas, adres IP i identyfikator przeglądarki lub aplikacji (user agent), a także szczegóły, takie jak nazwa sejfu lub urządzenia, a przy zmianie adresu e-mail – stary i nowy adres. Na tej podstawie wykrywamy też logowania z nowego urządzenia i powiadamiamy Cię o nich e-mailem.
+Każde zdarzenie zawiera czas, adres IP i identyfikator przeglądarki lub aplikacji (user agent), a także szczegóły, takie jak nazwa sejfu lub urządzenia, a przy zmianie adresu e-mail – stary i nowy adres. Zdarzenia sejfów zespołowych zapisują też adres e-mail osoby zaproszonej lub tej, której dostęp się zmienił, a przy przekazaniu własności adresy obu właścicieli. Aktywność właściciela sejfu zespołowego może więc zawierać adresy e-mail osób, które zaprosił lub których dostępem zarządzał. Na tej podstawie wykrywamy też logowania z nowego urządzenia i powiadamiamy Cię o nich e-mailem.
 
-Zdarzenia bezpieczeństwa są automatycznie usuwane po 90 dniach. Możesz je przejrzeć w Ustawieniach.
+Zdarzenia bezpieczeństwa, w tym zdarzenia sejfów zespołowych, są automatycznie usuwane po 90 dniach. Możesz je przejrzeć w Ustawieniach.
 
 ## Sesje, pliki cookie i pamięć przeglądarki
 
@@ -53,7 +68,9 @@ Używamy wyłącznie plików cookie niezbędnych do działania usługi. Nie ma �
 
 ## E-mail
 
-Wysyłamy Ci e-maile wyłącznie w sprawie konta: weryfikacja adresu, reset hasła, kody odsłaniania sekretów top, alerty bezpieczeństwa (np. logowanie z nowego urządzenia albo zmiana hasła, adresu e-mail, uwierzytelniania dwuskładnikowego, frazy dostępu lub kluczy dostępu) oraz powiadomienia o usunięciu konta. Żadnych newsletterów ani marketingu.
+Wysyłamy Ci e-maile wyłącznie w sprawie konta i sejfów zespołowych, z których korzystasz: weryfikacja adresu, reset hasła, kody odsłaniania sekretów top, alerty bezpieczeństwa (np. logowanie z nowego urządzenia albo zmiana hasła, adresu e-mail, uwierzytelniania dwuskładnikowego, frazy dostępu lub kluczy dostępu), powiadomienia o usunięciu konta oraz powiadomienia o sejfach zespołowych. Żadnych newsletterów ani marketingu.
+
+E-maile o sejfach zespołowych to zaproszenia, które trafiają na adres wpisany przez właściciela, nawet jeśli nie ma do niego konta, oraz powiadomienia o zmianach dostępu: do właściciela, gdy ktoś przyjmie zaproszenie, odejdzie lub usunie konto, do członka, gdy jego dostęp zostanie potwierdzony, zmieniony lub odebrany, do obu osób przy przekazaniu własności i do każdego członka, gdy sejf zespołowy zostanie usunięty. Zawierają nazwę sejfu zespołowego i imię osoby, której dotyczą.
 
 Aplikacja wysyła te e-maile przez SMTP za pośrednictwem seohost.pl, polskiego dostawcy usług hostingowych.
 
@@ -69,7 +86,7 @@ Aplikacja wysyła te e-maile przez SMTP za pośrednictwem seohost.pl, polskiego 
 - Żadnych reklam ani sieci reklamowych.
 - Żadnych skryptów analitycznych ani śledzących.
 - Nigdy nie sprzedajemy ani nie wynajmujemy Twoich danych i nie używamy ich do profilowania.
-- Udostępniamy dane wyłącznie wymienionym tu dostawcom, którzy przetwarzają je w naszym imieniu, lub gdy wymaga tego prawo.
+- Poza tym, co właściciele i członkowie sejfów zespołowych widzą o sobie nawzajem, opisanym w sekcji [Sejfy zespołowe](#sejfy-zespołowe), udostępniamy dane wyłącznie wymienionym tu dostawcom, którzy przetwarzają je w naszym imieniu, lub gdy wymaga tego prawo.
 
 ## Brak odzyskiwania
 
@@ -78,12 +95,15 @@ Celowo nie możemy odzyskać Twoich sejfów. Jeśli zapomnisz frazę dostępu do
 ## Jak długo przechowujemy dane
 
 - Dane konta, sejfy i klucze dostępu: dopóki ich nie usuniesz lub nie usuniesz konta.
+- Członkostwa w sejfach zespołowych: dopóki osoba nie odejdzie lub nie zostanie usunięta albo dopóki sejf zespołowy lub jej konto nie zostanie usunięte.
+- Zaproszenia do sejfów zespołowych: 30 dni od przyjęcia, anulowania lub wygaśnięcia. Wygasają 7 dni po wysłaniu.
+- Zapisy o odebraniu dostępu do sejfu zespołowego: do usunięcia sejfu zespołowego.
 - Zdarzenia bezpieczeństwa: 90 dni.
 - Sesje: do wygaśnięcia lub wylogowania. Tokeny urządzeń: do wylogowania urządzenia lub usunięcia konta.
 
 ## Usuwanie konta
 
-Konto możesz usunąć w dowolnej chwili w Ustawieniach. Od razu zamrażamy konto i planujemy jego usunięcie za 7 dni. Przed zaplanowaną datą możesz anulować usunięcie, logując się. Usunięcie kasuje konto wraz z sejfami, sekretami, kluczami dostępu, tokenami urządzeń i aktywnością bezpieczeństwa oraz wylogowuje wszystkie urządzenia mobilne.
+Konto możesz usunąć w dowolnej chwili w Ustawieniach. Od razu zamrażamy konto i planujemy jego usunięcie za 7 dni. Przed zaplanowaną datą możesz anulować usunięcie, logując się. Usunięcie kasuje konto wraz z sejfami, sekretami, kluczami dostępu, tokenami urządzeń i aktywnością bezpieczeństwa oraz wylogowuje wszystkie urządzenia mobilne. Dopóki jesteś właścicielem sejfu zespołowego, do którego ktoś inny ma dostęp, przed zaplanowaniem usunięcia musisz przekazać jego własność lub usunąć sejf. Usunięcie konta kasuje sejfy zespołowe, których jesteś właścicielem i z których nikt inny nie korzysta, oraz odbiera Ci dostęp do sejfów zespołowych innych osób. Ich właściciele dostają powiadomienie, a ich zapisy o odebraniu dostępu zachowują Twoje imię i adres e-mail, jak opisano w sekcji [Sejfy zespołowe](#sejfy-zespołowe).
 
 [Jak działa usuwanie konta](/pl/legal/account-deletion)
 
