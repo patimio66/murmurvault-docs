@@ -16,7 +16,7 @@ Einen privaten Tresor kannst du nicht in einen Team-Tresor umwandeln. Um Geheimn
 
 ## Tresor erstellen
 
-1. Öffne den Tresor-Bereich. Hast du noch keinen, landest du auf dem Einrichtungsbildschirm. Um einen weiteren anzulegen, wähle **Tresor hinzufügen**: das **+** neben **Private Tresore** in der Seitenleiste oder die Schaltfläche unter [Einstellungen → Tresor](/de/settings/vault).
+1. Öffne den Tresor-Bereich. Hast du noch keinen, landest du auf dem Einrichtungsbildschirm. Um einen weiteren anzulegen, wähle **Tresor hinzufügen**: das **+** neben **Private Tresore** in der Seitenleiste.
 2. Wähle **Tresor erstellen** und gib einen Namen (optional) und eine Passphrase an.
 3. Speichern. Die Schlüssel des Tresors werden in deinem Browser erzeugt und von deiner Passphrase umschlossen.
 
@@ -31,10 +31,11 @@ Ein Tresor ohne Namen wird in der Seitenleiste als `Vault {id}` angezeigt.
 Du kannst bis zu **50 private Tresore** pro Konto erstellen. Jeder hat unabhängige Schlüssel, eine Passphrase, Passkeys und Auto-Sperr-Einstellungen. Für Team-Tresore gilt ein eigenes Limit; siehe [Team-Tresore](/de/vault/team-vaults#limits).
 
 - Private Tresore erscheinen in der Seitenleiste unter **Private Tresore** in ihrer gespeicherten Reihenfolge.
-- Um sie **umzuordnen**, ziehe sie in der Liste **Private Tresore** unter [Einstellungen → Tresor](/de/settings/vault). Die Reihenfolge wird pro Konto gespeichert.
+- Um sie **umzuordnen**, wähle **Tresore neu anordnen** (⇅) neben dem **+** in der Kopfzeile **Private Tresore** der Seitenleiste und ziehe die Tresore an ihren Platz. Die Schaltfläche erscheint, sobald du mindestens zwei private Tresore hast. Die Reihenfolge wird pro Konto gespeichert.
+- Um einen Tresor **umzubenennen**, nutze **Name** in den [Tresor-Einstellungen](/de/vault/settings).
 - Dein erster privater Tresor nach Position ist dein **Standard** – dort landest du, wenn du die App öffnest.
 
-Erreichst du das Limit, verschwindet **Tresor hinzufügen**, die Liste **Private Tresore** zeigt **Tresor-Limit erreicht (50).**, und weiteres Erstellen wird vom Server abgelehnt.
+Erreichst du das Limit, verschwindet **Tresor hinzufügen** aus der Seitenleiste, und weiteres Erstellen wird vom Server abgelehnt.
 
 ## Wechseln und filtern
 
@@ -46,11 +47,11 @@ Erreichst du das Limit, verschwindet **Tresor hinzufügen**, die Liste **Private
 
 Einen Tresor zu löschen zerstört ihn und jedes Geheimnis darin dauerhaft. Wie du einen Team-Tresor löschst, steht unter [Team-Tresore](/de/vault/team-vaults#team-tresor-löschen).
 
-1. Öffne [Einstellungen → Tresor](/de/settings/vault).
-2. Wähle in der Liste **Private Tresore** neben dem Tresor **Tresor löschen** (das Papierkorb-Symbol) und **tippe den Bestätigungsnamen des Tresors** (seinen Anzeigenamen in Kebab-Case), um zu bestätigen.
+1. Öffne die [Tresor-Einstellungen](/de/vault/settings): das Zahnrad (**Tresor-Einstellungen**) in der Kopfzeile des Tresors oder das Zahnrad neben dem Tresor in der Seitenleiste.
+2. **Tippe** unter **Tresor löschen** **den Bestätigungsnamen des Tresors** (seinen Anzeigenamen in Kebab-Case) und wähle **Tresor löschen**.
 3. Bestätige bei Aufforderung erneut dein **Konto-Passwort**.
 
-Der Tresor muss nicht entsperrt sein, du kannst also auch einen Tresor löschen, dessen Passphrase und Passkeys verloren sind. Deinen einzigen privaten Tresor kannst du nicht löschen.
+Der Tresor muss nicht entsperrt sein, du kannst also auch einen Tresor löschen, dessen Passphrase und Passkeys verloren sind. Deinen einzigen privaten Tresor kannst du nicht löschen; die Einstellungsseite zeigt dann statt des Formulars einen Hinweis.
 
 <Warning>
   Das Löschen ist sofortig und unumkehrbar. Es gibt keinen Papierkorb und keine Wiederherstellung. Exportiere oder verschiebe vorher alles, was du brauchst.
@@ -61,8 +62,8 @@ Weil das Löschen dich aus deinen eigenen Daten aussperren kann, verlangt murmur
 ## Verwandt
 
 <CardGroup cols={2}>
-  <Card title="Tresor-Einstellungen" icon="gear" href="/de/settings/vault">
-    Passphrase, Auto-Sperre und Streng-geheim-Passkeys ändern.
+  <Card title="Tresor-Einstellungen" icon="gear" href="/de/vault/settings">
+    Tresor umbenennen, Passphrase, Sperren und Passkeys ändern.
   </Card>
   <Card title="Geheimnisse verwalten" icon="key" href="/de/vault/secrets">
     Geheimnisse in einem Tresor hinzufügen und organisieren.

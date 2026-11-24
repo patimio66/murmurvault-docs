@@ -1,0 +1,96 @@
+---
+title: "Tresor-Einstellungen"
+description: "Benenne einen privaten Tresor um, ändere Passphrase, Sperren und Passkeys oder lösche ihn."
+---
+
+Jeder private Tresor hat eine eigene Einstellungsseite. Dort benennst du den Tresor um, änderst Passphrase und Sperren, verknüpfst Passkeys und löschst ihn.
+
+## Tresor-Einstellungen öffnen
+
+Du hast zwei Wege:
+
+- Wähle im Tresor das Zahnrad (**Tresor-Einstellungen**) in der Kopfzeile, neben **Geheimnis hinzufügen** und **Sperren**.
+- Fahre in der Seitenleiste unter **Private Tresore** über einen Tresor und wähle sein Zahnrad. Auf dem Smartphone ist das Zahnrad immer sichtbar.
+
+Das Öffnen der Seite verlangt kein Konto-Passwort und funktioniert auch, wenn der Tresor gesperrt ist. Manche Änderungen brauchen einen entsperrten Tresor; siehe [Was einen entsperrten Tresor braucht](#was-einen-entsperrten-tresor-braucht).
+
+<Note>
+  Team-Tresore haben eine eigene Einstellungsseite, die du genauso öffnest: über das Zahnrad im Tresor oder das Zahnrad daneben in der Seitenleiste. Siehe [Team-Tresore](/de/vault/team-vaults).
+</Note>
+
+## Name
+
+Gib unter **Tresor-Name** einen neuen Namen ein und wähle **Umbenennen**. Ein Tresor ohne Namen wird als `Vault {id}` angezeigt.
+
+## Tresor-Passphrase
+
+Ändere die Tresor-Passphrase. Weil die Passphrase den [Hauptschlüssel](/de/concepts/security-model#schlüssel) umschließt, umschließt ihre Änderung diesen Schlüssel neu unter der neuen Passphrase.
+
+<Warning>
+  Wähle sorgfältig. Die Passphrase lässt sich nicht wiederherstellen oder zurücksetzen – vergisst du sie und hast keinen verknüpften Passkey, ist der Tresor nicht wiederherstellbar.
+</Warning>
+
+Passphrase-Änderungen erfordern eine kürzliche Passwortbestätigung (ein kurzes 15-Minuten-Fenster) und sind ratenbegrenzt, weil diese Aktion dich aus deinen eigenen Geheimnissen aussperren kann.
+
+## Sperren
+
+- **Automatische Sperre nach (Minuten)** legt fest, wie lange der Tresor im Leerlauf entsperrt bleibt, bevor er sich selbst sperrt. Standard sind 10 Minuten.
+- **Freigabefenster für Top-Geheimnisse (Sekunden)** legt fest, wie lange streng geheime Geheimnisse nach einem E-Mail-Code und einer Passkey-Berührung aufdeckbar bleiben. Siehe [Streng geheime Geheimnisse](/de/vault/top-secrets#streng-geheimes-geheimnis-aufdecken).
+
+Wähle **Tresor-Einstellungen speichern**, um die Änderungen zu übernehmen. murmurvault fragt dabei eventuell nach deinem Konto-Passwort.
+
+Läuft die automatische Sperre ab, werden zwischengespeicherte Schlüssel und jeglicher aufgedeckter Klartext streng geheimer Geheimnisse gelöscht. Siehe [Entsperren & automatische Sperre](/de/vault/unlocking#automatische-sperre).
+
+## Backup-Checkliste
+
+Es gibt keine serverseitige Wiederherstellung. Die Checkliste zeigt deshalb die Schritte, mit denen du den Verlust eines Geräts überstehst:
+
+- Ein mit dem Tresor verknüpfter Passkey.
+- Ein zweiter Passkey als Reserve.
+- Sobald die streng geheime Stufe aktiv ist: der Streng-geheim-Schlüssel auf mindestens zwei Passkeys.
+
+## Tresor-Passkeys
+
+Verknüpfe und trenne die Passkeys, die diesen Tresor entsperren, und lege fest, welche davon den [Streng-geheim-Schlüssel](/de/concepts/security-model#schlüssel) halten:
+
+- **top-Stufe aktivieren** bei einem verknüpften Passkey erzeugt den Streng-geheim-Schlüssel und **aktiviert die streng geheime Stufe** für diesen Tresor.
+- **Top-Schlüssel gewähren** gibt den Streng-geheim-Schlüssel einem weiteren verknüpften Passkey.
+- **Top-Schlüssel entfernen** entfernt nur den Streng-geheim-Schlüssel von einem Passkey. Der Passkey entsperrt den Tresor weiterhin.
+
+<Warning>
+  murmurvault blockiert das Entfernen des **letzten** Passkeys, der den Streng-geheim-Schlüssel hält, solange streng geheime Geheimnisse existieren – andernfalls würden diese Geheimnisse dauerhaft unlesbar. Halte mehr als einen Streng-geheim-Passkey.
+</Warning>
+
+Siehe [Streng geheime Geheimnisse](/de/vault/top-secrets) und [Passkeys](/de/vault/passkeys).
+
+## Tresor löschen
+
+Das Löschen entfernt den Tresor und jedes Geheimnis darin. Tippe den Bestätigungsnamen des Tresors und wähle **Tresor löschen**. Siehe [Tresore → Tresor löschen](/de/vault/vaults#tresor-löschen).
+
+Deinen einzigen privaten Tresor kannst du nicht löschen. Lege zuerst einen weiteren an.
+
+## Was einen entsperrten Tresor braucht
+
+| Bereich | Funktioniert im gesperrten Tresor |
+| --- | --- |
+| **Name** | Ja |
+| **Sperren** | Ja |
+| **Tresor löschen** | Ja |
+| **Tresor-Passphrase** | Nein – entsperre den Tresor zuerst |
+| **Tresor-Passkeys** | Nein – entsperre den Tresor zuerst |
+
+Weil das Löschen im gesperrten Tresor funktioniert, kannst du auch einen Tresor entfernen, dessen Passphrase und Passkeys verloren sind.
+
+## Verwandt
+
+<CardGroup cols={2}>
+  <Card title="Tresore" icon="vault" href="/de/vault/vaults">
+    Tresore erstellen, umordnen und löschen.
+  </Card>
+  <Card title="Passkeys" icon="fingerprint" href="/de/vault/passkeys">
+    Tresor-Passkeys verknüpfen und verwalten.
+  </Card>
+  <Card title="Entsperren" icon="unlock" href="/de/vault/unlocking">
+    Wie sich die automatische Sperre verhält.
+  </Card>
+</CardGroup>

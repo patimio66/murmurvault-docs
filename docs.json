@@ -35,6 +35,7 @@
             "group": "Using your vault",
             "pages": [
               "vault/vaults",
+              "vault/settings",
               "vault/team-vaults",
               "vault/secrets",
               "vault/unlocking",
@@ -47,7 +48,6 @@
             "pages": [
               "settings/profile",
               "settings/authentication",
-              "settings/vault",
               "settings/security-activity",
               "settings/account"
             ]
@@ -83,6 +83,7 @@
             "group": "Korzystanie z sejfu",
             "pages": [
               "pl/vault/vaults",
+              "pl/vault/settings",
               "pl/vault/team-vaults",
               "pl/vault/secrets",
               "pl/vault/unlocking",
@@ -95,7 +96,6 @@
             "pages": [
               "pl/settings/profile",
               "pl/settings/authentication",
-              "pl/settings/vault",
               "pl/settings/security-activity",
               "pl/settings/account"
             ]
@@ -130,6 +130,7 @@
             "group": "Tresor verwenden",
             "pages": [
               "de/vault/vaults",
+              "de/vault/settings",
               "de/vault/team-vaults",
               "de/vault/secrets",
               "de/vault/unlocking",
@@ -142,7 +143,6 @@
             "pages": [
               "de/settings/profile",
               "de/settings/authentication",
-              "de/settings/vault",
               "de/settings/security-activity",
               "de/settings/account"
             ]
@@ -158,6 +158,20 @@
       }
     ]
   },
+  "redirects": [
+    {
+      "source": "/settings/vault",
+      "destination": "/vault/settings"
+    },
+    {
+      "source": "/pl/settings/vault",
+      "destination": "/pl/vault/settings"
+    },
+    {
+      "source": "/de/settings/vault",
+      "destination": "/de/vault/settings"
+    }
+  ],
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"

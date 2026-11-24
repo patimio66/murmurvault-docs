@@ -1,0 +1,96 @@
+---
+title: "Ustawienia sejfu"
+description: "Zmień nazwę sejfu prywatnego, jego frazę dostępu, blokowanie i passkeys albo go usuń."
+---
+
+Każdy sejf prywatny ma własną stronę ustawień. Zmieniasz tam nazwę sejfu, jego frazę dostępu i blokowanie, łączysz passkeys i usuwasz sejf.
+
+## Otwórz ustawienia sejfu
+
+Masz dwie drogi:
+
+- W sejfie wybierz ikonę koła zębatego (**Ustawienia sejfu**) w nagłówku, obok **Dodaj sekret** i **Zablokuj**.
+- Na pasku bocznym najedź na sejf w sekcji **Sejfy prywatne** i wybierz jego koło zębate. Na telefonie koło zębate jest zawsze widoczne.
+
+Otwarcie strony nie wymaga hasła do konta i działa, gdy sejf jest zablokowany. Niektóre zmiany wymagają odblokowanego sejfu; zobacz [Co wymaga odblokowanego sejfu](#co-wymaga-odblokowanego-sejfu).
+
+<Note>
+  Sejfy zespołowe mają własną stronę ustawień, którą otwierasz tak samo: ikoną koła zębatego w sejfie albo kołem zębatym obok niego na pasku bocznym. Zobacz [Sejfy zespołowe](/pl/vault/team-vaults).
+</Note>
+
+## Nazwa
+
+Wpisz nową nazwę w polu **Nazwa sejfu** i wybierz **Zmień nazwę**. Sejf bez nazwy jest pokazywany jako `Vault {id}`.
+
+## Fraza dostępu sejfu
+
+Zmień frazę dostępu do sejfu. Ponieważ fraza dostępu opakowuje [Klucz główny](/pl/concepts/security-model#klucze), jej zmiana ponownie opakowuje ten klucz pod nową frazą.
+
+<Warning>
+  Wybieraj rozważnie. Frazy dostępu nie da się odzyskać ani zresetować — jeśli ją zapomnisz i nie masz powiązanego passkey, sejf będzie nie do odzyskania.
+</Warning>
+
+Zmiany frazy dostępu wymagają niedawnego potwierdzenia hasła (krótkie okno 15 minut) i są ograniczane częstotliwościowo, ponieważ ta akcja może zamknąć Ci dostęp do Twoich własnych sekretów.
+
+## Blokowanie
+
+- **Automatyczna blokada po (minuty)** ustala, jak długo sejf pozostaje odblokowany w bezczynności, zanim zablokuje się sam. Domyślnie 10 minut.
+- **Okno odsłaniania sekretów top (sekundy)** ustala, jak długo sekrety ściśle tajne pozostają możliwe do odsłonięcia po kodzie z e-maila i dotknięciu passkey. Zobacz [Sekrety ściśle tajne](/pl/vault/top-secrets#odsłoń-sekret-ściśle-tajny).
+
+Wybierz **Zapisz ustawienia sejfu**, aby zastosować zmiany. murmurvault może poprosić o potwierdzenie hasła do konta.
+
+Gdy upłynie czas automatycznej blokady, zbuforowane klucze i każdy odsłonięty tekst jawny sekretu ściśle tajnego zostają wyczyszczone. Zobacz [Odblokowywanie i automatyczna blokada](/pl/vault/unlocking#automatyczna-blokada).
+
+## Lista kontrolna kopii zapasowych
+
+Nie ma odzyskiwania po stronie serwera, więc lista pokazuje kroki, dzięki którym przetrwasz utratę jednego urządzenia:
+
+- Passkey połączony z sejfem.
+- Drugi passkey jako zapas.
+- Gdy warstwa ściśle tajna jest włączona, Klucz ściśle tajny na co najmniej dwóch passkeys.
+
+## Klucze dostępu sejfu
+
+Łącz i odłączaj passkeys, które odblokowują ten sejf, i wybieraj, które z nich przechowują [Klucz ściśle tajny](/pl/concepts/security-model#klucze):
+
+- **Włącz poziom top** przy połączonym passkey tworzy Klucz ściśle tajny i **włącza warstwę ściśle tajną** dla tego sejfu.
+- **Przyznaj klucz top** nadaje Klucz ściśle tajny kolejnemu połączonemu passkey.
+- **Usuń klucz top** usuwa z passkey tylko Klucz ściśle tajny. Passkey dalej odblokowuje sejf.
+
+<Warning>
+  murmurvault blokuje usunięcie **ostatniego** passkey, który przechowuje Klucz ściśle tajny, dopóki istnieją sekrety ściśle tajne — w przeciwnym razie te sekrety stałyby się trwale nieodczytywalne. Trzymaj więcej niż jeden passkey z Kluczem ściśle tajnym.
+</Warning>
+
+Zobacz [Sekrety ściśle tajne](/pl/vault/top-secrets) i [Passkeys](/pl/vault/passkeys).
+
+## Usuń sejf
+
+Usunięcie sejfu kasuje go razem z każdym sekretem w środku. Wpisz nazwę potwierdzającą sejfu i wybierz **Usuń sejf**. Zobacz [Sejfy → Usuń sejf](/pl/vault/vaults#usuń-sejf).
+
+Nie możesz usunąć swojego jedynego sejfu prywatnego. Najpierw utwórz kolejny.
+
+## Co wymaga odblokowanego sejfu
+
+| Sekcja | Działa przy zablokowanym sejfie |
+| --- | --- |
+| **Nazwa** | Tak |
+| **Blokowanie** | Tak |
+| **Usuń sejf** | Tak |
+| **Fraza dostępu sejfu** | Nie — najpierw odblokuj sejf |
+| **Klucze dostępu sejfu** | Nie — najpierw odblokuj sejf |
+
+Ponieważ usuwanie działa przy zablokowanym sejfie, możesz usunąć także sejf, do którego straciłeś frazę dostępu i passkeys.
+
+## Powiązane
+
+<CardGroup cols={2}>
+  <Card title="Sejfy" icon="vault" href="/pl/vault/vaults">
+    Twórz sejfy, zmieniaj ich kolejność i je usuwaj.
+  </Card>
+  <Card title="Passkeys" icon="fingerprint" href="/pl/vault/passkeys">
+    Powiąż passkeys sejfu i nimi zarządzaj.
+  </Card>
+  <Card title="Odblokowywanie" icon="unlock" href="/pl/vault/unlocking">
+    Jak zachowuje się automatyczna blokada.
+  </Card>
+</CardGroup>
