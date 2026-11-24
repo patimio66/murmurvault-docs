@@ -7,7 +7,7 @@ murmurvault is end-to-end encrypted. All encryption and decryption happen in you
 
 ## Keys
 
-murmurvault uses two independent 256-bit keys, both generated in your browser.
+A private vault uses two independent 256-bit keys, both generated in your browser. Team vaults use a different set of keys; see [Team vaults](#team-vaults).
 
 <CardGroup cols={2}>
   <Card title="Master Key (MK)" icon="key">
@@ -62,9 +62,58 @@ Because the WebCrypto wrapping key is non-extractable, the cached Master Key can
 
 A complete server compromise yields only ciphertext and key-derivation parameters. Without your passphrase or a passkey, the data cannot be decrypted.
 
+## Team vaults
+
+A [team vault](/vault/team-vaults) uses the same cipher and the same unlock methods as a private vault, but it splits the keys so that each person can open only what was shared with them. All key work happens in browsers. The server stores public keys, sealed boxes and wrapped keys, and never sees plaintext or a key it could use.
+
+### Keys in a team vault
+
+| Key | Who has it | How it is stored |
+|-----|-----------|------------------|
+| Member key | Each person with access, the owner included | Wrapped by that person's own passphrase and passkeys, like a private vault's Master Key |
+| Identity key pairs | Each person | An encryption key pair (X25519) and a signing key pair (Ed25519), derived from a seed that the member key wraps. The public keys are stored in plaintext. |
+| Vault key | Everyone with access to the entire vault | Sealed to each of those people's public keys (libsodium sealed box) |
+| Entry key | One per entry | Wrapped by the vault key. For people with access to selected entries, also sealed to each of them directly. |
+| Top keys | People with access to top entries | A top entry's value has a second key, wrapped by the vault top key. The vault top key, or for selected access each entry's top key, is sealed to the person's top public key. Their top private key is wrapped by their passkeys only. |
+
+Each wrapped entry key is bound to its vault, its entry and the key version, and each sealed key names the vault it belongs to, so a key moved anywhere else fails to open. Each person's top public key is signed with their signing key, and the owner's browser checks that signature before sealing any top key to it.
+
+### Sealing keys to people
+
+When you accept an invitation, your browser creates your member key and identity keys. No key travels by email. When the owner confirms your access, the owner's browser seals the keys you need to your public key. Only your browser can open what is sealed to you.
+
+### Fingerprints
+
+A key fingerprint is a 20-digit number computed from a person's public signing and encryption keys (BLAKE2b). The owner sees it when confirming someone, and each member sees their own in the vault's settings. If both read the same digits over a channel they trust, the owner's browser has that person's real public keys. See [Compare key fingerprints](/vault/team-vaults#compare-key-fingerprints).
+
+### Key rotation
+
+When someone who held the vault key loses access, the server flags the vault. This happens when the owner removes them, when they leave or delete their account, and when their access narrows from the entire vault to selected entries. The owner's browser then creates a new vault key, re-wraps every entry key under it and seals the new key to everyone who still has access to the entire vault. If the vault has top entries, the vault top key is replaced the same way, which takes a passkey tap. The key version goes up, so the old wraps stop matching.
+
+Rotation re-wraps entry keys but doesn't replace them. When the owner edits an entry, that entry gets a new entry key, sealed again to everyone it is shared with. Edits by members keep the entry's key so that everyone with access keeps seeing the current value.
+
+### What the server can see in a team vault
+
+| Visible to the server | Hidden from the server |
+|-----------------------|------------------------|
+| The vault's name and who owns it | Entry names, types and values |
+| Who has access, what they can access and do, and the status of their access | Every member key, vault key, top key and entry key |
+| Which entries each person with selected access can open | Every private key |
+| Public keys, sealed boxes and wrapped keys | Each person's passphrase and WebAuthn PRF output |
+| The number of entries per tier, and each entry's tier | Any plaintext |
+
+### Known limitations
+
+- **Key substitution at invite time.** The server delivers each person's public keys to the owner's browser. A malicious or compromised server could hand over keys of its own instead, and the owner's browser would then seal the vault keys to the server. Comparing fingerprints detects this. murmurvault doesn't force the comparison.
+- **Members can't verify what the server serves them.** The owner doesn't sign grants or entries, so members can't check cryptographically that what they see came from the vault. A malicious server could show a member made-up entries. It still can't read the real ones.
+- **View and edit are enforced by the server.** Anyone who can decrypt an entry could also produce valid ciphertext for it. The server rejects changes from people who can only view, but the encryption alone doesn't prevent them.
+- **Removal can't undo what was already seen.** A removed person keeps whatever they already decrypted, and the entry keys they held still open those entries' ciphertext. Rotation protects entries added afterwards. An existing entry gets a new key only when the owner edits it, or, for a top entry, deletes it and creates it again.
+
 ## Recovery
 
 There is **none, by design**. Your passphrase and your passkeys are the only ways to unlock a vault. There is no reset link, no support override, and no operator backdoor.
+
+This also applies to your access to a team vault. If you lose your own passphrase and passkeys for it, the owner can remove you and invite you again. The owner needs to unlock the vault to manage access, so owners should keep more than one passkey linked.
 
 <Warning>
   Lose every passphrase and passkey for a vault and its contents are permanently unrecoverable. Keep at least one passphrase recorded safely and more than one passkey linked.

@@ -9,6 +9,21 @@ description: "Review recent account activity and new-device sign-in alerts."
 
 Each event captures details such as the IP address and browser (user agent) involved. This lets you tell your own sessions apart from one you don't recognize.
 
+## Team vault events
+
+If you use [team vaults](/vault/team-vaults), the log also records:
+
+- **Team vault created** and **Team vault deleted**
+- **Team vault invitation sent** and **Team vault invitation cancelled**, with the invited email address
+- **Team vault invitation accepted**
+- **Team vault access confirmed** and **Team vault access changed**, with the person's email address
+- **Team vault access removed**, for both the owner and the person who lost access
+- **Left a team vault**
+- **Team vault ownership transferred**, for both the previous and the new owner
+- **Team vault keys rotated**
+
+Each team event names the vault. Events that remove access or change who can read the vault are flagged in the list.
+
 ## New-device alerts
 
 When you sign in from a device murmurvault hasn't seen recently, it treats that as a **new device** and alerts you. A device that has been idle longer than the retention window is treated as new again on its next sign-in.
@@ -19,7 +34,7 @@ When you sign in from a device murmurvault hasn't seen recently, it treats that 
 
 ## Retention
 
-Security events are kept for **90 days**, then automatically pruned. Keeping IP addresses and user agents indefinitely would only create more data for a future breach to expose, so the log is deliberately short-lived.
+Security events, team vault events included, are kept for **90 days**, then automatically pruned. Keeping IP addresses and user agents indefinitely would only create more data for a future breach to expose, so the log is deliberately short-lived.
 
 ## Related
 

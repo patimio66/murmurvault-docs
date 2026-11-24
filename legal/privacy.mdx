@@ -4,7 +4,7 @@ description: "How murmurvault handles your data on the website and Android app."
 keywords: ["privacy", "data retention", "Android"]
 ---
 
-**Last updated: 23 November 2026**
+**Last updated: 24 November 2026**
 
 This policy covers the murmurvault website and Android app: what we collect, why, where it goes and how long we keep it. murmurvault is built so the server cannot read what you store in your vaults, so most of this page is about the little it can see.
 
@@ -16,6 +16,7 @@ This policy covers the murmurvault website and Android app: what we collect, why
 - Everything you store in a vault is encrypted on your device before it is sent: each secret’s value, name and type.
 - The server keeps only ciphertext, encrypted copies of your keys, salts and key-derivation settings. Your vault passphrase and your decryption keys never leave your device.
 - What the server can see about a vault: its name (shown before unlock so you can pick a vault, so do not put anything sensitive in it), its settings, how many secrets it holds per tier, each secret’s tier, and when things were created and changed.
+- Team vaults work the same way. Each person’s browser encrypts and decrypts, and the keys are sealed to each member in the browser, so the server never sees plaintext or a key it could use. A team vault’s name is also visible to everyone invited to it.
 
 ## Account data
 
@@ -25,13 +26,27 @@ This policy covers the murmurvault website and Android app: what we collect, why
 - Passkeys you register: the public key, credential id, the name you give it and when it was last used. The private key stays in your authenticator or password manager.
 - Your language preference and whether your email address is verified.
 
+## Team vaults
+
+A team vault is a vault its owner shares with other people. If you create one, join one or are invited to one, we also store:
+
+- **Invitations:** the email address the owner invited, which may belong to someone without an account, who sent the invitation, what access it offers (the entire vault or selected entries, and view or edit) and when it expires. We email the invitation link to that address. The link carries a random token only, and we store only a hash of the token. Invitations expire after 7 days. We delete each invitation 30 days after it is accepted, cancelled or expires.
+- **Memberships:** who has access to which team vault and whether they are the owner, what they can access (the entire vault or selected entries, and which ones), what they can do (view or edit), whether their access is still waiting for the owner’s confirmation, and their public keys. The keys stored with a membership are encrypted on the member’s device, like the keys of any vault.
+- **Access-removal records:** when someone loses access to entries they could read, because the owner removed them or narrowed their access, they left, or they deleted their account, the vault keeps their name, their email address, the reason and which entries they could read. The owner sees these records on the access screen so they know which passwords to change. They are not deleted on a schedule. They stay until the team vault is deleted, also after the owner marks them as handled and after the person deletes their account. The list of entries in a record gets shorter when the owner edits one of those entries or someone deletes it, but the name and email address stay.
+
+Who sees what:
+
+- The owner sees the name and email address of everyone who has access or is waiting for confirmation, the email address of each pending invitation, and the access-removal records.
+- Members and invitees see the team vault’s name and the owner’s name. Members do not see each other.
+- The server sees everything in this section, but not the vault’s contents.
+
 ## Security activity
 
-So you can spot misuse, we record security events: sign-ins and failed sign-ins, password, email and two-factor changes, vault and passkey changes, opened reveal windows, mobile device sign-ins and sign-outs, and account deletion requests.
+So you can spot misuse, we record security events: sign-ins and failed sign-ins, password, email and two-factor changes, vault and passkey changes, opened reveal windows, mobile device sign-ins and sign-outs, account deletion requests, and team vault changes (created and deleted vaults, invitations sent, cancelled and accepted, access confirmed, changed and removed, leaving a vault, ownership transfers and key rotations).
 
-Each event stores the time, the IP address and the browser or app user agent, plus details such as the vault or device name involved and, for an email change, the old and new address. We also use these records to detect sign-ins from a new device and email you about them.
+Each event stores the time, the IP address and the browser or app user agent, plus details such as the vault or device name involved and, for an email change, the old and new address. Team vault events also store the email address of the person invited or whose access changed, and for an ownership transfer the addresses of both owners. So a team vault owner’s activity can contain the email addresses of the people they invited or managed. We also use these records to detect sign-ins from a new device and email you about them.
 
-Security events are deleted automatically after 90 days. You can review them in Settings.
+Security events, team vault events included, are deleted automatically after 90 days. You can review them in Settings.
 
 ## Sessions, cookies and browser storage
 
@@ -53,7 +68,9 @@ We only use cookies the service needs to work. There are no advertising, analyti
 
 ## Email
 
-We email you only about your account: address verification, password resets, reveal codes for top secrets, security alerts (such as a new device signing in or a change to your password, email, two-factor authentication, vault passphrase or passkeys) and account deletion notices. No newsletters or marketing.
+We email you only about your account and the team vaults you use: address verification, password resets, reveal codes for top secrets, security alerts (such as a new device signing in or a change to your password, email, two-factor authentication, vault passphrase or passkeys), account deletion notices, and team vault notices. No newsletters or marketing.
+
+Team vault emails are invitations, which go to the address the owner entered even if it has no account, and notices when access changes: to the owner when someone accepts an invitation, leaves or deletes their account, to a member when their access is confirmed, changed or removed, to both people when ownership is transferred, and to every member when a team vault is deleted. They contain the team vault’s name and the name of the person involved.
 
 The app sends these emails over SMTP through seohost.pl, a Polish hosting provider.
 
@@ -69,7 +86,7 @@ The app sends these emails over SMTP through seohost.pl, a Polish hosting provid
 - No advertising and no ad networks.
 - No analytics or tracking scripts.
 - We never sell or rent your data, and we do not use it for profiling.
-- We share data only with the providers listed here, which process it on our behalf, or when the law requires it.
+- Apart from what team vault owners and members see of each other, described under [Team vaults](#team-vaults), we share data only with the providers listed here, which process it on our behalf, or when the law requires it.
 
 ## No recovery
 
@@ -78,12 +95,15 @@ We cannot recover your vaults, by design. If you forget a vault’s passphrase a
 ## How long we keep data
 
 - Account data, vaults and passkeys: until you delete them or your account.
+- Team vault memberships: until the person leaves or is removed, or the team vault or their account is deleted.
+- Team vault invitations: 30 days after they are accepted, cancelled or expire. They expire 7 days after they are sent.
+- Team vault access-removal records: until the team vault is deleted.
 - Security events: 90 days.
 - Sessions: until they expire or you sign out. Device tokens: until the device is signed out or the account is erased.
 
 ## Deleting your account
 
-You can delete your account in Settings at any time. We freeze your account right away and schedule erasure for 7 days later. You can cancel by signing in before the scheduled date. Erasure removes your account with its vaults, secrets, passkeys, device tokens and security activity, and signs out every mobile device.
+You can delete your account in Settings at any time. We freeze your account right away and schedule erasure for 7 days later. You can cancel by signing in before the scheduled date. Erasure removes your account with its vaults, secrets, passkeys, device tokens and security activity, and signs out every mobile device. While you own a team vault that someone else can access, you need to transfer ownership or delete the vault before you can schedule deletion. Erasure deletes the team vaults you own that nobody else uses and removes your access to other people’s team vaults. Their owners are notified, and their access-removal records keep your name and email address as described under [Team vaults](#team-vaults).
 
 [How account deletion works](/legal/account-deletion)
 
