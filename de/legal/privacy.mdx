@@ -4,7 +4,7 @@ description: "Wie murmurvault deine Daten auf der Website und in der Android-App
 keywords: ["Datenschutz", "Datenspeicherung", "Android"]
 ---
 
-**Zuletzt aktualisiert: 23. November 2026**
+**Zuletzt aktualisiert: 24. November 2026**
 
 Diese Erklärung gilt für die murmurvault-Website und die Android-App: was wir erheben, warum, wohin es geht und wie lange wir es speichern. murmurvault ist so gebaut, dass der Server nicht lesen kann, was du in deinen Tresoren speicherst – daher geht es auf dieser Seite vor allem um das Wenige, das er sieht.
 
@@ -16,6 +16,7 @@ Diese Erklärung gilt für die murmurvault-Website und die Android-App: was wir 
 - Alles, was du in einem Tresor speicherst, wird auf deinem Gerät verschlüsselt, bevor es gesendet wird: Wert, Name und Typ jedes Geheimnisses.
 - Der Server speichert nur Chiffretext, verschlüsselte Kopien deiner Schlüssel, Salts und Einstellungen zur Schlüsselableitung. Deine Tresor-Passphrase und deine Entschlüsselungsschlüssel verlassen dein Gerät nie.
 - Was der Server über einen Tresor sieht: seinen Namen (er wird vor dem Entsperren angezeigt, damit du einen Tresor wählen kannst – schreib also nichts Vertrauliches hinein), seine Einstellungen, wie viele Geheimnisse er pro Stufe enthält, die Stufe jedes Geheimnisses und wann etwas erstellt und geändert wurde.
+- Team-Tresore funktionieren genauso. Der Browser jeder Person ver- und entschlüsselt, und die Schlüssel werden im Browser für jedes Mitglied versiegelt, sodass der Server nie Klartext oder einen Schlüssel sieht, den er nutzen könnte. Den Namen eines Team-Tresors sehen außerdem alle, die dazu eingeladen werden.
 
 ## Kontodaten
 
@@ -25,13 +26,27 @@ Diese Erklärung gilt für die murmurvault-Website und die Android-App: was wir 
 - Passkeys, die du registrierst: der öffentliche Schlüssel, die Credential-ID, der Name, den du vergibst, und wann er zuletzt verwendet wurde. Der private Schlüssel bleibt in deinem Authenticator oder Passwort-Manager.
 - Deine Spracheinstellung und ob deine E-Mail-Adresse bestätigt ist.
 
+## Team-Tresore
+
+Ein Team-Tresor ist ein Tresor, den sein Besitzer mit anderen teilt. Wenn du einen erstellst, einem beitrittst oder dazu eingeladen wirst, speichern wir außerdem:
+
+- **Einladungen:** die eingeladene E-Mail-Adresse, die auch jemandem ohne Konto gehören kann, wer die Einladung gesendet hat, welchen Zugriff sie anbietet (den ganzen Tresor oder ausgewählte Einträge, ansehen oder bearbeiten) und wann sie abläuft. Den Einladungslink schicken wir per E-Mail an diese Adresse. Der Link enthält nur ein zufälliges Token, und wir speichern nur einen Hash davon. Einladungen laufen nach 7 Tagen ab. Wir löschen jede Einladung 30 Tage, nachdem sie angenommen, zurückgezogen wurde oder abgelaufen ist.
+- **Mitgliedschaften:** wer auf welchen Team-Tresor zugreifen kann und ob die Person der Besitzer ist, worauf sie zugreifen kann (den ganzen Tresor oder ausgewählte Einträge, und welche), was sie tun kann (ansehen oder bearbeiten), ob ihr Zugriff noch auf die Bestätigung des Besitzers wartet, und ihre öffentlichen Schlüssel. Die Schlüssel einer Mitgliedschaft werden auf dem Gerät des Mitglieds verschlüsselt, wie die Schlüssel jedes Tresors.
+- **Aufzeichnungen über entzogenen Zugriff:** Verliert jemand den Zugriff auf Einträge, die die Person lesen konnte, weil der Besitzer sie entfernt oder ihren Zugriff eingeschränkt hat, weil sie gegangen ist oder ihr Konto gelöscht hat, behält der Tresor ihren Namen, ihre E-Mail-Adresse, den Grund und welche Einträge sie lesen konnte. Der Besitzer sieht diese Aufzeichnungen in der Zugriffsübersicht, damit er weiß, welche Passwörter er ändern muss. Sie werden nicht nach einer festen Frist gelöscht. Sie bleiben, bis der Team-Tresor gelöscht wird, auch nachdem der Besitzer sie als erledigt markiert hat und nachdem die Person ihr Konto gelöscht hat. Die Liste der Einträge in einer Aufzeichnung wird kürzer, wenn der Besitzer einen dieser Einträge bearbeitet oder jemand ihn löscht, aber Name und E-Mail-Adresse bleiben.
+
+Wer was sieht:
+
+- Der Besitzer sieht Name und E-Mail-Adresse aller, die Zugriff haben oder auf Bestätigung warten, die E-Mail-Adresse jeder offenen Einladung und die Aufzeichnungen über entzogenen Zugriff.
+- Mitglieder und Eingeladene sehen den Namen des Team-Tresors und den Namen des Besitzers. Mitglieder sehen einander nicht.
+- Der Server sieht alles in diesem Abschnitt, aber nicht den Inhalt des Tresors.
+
 ## Sicherheitsaktivität
 
-Damit du Missbrauch erkennen kannst, protokollieren wir Sicherheitsereignisse: Anmeldungen und fehlgeschlagene Anmeldungen, Änderungen an Passwort, E-Mail und Zwei-Faktor-Authentifizierung, Änderungen an Tresoren und Passkeys, geöffnete Freigabefenster, An- und Abmeldungen von Mobilgeräten sowie Anträge auf Kontolöschung.
+Damit du Missbrauch erkennen kannst, protokollieren wir Sicherheitsereignisse: Anmeldungen und fehlgeschlagene Anmeldungen, Änderungen an Passwort, E-Mail und Zwei-Faktor-Authentifizierung, Änderungen an Tresoren und Passkeys, geöffnete Freigabefenster, An- und Abmeldungen von Mobilgeräten, Anträge auf Kontolöschung sowie Änderungen an Team-Tresoren (erstellte und gelöschte Tresore, gesendete, zurückgezogene und angenommene Einladungen, bestätigter, geänderter und entfernter Zugriff, verlassene Tresore, Besitzübertragungen und Schlüsselrotationen).
 
-Jedes Ereignis speichert die Uhrzeit, die IP-Adresse und den User-Agent des Browsers oder der App, dazu Details wie den betroffenen Tresor- oder Gerätenamen und bei einer E-Mail-Änderung die alte und neue Adresse. Anhand dieser Einträge erkennen wir auch Anmeldungen von neuen Geräten und informieren dich per E-Mail.
+Jedes Ereignis speichert die Uhrzeit, die IP-Adresse und den User-Agent des Browsers oder der App, dazu Details wie den betroffenen Tresor- oder Gerätenamen und bei einer E-Mail-Änderung die alte und neue Adresse. Ereignisse in Team-Tresoren speichern außerdem die E-Mail-Adresse der eingeladenen Person oder der Person, deren Zugriff sich geändert hat, und bei einer Besitzübertragung die Adressen beider Besitzer. Die Aktivität eines Besitzers kann also die E-Mail-Adressen der Personen enthalten, die er eingeladen oder verwaltet hat. Anhand dieser Einträge erkennen wir auch Anmeldungen von neuen Geräten und informieren dich per E-Mail.
 
-Sicherheitsereignisse werden nach 90 Tagen automatisch gelöscht. Du kannst sie in den Einstellungen einsehen.
+Sicherheitsereignisse, auch die von Team-Tresoren, werden nach 90 Tagen automatisch gelöscht. Du kannst sie in den Einstellungen einsehen.
 
 ## Sitzungen, Cookies und Browserspeicher
 
@@ -53,7 +68,9 @@ Wir verwenden nur Cookies, die der Dienst zum Funktionieren braucht. Es gibt kei
 
 ## E-Mail
 
-Wir schreiben dir nur zu deinem Konto: Adressbestätigung, Passwort-Zurücksetzung, Freigabecodes für Top-Geheimnisse, Sicherheitswarnungen (etwa bei einer Anmeldung von einem neuen Gerät oder einer Änderung an Passwort, E-Mail, Zwei-Faktor-Authentifizierung, Tresor-Passphrase oder Passkeys) und Hinweise zur Kontolöschung. Keine Newsletter, kein Marketing.
+Wir schreiben dir nur zu deinem Konto und den Team-Tresoren, die du nutzt: Adressbestätigung, Passwort-Zurücksetzung, Freigabecodes für Top-Geheimnisse, Sicherheitswarnungen (etwa bei einer Anmeldung von einem neuen Gerät oder einer Änderung an Passwort, E-Mail, Zwei-Faktor-Authentifizierung, Tresor-Passphrase oder Passkeys), Hinweise zur Kontolöschung und Hinweise zu Team-Tresoren. Keine Newsletter, kein Marketing.
+
+E-Mails zu Team-Tresoren sind Einladungen, die an die vom Besitzer eingegebene Adresse gehen, auch wenn es dafür kein Konto gibt, und Hinweise zu Zugriffsänderungen: an den Besitzer, wenn jemand eine Einladung annimmt, geht oder sein Konto löscht, an ein Mitglied, wenn sein Zugriff bestätigt, geändert oder entfernt wird, an beide Personen bei einer Besitzübertragung und an jedes Mitglied, wenn ein Team-Tresor gelöscht wird. Sie enthalten den Namen des Team-Tresors und den Namen der beteiligten Person.
 
 Die App versendet diese E-Mails per SMTP über seohost.pl, einen polnischen Hostinganbieter.
 
@@ -69,7 +86,7 @@ Die App versendet diese E-Mails per SMTP über seohost.pl, einen polnischen Host
 - Keine Werbung und keine Werbenetzwerke.
 - Keine Analyse- oder Tracking-Skripte.
 - Wir verkaufen oder vermieten deine Daten nie und nutzen sie nicht für Profiling.
-- Wir geben Daten nur an die hier genannten Anbieter weiter, die sie in unserem Auftrag verarbeiten, oder wenn das Gesetz es verlangt.
+- Abgesehen davon, was Besitzer und Mitglieder von Team-Tresoren voneinander sehen, beschrieben unter [Team-Tresore](#team-tresore), geben wir Daten nur an die hier genannten Anbieter weiter, die sie in unserem Auftrag verarbeiten, oder wenn das Gesetz es verlangt.
 
 ## Keine Wiederherstellung
 
@@ -78,12 +95,15 @@ Wir können deine Tresore absichtlich nicht wiederherstellen. Wenn du die Passph
 ## Wie lange wir Daten speichern
 
 - Kontodaten, Tresore und Passkeys: bis du sie oder dein Konto löschst.
+- Mitgliedschaften in Team-Tresoren: bis die Person geht oder entfernt wird oder der Team-Tresor oder ihr Konto gelöscht wird.
+- Einladungen zu Team-Tresoren: 30 Tage, nachdem sie angenommen, zurückgezogen wurden oder abgelaufen sind. Sie laufen 7 Tage nach dem Versand ab.
+- Aufzeichnungen über entzogenen Zugriff auf Team-Tresore: bis der Team-Tresor gelöscht wird.
 - Sicherheitsereignisse: 90 Tage.
 - Sitzungen: bis sie ablaufen oder du dich abmeldest. Geräte-Tokens: bis das Gerät abgemeldet oder das Konto gelöscht wird.
 
 ## Konto löschen
 
-Du kannst dein Konto jederzeit in den Einstellungen löschen. Wir frieren dein Konto sofort ein und planen die Löschung für 7 Tage später. Bis zum geplanten Datum kannst du die Löschung durch Anmelden abbrechen. Die Löschung entfernt dein Konto mit seinen Tresoren, Geheimnissen, Passkeys, Geräte-Tokens und Sicherheitsaktivitäten und meldet alle Mobilgeräte ab.
+Du kannst dein Konto jederzeit in den Einstellungen löschen. Wir frieren dein Konto sofort ein und planen die Löschung für 7 Tage später. Bis zum geplanten Datum kannst du die Löschung durch Anmelden abbrechen. Die Löschung entfernt dein Konto mit seinen Tresoren, Geheimnissen, Passkeys, Geräte-Tokens und Sicherheitsaktivitäten und meldet alle Mobilgeräte ab. Solange du einen Team-Tresor besitzt, auf den jemand anderes zugreifen kann, musst du den Besitz übertragen oder den Tresor löschen, bevor du die Löschung planen kannst. Die Löschung entfernt die Team-Tresore, die du besitzt und die sonst niemand nutzt, und deinen Zugriff auf Team-Tresore anderer. Deren Besitzer werden benachrichtigt, und ihre Aufzeichnungen über entzogenen Zugriff behalten deinen Namen und deine E-Mail-Adresse, wie unter [Team-Tresore](#team-tresore) beschrieben.
 
 [So funktioniert die Kontolöschung](/de/legal/account-deletion)
 

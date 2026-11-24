@@ -1,0 +1,186 @@
+---
+title: "Sejfy zespołowe"
+description: "Udostępniaj wpisy innym osobom, decyduj, co każda z nich może widzieć i robić, i zarządzaj ich dostępem."
+keywords: ["sejf zespołowy", "udostępnianie", "zaproszenia", "dostęp"]
+---
+
+Sejf zespołowy to sejf, który udostępniasz innym osobom. Pozostałe Twoje sejfy są **prywatne**: tylko Ty możesz je otworzyć. Utwórz sejf zespołowy, gdy chcesz pracować z innymi.
+
+Każda osoba z dostępem odblokowuje sejf zespołowy **własną** frazą dostępu lub własnym kluczem dostępu (passkey). Nikt nie dzieli się frazą dostępu. Przeglądarka właściciela pieczętuje klucze dla każdej osoby, a serwer przechowuje tylko zapieczętowane kopie. W aplikacji elementy sejfu zespołowego nazywają się **wpisami**. Działają jak sekrety w sejfie prywatnym.
+
+<Note>
+  Sejfy zespołowe są dostępne w przeglądarce. Aplikacja na Androida jeszcze ich nie pokazuje; ich obsługa w aplikacji pojawi się osobno. Zarządzanie dostępem (zapraszanie, potwierdzanie, zmiana, odbieranie dostępu i przekazywanie własności) odbywa się w przeglądarce.
+</Note>
+
+## Kto co może
+
+- **Właściciel** tworzy sejf zespołowy i jako jedyny zarządza dostępem. Sejf zespołowy ma w danym momencie jednego właściciela.
+- **Członkowie** widzą nazwę sejfu, imię właściciela i swój własny dostęp. Członkowie nie widzą siebie nawzajem. Tylko właściciel widzi, kto ma dostęp.
+
+Każdy członek ma dwa ustawienia, które wybiera właściciel:
+
+| Ustawienie | Opcje |
+|------------|-------|
+| Do czego mają dostęp | **Cały sejf**: każdy obecny wpis i każdy dodany później. **Wybrane wpisy**: tylko wpisy zaznaczone przez właściciela. |
+| Co mogą robić | **Podgląd**: tylko odczyt. **Edycja**: przy całym sejfie dodawanie, zmienianie i usuwanie wpisów. Przy wybranych wpisach tylko zmienianie tych wpisów, bez dodawania i usuwania. |
+
+## Utwórz sejf zespołowy
+
+<Steps>
+  <Step title="Zacznij nowy sejf zespołowy">
+    Na pasku bocznym przy **Sejfy zespołowe** wybierz **Nowy sejf zespołowy**.
+  </Step>
+  <Step title="Nadaj nazwę">
+    W polu **Nazwa sejfu zespołowego** wpisz nazwę. Jest wymagana. Widzi ją każda zaproszona osoba i serwer, więc nie nazywaj sejfu od jego zawartości.
+  </Step>
+  <Step title="Ustaw frazę dostępu">
+    Ustaw własną frazę dostępu do tego sejfu i wybierz **Utwórz sejf zespołowy**. Twoja przeglądarka tworzy klucze sejfu.
+  </Step>
+  <Step title="Dodaj klucze dostępu (zalecane)">
+    Otwórz ustawienia sejfu (ikona koła zębatego w sejfie) i połącz klucz dostępu w sekcji **Klucze dostępu sejfu**. Klucz dostępu pozwala odblokować sejf bez wpisywania frazy dostępu i jest wymagany do wpisów top. Zobacz [Passkeys](/pl/vault/passkeys).
+  </Step>
+</Steps>
+
+<Warning>
+  Twoja fraza dostępu do sejfu zespołowego należy tylko do Ciebie. Nikt inny w sejfie jej nie zna i nikt nie może jej zresetować, także właściciel ani operator serwera. Jeśli ją zapomnisz i nie masz połączonego klucza dostępu, stracisz dostęp.
+</Warning>
+
+## Zaproś kogoś
+
+Musisz być właścicielem, a sejf musi być odblokowany.
+
+1. Otwórz sejf zespołowy i wybierz **Zarządzaj dostępem**.
+2. Wybierz **Zaproś** i wpisz **Adres e-mail** tej osoby.
+3. W sekcji **Do czego mają dostęp** wybierz **Cały sejf** albo **Wybrane wpisy**. Przy wybranych wpisach zaznacz wpisy do udostępnienia.
+4. W sekcji **Co mogą robić** wybierz **Podgląd** albo **Edycja**.
+5. Wybierz **Wyślij zaproszenie**.
+
+Ta osoba dostanie e-mail z linkiem. Link nie zawiera żadnych kluczy. Zaproszenie wygasa po **7 dniach**. Do tego czasu widać je w sekcji **Zaproszenia** na ekranie dostępu, gdzie możesz wybrać **Anuluj zaproszenie**.
+
+Zaproszona osoba nie musi jeszcze mieć konta. Może je założyć na zaproszony adres e-mail, a potem ponownie otworzyć link.
+
+## Przyjmij zaproszenie
+
+1. Otwórz link z e-maila z zaproszeniem.
+2. Zaloguj się na konto z adresem e-mail, na który wysłano zaproszenie. Jeśli nie masz jeszcze konta, załóż je na ten adres i go zweryfikuj. Zaproszenia wysłanego na inny adres nie przyjmiesz.
+3. Ustaw własną frazę dostępu do tego sejfu i wybierz **Przyjmij zaproszenie**.
+
+Sejf pojawi się na pasku bocznym w sekcji **Sejfy zespołowe** z oznaczeniem **Oczekuje**. Dostęp zacznie działać, gdy właściciel go potwierdzi; dostaniesz wtedy e-mail. W międzyczasie możesz połączyć klucz dostępu w ustawieniach sejfu, aby właściciel mógł udostępnić Ci też wpisy top.
+
+## Potwierdź dostęp
+
+Gdy ktoś przyjmie zaproszenie, dostaniesz e-mail, a ta osoba pojawi się w sekcji **Osoby** ze statusem **Czeka na Ciebie**.
+
+1. Otwórz **Zarządzaj dostępem** przy odblokowanym sejfie.
+2. Wybierz **Potwierdź** przy tej osobie.
+3. [Porównaj z nią odcisk klucza](#porównaj-odciski-kluczy).
+4. Sprawdź jej dostęp. Jeśli ta osoba ma już klucz top, możesz zaznaczyć **Udostępnij też klucze sekretów top**, co wymaga dotknięcia Twojego klucza dostępu.
+5. Wybierz **Potwierdź dostęp**. Twoja przeglądarka pieczętuje dla niej klucze, a ona dostaje e-mail.
+
+## Porównaj odciski kluczy
+
+Odcisk klucza to 20 cyfr w pięciu grupach. Właściciel widzi odcisk każdej osoby na ekranie dostępu i w oknie potwierdzania (**Odcisk ich klucza**). Każdy członek widzi swój na ekranie oczekiwania i w ustawieniach sejfu (**Odcisk Twojego klucza**).
+
+Serwer dostarcza przeglądarce właściciela klucze publiczne każdej osoby, a przeglądarka właściciela pieczętuje dla nich klucze sejfu. Zgodne odciski dowodzą, że klucze, dla których pieczętuje przeglądarka właściciela, naprawdę należą do tej osoby i że nikt, również serwer, ich nie podmienił.
+
+Jak porównać:
+
+1. Użyj kanału, któremu już ufasz, innego niż murmurvault, na przykład rozmowy telefonicznej lub spotkania na żywo.
+2. Poproś członka, aby przeczytał na głos cyfry z sekcji **Odcisk Twojego klucza**.
+3. Sprawdź, czy każda grupa zgadza się z tym, co widzisz w sekcji **Odcisk ich klucza**.
+
+Jeśli którakolwiek cyfra się różni, nie potwierdzaj. Zamiast tego wybierz **Usuń**.
+
+<Note>
+  murmurvault nie wymusza porównania odcisków. Bez niego polegasz na tym, że serwer dostarczy właściwe klucze. Porównaj je, zanim dasz komuś dostęp do poufnych wpisów.
+</Note>
+
+## Wpisy top w sejfie zespołowym
+
+Wpisy top w sejfie zespołowym zachowują dodatkowy krok odsłaniania i każda osoba wykonuje go sama. Aby odsłonić wpis top, każda osoba potrzebuje:
+
+1. Jednorazowego kodu wysłanego na adres e-mail **jej własnego** konta.
+2. Dotknięcia **jej własnego** klucza dostępu.
+
+Odsłonięcie wartości otwiera okno odsłaniania tylko dla tej osoby. Zobacz [Sekrety ściśle tajne](/pl/vault/top-secrets#wpisy-top-w-sejfie-zespołowym), aby dowiedzieć się, jak działa odsłanianie.
+
+Aby dać członkowi dostęp do wpisów top:
+
+1. Członek łączy klucz dostępu w ustawieniach sejfu zespołowego i przekazuje mu klucz top. To tworzy jego klucz top.
+2. Na ekranie dostępu właściciel widzi przy nim **Dostęp top oczekuje** i wybiera **Udostępnij klucze sekretów top**. Wymaga to jednego dotknięcia klucza dostępu właściciela.
+
+## Zarządzaj dostępem
+
+Tylko właściciel może otworzyć **Zarządzaj dostępem**, a sejf musi być odblokowany. Ekran dostępu pokazuje każdą osobę z dostępem: imię, adres e-mail, status, do czego ma dostęp i co może robić oraz odcisk klucza.
+
+| Akcja | Co robi |
+|-------|---------|
+| **Potwierdź** | Przekazuje klucze osobie, która przyjęła zaproszenie. |
+| **Zmień** | Zmienia, do czego osoba ma dostęp lub co może robić. Twoja przeglądarka pieczętuje nowo potrzebne klucze. |
+| **Udostępnij klucze sekretów top** | Przekazuje klucze do wpisów top. Wymaga dotknięcia Twojego klucza dostępu. |
+| **Przekaż własność** | Przekazuje tej osobie własność sejfu. |
+| **Usuń** | Natychmiast odbiera dostęp. |
+| **Anuluj zaproszenie** | Wycofuje zaproszenie, którego jeszcze nie przyjęto. |
+
+Zawężenie czyjegoś dostępu, na przykład z całego sejfu do wybranych wpisów, oznacza odebranie dostępu do wpisów, które ta osoba traci. Te wpisy pojawiają się w sekcji **Wpisy do zmiany**, opisanej w części [Co daje odebranie dostępu](#co-daje-odebranie-dostępu).
+
+Usunięcie osoby, przekazanie własności i usunięcie sejfu wymagają niedawnego potwierdzenia hasła do konta.
+
+### Przekaż własność
+
+Możesz uczynić właścicielem osobę, która ma potwierdzony dostęp do całego sejfu. Jeśli sejf zawiera wpisy top, najpierw udostępnij jej klucze sekretów top.
+
+Wybierz **Przekaż własność** przy tej osobie i potwierdź. Od tej chwili ona zarządza dostępem. Ty zachowujesz dostęp do całego sejfu z prawem edycji i możesz potem odejść. Obie osoby dostają e-mail.
+
+### Opuść sejf zespołowy
+
+Jako członek otwórz ustawienia sejfu i wybierz **Opuść sejf**. Twój dostęp kończy się natychmiast, a właściciel dostaje e-mail, aby mógł wymienić klucze sejfu. Aby wrócić, właściciel musi zaprosić Cię ponownie.
+
+Właściciel nie może opuścić sejfu. Najpierw przekaż własność albo usuń sejf.
+
+## Co daje odebranie dostępu
+
+Gdy usuniesz kogoś z sejfu albo gdy ta osoba sama odejdzie lub usunie konto:
+
+- **Jej dostęp kończy się natychmiast.** Serwer usuwa jej członkostwo i nie może ona już wczytać sejfu ani jego wpisów.
+- **Wymieniasz klucz sejfu.** Jeśli miała dostęp do całego sejfu, ekran dostępu pokazuje **Wymień klucze sejfu**. Wybierz **Wymień klucze teraz**. Twoja przeglądarka tworzy nowy klucz sejfu i ponownie opakowuje nim klucz każdego wpisu, więc wpisy dodane od tej chwili pozostaną poza zasięgiem tej osoby. Przy wpisach top wymaga to dotknięcia Twojego klucza dostępu. Dopóki nie wymienisz kluczy, nowe wpisy są nadal opakowywane starym kluczem, więc zrób to od razu.
+
+Odebranie dostępu nie cofnie tego, co ta osoba już zobaczyła. Mając dostęp, mogła odsłonić, skopiować lub zapamiętać wartości, a wymiana kluczy nie zmienia kluczy istniejących wpisów. Dlatego murmurvault wymienia te wpisy w sekcji **Wpisy do zmiany**:
+
+1. Zmień każde hasło lub klucz u źródła, czyli w serwisie lub usłudze, do której należy.
+2. Zaktualizuj wpis w murmurvault nową wartością. Edycja właściciela nadaje wpisowi nowy klucz. Edycja członka zachowuje stary klucz.
+3. Wartości wpisu top nie da się edytować. Aby nadać wpisowi top nowy klucz, usuń go i utwórz ponownie.
+4. Wybierz **Oznacz jako załatwione**, aby ukryć tę osobę na liście.
+
+## Usuń sejf zespołowy
+
+Jako właściciel otwórz ustawienia sejfu i przejdź do **Usuń sejf zespołowy**. Wpisz nazwę potwierdzającą sejfu i potwierdź hasło do konta. To usuwa każdy wpis dla wszystkich z dostępem, a każdy członek dostaje e-mail.
+
+Aby odejść bez usuwania sejfu, najpierw przekaż własność.
+
+## Sejfy zespołowe a usuwanie konta
+
+Nie możesz zaplanować usunięcia konta, dopóki jesteś właścicielem sejfu zespołowego, do którego ktoś inny ma dostęp, także osoba czekająca na Twoje potwierdzenie albo oczekujące zaproszenie. Najpierw przekaż własność lub usuń sejf. Zobacz [Usuń swoje konto](/pl/legal/account-deletion).
+
+## Limity
+
+- Do **25 osób** na sejf zespołowy, wliczając Ciebie i oczekujące zaproszenia.
+- Do **50 sejfów zespołowych** na konto, wliczając te, których jesteś właścicielem, i te udostępnione Ci. Ten limit jest niezależny od limitu sejfów prywatnych.
+- Zaproszenia wygasają po **7 dniach**.
+
+## Powiązane
+
+<CardGroup cols={2}>
+  <Card title="Model bezpieczeństwa" icon="shield-halved" href="/pl/concepts/security-model#sejfy-zespołowe">
+    Jak działają klucze sejfu zespołowego i jakie mają znane ograniczenia.
+  </Card>
+  <Card title="Sekrety ściśle tajne" icon="lock" href="/pl/vault/top-secrets">
+    Jak działa dodatkowy krok odsłaniania.
+  </Card>
+  <Card title="Sejfy" icon="vault" href="/pl/vault/vaults">
+    Sejfy prywatne i zespołowe.
+  </Card>
+  <Card title="Polityka prywatności" icon="user-shield" href="/pl/legal/privacy">
+    Jakie dane przechowują sejfy zespołowe i jak długo.
+  </Card>
+</CardGroup>

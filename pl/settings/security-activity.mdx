@@ -9,6 +9,21 @@ description: "Przeglądaj ostatnią aktywność konta i alerty o logowaniu z now
 
 Każde zdarzenie zawiera szczegóły, takie jak adres IP i przeglądarka (user agent), których dotyczyło. Pozwala to odróżnić Twoje własne sesje od takiej, której nie rozpoznajesz.
 
+## Zdarzenia sejfów zespołowych
+
+Jeśli korzystasz z [sejfów zespołowych](/pl/vault/team-vaults), dziennik zapisuje też:
+
+- **Utworzono sejf zespołowy** i **Usunięto sejf zespołowy**
+- **Wysłano zaproszenie do sejfu zespołowego** i **Anulowano zaproszenie do sejfu zespołowego**, z zaproszonym adresem e-mail
+- **Przyjęto zaproszenie do sejfu zespołowego**
+- **Potwierdzono dostęp do sejfu zespołowego** i **Zmieniono dostęp do sejfu zespołowego**, z adresem e-mail tej osoby
+- **Odebrano dostęp do sejfu zespołowego**, zarówno u właściciela, jak i u osoby, która straciła dostęp
+- **Opuszczono sejf zespołowy**
+- **Przekazano własność sejfu zespołowego**, zarówno u poprzedniego, jak i u nowego właściciela
+- **Wymieniono klucze sejfu zespołowego**
+
+Każde zdarzenie sejfu zespołowego podaje nazwę sejfu. Zdarzenia, które odbierają dostęp lub zmieniają, kto może czytać sejf, są na liście wyróżnione.
+
 ## Alerty o nowych urządzeniach
 
 Gdy logujesz się z urządzenia, którego murmurvault nie widział od niedawna, traktuje to jako **nowe urządzenie** i ostrzega Cię. Urządzenie bezczynne dłużej niż okno retencji jest przy kolejnym logowaniu znów traktowane jako nowe.
@@ -19,7 +34,7 @@ Gdy logujesz się z urządzenia, którego murmurvault nie widział od niedawna, 
 
 ## Retencja
 
-Zdarzenia bezpieczeństwa są przechowywane przez **90 dni**, a potem automatycznie usuwane. Trzymanie adresów IP i user agentów bez końca tworzyłoby tylko więcej danych do ujawnienia w razie przyszłego włamania, więc dziennik jest celowo krótkotrwały.
+Zdarzenia bezpieczeństwa, w tym zdarzenia sejfów zespołowych, są przechowywane przez **90 dni**, a potem automatycznie usuwane. Trzymanie adresów IP i user agentów bez końca tworzyłoby tylko więcej danych do ujawnienia w razie przyszłego włamania, więc dziennik jest celowo krótkotrwały.
 
 ## Powiązane
 

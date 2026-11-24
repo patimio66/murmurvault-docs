@@ -1,0 +1,186 @@
+---
+title: "Team vaults"
+description: "Share entries with other people, choose what each person can see and do, and manage their access."
+keywords: ["team vault", "sharing", "invitations", "access"]
+---
+
+A team vault is a vault you share with other people. Your other vaults are **private**: only you can open them. Create a team vault when you need to work with others.
+
+Everyone with access unlocks a team vault with their **own** passphrase or passkey. Nobody shares a passphrase. The owner's browser seals the keys to each person, and the server stores only the sealed copies. In the app, the items in a team vault are called **entries**. They work like the secrets in a private vault.
+
+<Note>
+  Team vaults are available on the web. The Android app doesn't show them yet; support for them in the app is coming separately. Managing access (inviting, confirming, changing, removing and transferring ownership) happens on the web.
+</Note>
+
+## Who can do what
+
+- **The owner** creates the team vault and is the only person who manages access. A team vault has one owner at a time.
+- **Members** see the vault name, the owner's name and their own access. Members don't see each other. Only the owner sees who has access.
+
+Each member has two settings, which the owner chooses:
+
+| Setting | Options |
+|---------|---------|
+| What they can access | **Entire vault**: every current entry and every entry added later. **Selected entries**: only the entries the owner ticks. |
+| What they can do | **View**: read only. **Edit**: with the entire vault, add, change and delete entries. With selected entries, change those entries only, without adding or deleting. |
+
+## Create a team vault
+
+<Steps>
+  <Step title="Start a new team vault">
+    In the sidebar, next to **Team vaults**, choose **New team vault**.
+  </Step>
+  <Step title="Name it">
+    Enter a **Team vault name**. The name is required. Everyone you invite sees it, and so does the server, so don't name a vault after what's inside it.
+  </Step>
+  <Step title="Set your passphrase">
+    Set your own passphrase for this vault and choose **Create team vault**. Your browser creates the vault's keys.
+  </Step>
+  <Step title="Add passkeys (recommended)">
+    Open the vault's settings (the gear icon in the vault) and link a passkey under **Vault passkeys**. A passkey lets you unlock without typing your passphrase and is required for top entries. See [Passkeys](/vault/passkeys).
+  </Step>
+</Steps>
+
+<Warning>
+  Your passphrase for a team vault is yours alone. Nobody else in the vault knows it, and nobody can reset it, including the owner and the server operator. If you forget it and have no linked passkey, you lose your access.
+</Warning>
+
+## Invite someone
+
+You need to be the owner, with the vault unlocked.
+
+1. Open the team vault and choose **Manage access**.
+2. Choose **Invite** and enter the person's **Email address**.
+3. Under **What they can access**, choose **Entire vault** or **Selected entries**. For selected entries, tick the entries to share.
+4. Under **What they can do**, choose **View** or **Edit**.
+5. Choose **Send invitation**.
+
+The person gets an email with a link. The link carries no keys. The invitation expires after **7 days**. Until then it's listed under **Invitations** on the access screen, where you can choose **Cancel invitation**.
+
+The person doesn't need an account yet. They can create one with the invited email address and then open the link again.
+
+## Accept an invitation
+
+1. Open the link in the invitation email.
+2. Sign in with the email address the invitation was sent to. If you don't have an account yet, create one with that address and verify it. You can't accept an invitation that was sent to a different address.
+3. Set your own passphrase for this vault and choose **Accept invitation**.
+
+The vault appears in your sidebar under **Team vaults**, marked **Waiting**. Your access starts once the owner confirms it, and you get an email when they do. While you wait, you can link a passkey in the vault's settings so the owner can also share top entries with you.
+
+## Confirm access
+
+When someone accepts, you get an email and they appear under **People** with the status **Waiting for you**.
+
+1. Open **Manage access** with the vault unlocked.
+2. Choose **Confirm** next to the person.
+3. [Compare their key fingerprint](#compare-key-fingerprints) with them.
+4. Check their access. If they already have a top key, you can tick **Also share top-secret keys**, which takes a tap on your passkey.
+5. Choose **Confirm access**. Your browser seals the keys to them, and they get an email.
+
+## Compare key fingerprints
+
+A key fingerprint is 20 digits in five groups. The owner sees each person's fingerprint on the access screen and in the confirm dialog (**Their key fingerprint**). Each member sees their own on the waiting screen and in the vault's settings (**Your key fingerprint**).
+
+The server delivers each person's public keys to the owner's browser, and the owner's browser seals the vault keys to them. Matching fingerprints prove that the keys the owner's browser seals to really belong to that person, and that nobody, the server included, swapped them.
+
+To compare:
+
+1. Use a channel you already trust that isn't murmurvault, such as a call or meeting in person.
+2. Have the member read their digits aloud from **Your key fingerprint**.
+3. Check that every group matches what you see under **Their key fingerprint**.
+
+If any digit differs, don't confirm. Choose **Remove** instead.
+
+<Note>
+  murmurvault doesn't force you to compare fingerprints. Without the comparison, you rely on the server to deliver the right keys. Compare them before you give anyone access to sensitive entries.
+</Note>
+
+## Top entries in a team vault
+
+Top entries in a team vault keep the extra reveal step, and each person completes it themselves. To reveal a top entry, each person needs:
+
+1. A one-time code sent to **their own** account email.
+2. A tap on **their own** passkey.
+
+Revealing a value opens a reveal window for that person only. See [Top-tier secrets](/vault/top-secrets#top-entries-in-a-team-vault) for how a reveal works.
+
+To give a member access to top entries:
+
+1. The member links a passkey in the team vault's settings and gives it the top key. This creates their top key.
+2. On the access screen, the owner sees **Top access pending** next to them and chooses **Share top-secret keys**. This takes one tap on the owner's passkey.
+
+## Manage access
+
+Only the owner can open **Manage access**, and the vault must be unlocked. The access screen lists everyone with access: their name, email address, status, what they can access and do, and their key fingerprint.
+
+| Action | What it does |
+|--------|--------------|
+| **Confirm** | Gives a person who accepted an invitation their keys. |
+| **Change** | Changes what they can access or what they can do. Your browser seals any newly needed keys. |
+| **Share top-secret keys** | Gives them the keys for top entries. Takes a tap on your passkey. |
+| **Make owner** | Transfers ownership to them. |
+| **Remove** | Ends their access right away. |
+| **Cancel invitation** | Withdraws an invitation that hasn't been accepted yet. |
+
+If you narrow someone's access, for example from the entire vault to selected entries, it counts as removing their access to the entries they lose. Those entries appear under **Entries to change**, as described in [What removing access does](#what-removing-access-does).
+
+Removing someone, transferring ownership and deleting the vault ask for a recent confirmation of your account password.
+
+### Transfer ownership
+
+You can make someone the owner if they have confirmed access to the entire vault. If the vault has top entries, share the top-secret keys with them first.
+
+Choose **Make owner** next to them and confirm. They then manage access. You keep access to the entire vault as an editor, and you can leave afterwards. You both get an email.
+
+### Leave a team vault
+
+As a member, open the vault's settings and choose **Leave vault**. Your access ends right away, and the owner gets an email so they can rotate the vault keys. To come back, the owner has to invite you again.
+
+The owner can't leave. Transfer ownership first, or delete the vault.
+
+## What removing access does
+
+When you remove someone, or when they leave or delete their account:
+
+- **Their access stops immediately.** The server deletes their membership, and they can no longer load the vault or its entries.
+- **You rotate the vault key.** If they had access to the entire vault, the access screen shows **Rotate the vault keys**. Choose **Rotate keys now**. Your browser creates a new vault key and re-wraps every entry's key under it, so entries added from then on stay out of their reach. With top entries, this takes a tap on your passkey. Until you rotate, new entries are still wrapped under the old key, so rotate right away.
+
+Removing access can't take back what the person has already seen. They may have revealed, copied or remembered values while they had access, and rotation doesn't change the keys of existing entries. murmurvault lists those entries under **Entries to change**:
+
+1. Change each password or key at its source, such as the website or service it belongs to.
+2. Edit the entry in murmurvault to store the new value. An edit made by the owner gives the entry a new key. An edit by a member keeps the old key.
+3. A top entry's value can't be edited. To give a top entry a new key, delete it and create it again.
+4. Choose **Mark as handled** to hide the person from the list.
+
+## Delete a team vault
+
+As the owner, open the vault's settings and go to **Delete team vault**. Type the vault's confirmation name and confirm your account password. This deletes every entry for everyone with access, and every member gets an email.
+
+To leave without deleting the vault, transfer ownership first.
+
+## Team vaults and account deletion
+
+You can't schedule deletion of your account while you own a team vault that someone else can access, including someone waiting for your confirmation or a pending invitation. Transfer ownership or delete the vault first. See [Delete your account](/legal/account-deletion).
+
+## Limits
+
+- Up to **25 people** per team vault, counting you and pending invitations.
+- Up to **50 team vaults** per account, counting the ones you own and the ones shared with you. This is separate from the limit on private vaults.
+- Invitations expire after **7 days**.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Security model" icon="shield-halved" href="/concepts/security-model#team-vaults">
+    How team vault keys work and their known limits.
+  </Card>
+  <Card title="Top-tier secrets" icon="lock" href="/vault/top-secrets">
+    How the extra reveal step works.
+  </Card>
+  <Card title="Vaults" icon="vault" href="/vault/vaults">
+    Private and team vaults.
+  </Card>
+  <Card title="Privacy policy" icon="user-shield" href="/legal/privacy">
+    What data team vaults store and how long it is kept.
+  </Card>
+</CardGroup>
