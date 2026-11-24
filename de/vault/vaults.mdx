@@ -9,15 +9,15 @@ Ein Tresor ist ein verschlüsselter Container für deine Geheimnisse, geschützt
 
 Es gibt zwei Arten von Tresoren:
 
-- **Private Tresore** sind die Tresore, die diese Seite beschreibt. Nur du kannst sie öffnen, und ihre Schlüssel gehören nur dir. Jeder Tresor, den du mit **Create vault** erstellst, ist privat und bleibt privat.
+- **Private Tresore** sind die Tresore, die diese Seite beschreibt. Nur du kannst sie öffnen, und ihre Schlüssel gehören nur dir. Jeder Tresor, den du mit **Tresor erstellen** erstellst, ist privat und bleibt privat. Private Tresore stehen in der Seitenleiste unter **Private Tresore**.
 - **Team-Tresore** werden geteilt. Der Besitzer lädt Personen per E-Mail ein und legt fest, worauf jede Person zugreifen und was sie tun kann. Alle entsperren mit ihrer eigenen Passphrase oder ihrem eigenen Passkey. Team-Tresore stehen in der Seitenleiste unter **Team-Tresore**. Siehe [Team-Tresore](/de/vault/team-vaults).
 
 Einen privaten Tresor kannst du nicht in einen Team-Tresor umwandeln. Um Geheimnisse zu teilen, erstelle einen Team-Tresor und lege sie dort an.
 
 ## Tresor erstellen
 
-1. Öffne den Tresor-Bereich. Hast du noch keinen, landest du auf dem Einrichtungsbildschirm.
-2. Wähle **Create vault** und gib einen Namen (optional) und eine Passphrase an.
+1. Öffne den Tresor-Bereich. Hast du noch keinen, landest du auf dem Einrichtungsbildschirm. Um einen weiteren anzulegen, wähle **Tresor hinzufügen**: das **+** neben **Private Tresore** in der Seitenleiste oder die Schaltfläche unter [Einstellungen → Tresor](/de/settings/vault).
+2. Wähle **Tresor erstellen** und gib einen Namen (optional) und eine Passphrase an.
 3. Speichern. Die Schlüssel des Tresors werden in deinem Browser erzeugt und von deiner Passphrase umschlossen.
 
 Ein Tresor ohne Namen wird in der Seitenleiste als `Vault {id}` angezeigt.
@@ -30,11 +30,11 @@ Ein Tresor ohne Namen wird in der Seitenleiste als `Vault {id}` angezeigt.
 
 Du kannst bis zu **50 private Tresore** pro Konto erstellen. Jeder hat unabhängige Schlüssel, eine Passphrase, Passkeys und Auto-Sperr-Einstellungen. Für Team-Tresore gilt ein eigenes Limit; siehe [Team-Tresore](/de/vault/team-vaults#limits).
 
-- Tresore erscheinen in der Seitenleiste in ihrer gespeicherten Reihenfolge.
-- Ziehe, um sie **umzuordnen**; die Reihenfolge wird pro Konto gespeichert.
-- Der erste Tresor nach Position ist dein **Standard** – dort landest du, wenn du die App öffnest.
+- Private Tresore erscheinen in der Seitenleiste unter **Private Tresore** in ihrer gespeicherten Reihenfolge.
+- Um sie **umzuordnen**, ziehe sie in der Liste **Private Tresore** unter [Einstellungen → Tresor](/de/settings/vault). Die Reihenfolge wird pro Konto gespeichert.
+- Dein erster privater Tresor nach Position ist dein **Standard** – dort landest du, wenn du die App öffnest.
 
-Erreichst du das Limit, ist die Aktion **Add vault** deaktiviert, und weiteres Erstellen wird vom Server abgelehnt.
+Erreichst du das Limit, verschwindet **Tresor hinzufügen**, die Liste **Private Tresore** zeigt **Tresor-Limit erreicht (50).**, und weiteres Erstellen wird vom Server abgelehnt.
 
 ## Wechseln und filtern
 
@@ -46,9 +46,11 @@ Erreichst du das Limit, ist die Aktion **Add vault** deaktiviert, und weiteres E
 
 Einen Tresor zu löschen zerstört ihn und jedes Geheimnis darin dauerhaft. Wie du einen Team-Tresor löschst, steht unter [Team-Tresore](/de/vault/team-vaults#team-tresor-löschen).
 
-1. Öffne die Einstellungen des Tresors.
-2. Wähle Löschen und **tippe den Bestätigungsnamen des Tresors** (seinen Anzeigenamen in Kebab-Case), um zu bestätigen.
+1. Öffne [Einstellungen → Tresor](/de/settings/vault).
+2. Wähle in der Liste **Private Tresore** neben dem Tresor **Tresor löschen** (das Papierkorb-Symbol) und **tippe den Bestätigungsnamen des Tresors** (seinen Anzeigenamen in Kebab-Case), um zu bestätigen.
 3. Bestätige bei Aufforderung erneut dein **Konto-Passwort**.
+
+Der Tresor muss nicht entsperrt sein, du kannst also auch einen Tresor löschen, dessen Passphrase und Passkeys verloren sind. Deinen einzigen privaten Tresor kannst du nicht löschen.
 
 <Warning>
   Das Löschen ist sofortig und unumkehrbar. Es gibt keinen Papierkorb und keine Wiederherstellung. Exportiere oder verschiebe vorher alles, was du brauchst.
