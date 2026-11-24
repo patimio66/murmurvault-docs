@@ -1,17 +1,28 @@
 ---
 title: "Ustawienia sejfu"
-description: "Zmień frazę dostępu sejfu, limit automatycznej blokady i passkeys sekretów ściśle tajnych."
+description: "Zmień nazwę sejfu prywatnego, jego frazę dostępu, blokowanie i passkeys albo go usuń."
 ---
 
-**Ustawienia → Sejf** steruje Twoimi sejfami prywatnymi. Otwarcie wymaga niedawnego potwierdzenia hasła do konta.
+Każdy sejf prywatny ma własną stronę ustawień. Zmieniasz tam nazwę sejfu, jego frazę dostępu i blokowanie, łączysz passkeys i usuwasz sejf.
 
-Strona zaczyna się od listy **Sejfy prywatne**, na której dodajesz sejfy prywatne, zmieniasz ich nazwy i kolejność oraz je usuwasz. Wybierz sejf na liście, aby poniżej zmienić jego ustawienia ochrony.
+## Otwórz ustawienia sejfu
+
+Masz dwie drogi:
+
+- W sejfie wybierz ikonę koła zębatego (**Ustawienia sejfu**) w nagłówku, obok **Dodaj sekret** i **Zablokuj**.
+- Na pasku bocznym najedź na sejf w sekcji **Sejfy prywatne** i wybierz jego koło zębate. Na telefonie koło zębate jest zawsze widoczne.
+
+Otwarcie strony nie wymaga hasła do konta i działa, gdy sejf jest zablokowany. Niektóre zmiany wymagają odblokowanego sejfu; zobacz [Co wymaga odblokowanego sejfu](#co-wymaga-odblokowanego-sejfu).
 
 <Note>
-  Sejfów zespołowych tu nie ma. Każdy sejf zespołowy ma własną stronę ustawień: odblokuj sejf zespołowy i wybierz ikonę koła zębatego (**Ustawienia sejfu**). Zobacz [Sejfy zespołowe](/pl/vault/team-vaults).
+  Sejfy zespołowe mają własną stronę ustawień, którą otwierasz tak samo: ikoną koła zębatego w sejfie albo kołem zębatym obok niego na pasku bocznym. Zobacz [Sejfy zespołowe](/pl/vault/team-vaults).
 </Note>
 
-## Fraza dostępu
+## Nazwa
+
+Wpisz nową nazwę w polu **Nazwa sejfu** i wybierz **Zmień nazwę**. Sejf bez nazwy jest pokazywany jako `Vault {id}`.
+
+## Fraza dostępu sejfu
 
 Zmień frazę dostępu do sejfu. Ponieważ fraza dostępu opakowuje [Klucz główny](/pl/concepts/security-model#klucze), jej zmiana ponownie opakowuje ten klucz pod nową frazą.
 
@@ -21,21 +32,30 @@ Zmień frazę dostępu do sejfu. Ponieważ fraza dostępu opakowuje [Klucz głó
 
 Zmiany frazy dostępu wymagają niedawnego potwierdzenia hasła (krótkie okno 15 minut) i są ograniczane częstotliwościowo, ponieważ ta akcja może zamknąć Ci dostęp do Twoich własnych sekretów.
 
-## Automatyczna blokada
+## Blokowanie
 
-Ustaw, jak długo sejf pozostaje odblokowany w bezczynności, zanim zablokuje się sam.
+- **Automatyczna blokada po (minuty)** ustala, jak długo sejf pozostaje odblokowany w bezczynności, zanim zablokuje się sam. Domyślnie 10 minut.
+- **Okno odsłaniania sekretów top (sekundy)** ustala, jak długo sekrety ściśle tajne pozostają możliwe do odsłonięcia po kodzie z e-maila i dotknięciu passkey. Zobacz [Sekrety ściśle tajne](/pl/vault/top-secrets#odsłoń-sekret-ściśle-tajny).
 
-- **Domyślnie:** 10 minut.
-- Dotyczy pojedynczego sejfu.
+Wybierz **Zapisz ustawienia sejfu**, aby zastosować zmiany. murmurvault może poprosić o potwierdzenie hasła do konta.
 
-Gdy limit czasu upłynie, zbuforowane klucze i każdy odsłonięty tekst jawny sekretu ściśle tajnego zostają wyczyszczone. Zobacz [Odblokowywanie i automatyczna blokada](/pl/vault/unlocking#automatyczna-blokada).
+Gdy upłynie czas automatycznej blokady, zbuforowane klucze i każdy odsłonięty tekst jawny sekretu ściśle tajnego zostają wyczyszczone. Zobacz [Odblokowywanie i automatyczna blokada](/pl/vault/unlocking#automatyczna-blokada).
 
-## Passkeys sekretów ściśle tajnych
+## Lista kontrolna kopii zapasowych
 
-Nadawaj lub zarządzaj tym, które passkeys przechowują [Klucz ściśle tajny](/pl/concepts/security-model#klucze):
+Nie ma odzyskiwania po stronie serwera, więc lista pokazuje kroki, dzięki którym przetrwasz utratę jednego urządzenia:
 
-- Nadanie Klucza ściśle tajnego passkey **włącza warstwę ściśle tajną** dla tego sejfu.
-- Sekrety ściśle tajne można wtedy tworzyć i odsłaniać tym passkey.
+- Passkey połączony z sejfem.
+- Drugi passkey jako zapas.
+- Gdy warstwa ściśle tajna jest włączona, Klucz ściśle tajny na co najmniej dwóch passkeys.
+
+## Klucze dostępu sejfu
+
+Łącz i odłączaj passkeys, które odblokowują ten sejf, i wybieraj, które z nich przechowują [Klucz ściśle tajny](/pl/concepts/security-model#klucze):
+
+- **Włącz poziom top** przy połączonym passkey tworzy Klucz ściśle tajny i **włącza warstwę ściśle tajną** dla tego sejfu.
+- **Przyznaj klucz top** nadaje Klucz ściśle tajny kolejnemu połączonemu passkey.
+- **Usuń klucz top** usuwa z passkey tylko Klucz ściśle tajny. Passkey dalej odblokowuje sejf.
 
 <Warning>
   murmurvault blokuje usunięcie **ostatniego** passkey, który przechowuje Klucz ściśle tajny, dopóki istnieją sekrety ściśle tajne — w przeciwnym razie te sekrety stałyby się trwale nieodczytywalne. Trzymaj więcej niż jeden passkey z Kluczem ściśle tajnym.
@@ -45,11 +65,28 @@ Zobacz [Sekrety ściśle tajne](/pl/vault/top-secrets) i [Passkeys](/pl/vault/pa
 
 ## Usuń sejf
 
-Sejf możesz też usunąć z listy **Sejfy prywatne**. Usunięcie jest natychmiastowe i nieodwracalne, a w jego trakcie prosi o wpisanie nazwy potwierdzającej sejfu. Zobacz [Sejfy → Usuń sejf](/pl/vault/vaults#usuń-sejf).
+Usunięcie sejfu kasuje go razem z każdym sekretem w środku. Wpisz nazwę potwierdzającą sejfu i wybierz **Usuń sejf**. Zobacz [Sejfy → Usuń sejf](/pl/vault/vaults#usuń-sejf).
+
+Nie możesz usunąć swojego jedynego sejfu prywatnego. Najpierw utwórz kolejny.
+
+## Co wymaga odblokowanego sejfu
+
+| Sekcja | Działa przy zablokowanym sejfie |
+| --- | --- |
+| **Nazwa** | Tak |
+| **Blokowanie** | Tak |
+| **Usuń sejf** | Tak |
+| **Fraza dostępu sejfu** | Nie — najpierw odblokuj sejf |
+| **Klucze dostępu sejfu** | Nie — najpierw odblokuj sejf |
+
+Ponieważ usuwanie działa przy zablokowanym sejfie, możesz usunąć także sejf, do którego straciłeś frazę dostępu i passkeys.
 
 ## Powiązane
 
 <CardGroup cols={2}>
+  <Card title="Sejfy" icon="vault" href="/pl/vault/vaults">
+    Twórz sejfy, zmieniaj ich kolejność i je usuwaj.
+  </Card>
   <Card title="Passkeys" icon="fingerprint" href="/pl/vault/passkeys">
     Powiąż passkeys sejfu i nimi zarządzaj.
   </Card>

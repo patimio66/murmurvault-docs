@@ -16,7 +16,7 @@ Sejfu prywatnego nie da się zamienić w sejf zespołowy. Aby udostępnić sekre
 
 ## Utwórz sejf
 
-1. Otwórz obszar sejfu. Jeśli nie masz jeszcze żadnego, trafiasz na ekran konfiguracji. Aby dodać kolejny, wybierz **Dodaj sejf**: **+** przy **Sejfy prywatne** na pasku bocznym albo przycisk w [Ustawienia → Sejf](/pl/settings/vault).
+1. Otwórz obszar sejfu. Jeśli nie masz jeszcze żadnego, trafiasz na ekran konfiguracji. Aby dodać kolejny, wybierz **Dodaj sejf**: **+** przy **Sejfy prywatne** na pasku bocznym.
 2. Wybierz **Utwórz sejf**, nadaj nazwę (opcjonalnie) i frazę dostępu.
 3. Zapisz. Klucze sejfu zostają wygenerowane w przeglądarce i opakowane Twoją frazą dostępu.
 
@@ -31,10 +31,11 @@ Sejf bez nazwy jest pokazywany na pasku bocznym jako `Vault {id}`.
 Możesz utworzyć do **50 sejfów prywatnych** na konto. Każdy ma niezależne klucze, frazę dostępu, passkeys i ustawienia automatycznej blokady. Sejfy zespołowe mają własny limit; zobacz [Sejfy zespołowe](/pl/vault/team-vaults#limity).
 
 - Sejfy prywatne pojawiają się na pasku bocznym w sekcji **Sejfy prywatne**, w zapisanej kolejności.
-- Aby **zmienić kolejność**, przeciągnij je na liście **Sejfy prywatne** w [Ustawienia → Sejf](/pl/settings/vault). Kolejność jest zapisywana per konto.
+- Aby **zmienić kolejność**, wybierz **Zmień kolejność sejfów** (⇅) obok **+** w nagłówku **Sejfy prywatne** na pasku bocznym, a potem przeciągnij sejfy na miejsce. Przycisk pojawia się, gdy masz co najmniej dwa sejfy prywatne. Kolejność jest zapisywana per konto.
+- Aby **zmienić nazwę** sejfu, użyj sekcji **Nazwa** w [ustawieniach sejfu](/pl/vault/settings).
 - Twój pierwszy sejf prywatny według pozycji jest Twoim **domyślnym** — na nim lądujesz po otwarciu aplikacji.
 
-Po osiągnięciu limitu **Dodaj sejf** znika, lista **Sejfy prywatne** pokazuje **Osiągnięto limit sejfów (50).**, a dalsze tworzenie odrzuca serwer.
+Po osiągnięciu limitu **Dodaj sejf** znika z paska bocznego, a dalsze tworzenie odrzuca serwer.
 
 ## Przełączaj i filtruj
 
@@ -46,11 +47,11 @@ Po osiągnięciu limitu **Dodaj sejf** znika, lista **Sejfy prywatne** pokazuje 
 
 Usunięcie sejfu trwale niszczy go i każdy sekret w środku. Usuwanie sejfu zespołowego opisuje strona [Sejfy zespołowe](/pl/vault/team-vaults#usuń-sejf-zespołowy).
 
-1. Otwórz [Ustawienia → Sejf](/pl/settings/vault).
-2. Na liście **Sejfy prywatne** wybierz **Usuń sejf** (ikona kosza) przy sejfie i **wpisz nazwę potwierdzającą sejfu** (jego nazwę wyświetlaną w kebab-case), aby potwierdzić.
+1. Otwórz [ustawienia sejfu](/pl/vault/settings): ikonę koła zębatego (**Ustawienia sejfu**) w nagłówku sejfu albo koło zębate obok sejfu na pasku bocznym.
+2. W sekcji **Usuń sejf** **wpisz nazwę potwierdzającą sejfu** (jego nazwę wyświetlaną w kebab-case) i wybierz **Usuń sejf**.
 3. Potwierdź ponownie **hasło do konta**, jeśli pojawi się taka prośba.
 
-Sejf nie musi być odblokowany, więc możesz też usunąć sejf, do którego straciłeś frazę dostępu i passkeys. Nie możesz usunąć swojego jedynego sejfu prywatnego.
+Sejf nie musi być odblokowany, więc możesz też usunąć sejf, do którego straciłeś frazę dostępu i passkeys. Nie możesz usunąć swojego jedynego sejfu prywatnego; zamiast formularza strona ustawień pokazuje wtedy informację o tym.
 
 <Warning>
   Usunięcie jest natychmiastowe i nieodwracalne. Nie ma kosza ani odzyskiwania. Najpierw wyeksportuj lub przenieś wszystko, czego potrzebujesz.
@@ -61,8 +62,8 @@ Ponieważ usunięcie może zamknąć Ci dostęp do Twoich własnych danych, murm
 ## Powiązane
 
 <CardGroup cols={2}>
-  <Card title="Ustawienia sejfu" icon="gear" href="/pl/settings/vault">
-    Zmień frazę dostępu, automatyczną blokadę i passkeys warstwy ściśle tajnej.
+  <Card title="Ustawienia sejfu" icon="gear" href="/pl/vault/settings">
+    Zmień nazwę sejfu, jego frazę dostępu, blokowanie i passkeys.
   </Card>
   <Card title="Zarządzaj sekretami" icon="key" href="/pl/vault/secrets">
     Dodawaj i porządkuj sekrety w sejfie.

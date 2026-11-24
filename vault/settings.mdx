@@ -1,17 +1,28 @@
 ---
 title: "Vault settings"
-description: "Change a vault's passphrase, auto-lock timeout, and top-secret passkeys."
+description: "Rename a private vault, change its passphrase, locking and passkeys, or delete it."
 ---
 
-**Settings → Vault** controls your private vaults. Opening it requires a recent account-password confirmation.
+Each private vault has its own settings page. There you rename the vault, change its passphrase and locking, link passkeys, and delete it.
 
-The page starts with the **Private vaults** list, where you add, rename, reorder and delete private vaults. Select a vault in the list to change its protection settings below.
+## Open vault settings
+
+Use either of these:
+
+- In the vault, choose the gear icon (**Vault settings**) in the header, next to **Add secret** and **Lock**.
+- In the sidebar, hover a vault under **Private vaults** and choose its cog. On mobile, the cog is always visible.
+
+Opening the page doesn't ask for your account password, and it works while the vault is locked. Some changes need the vault unlocked; see [What needs an unlocked vault](#what-needs-an-unlocked-vault).
 
 <Note>
-  Team vaults aren't listed here. Each team vault has its own settings page: unlock the team vault and choose the gear icon (**Vault settings**). See [Team vaults](/vault/team-vaults).
+  Team vaults have their own settings page, opened the same way: the gear icon in the vault or the cog next to it in the sidebar. See [Team vaults](/vault/team-vaults).
 </Note>
 
-## Passphrase
+## Name
+
+Type a new name under **Vault name** and choose **Rename**. A vault without a name is shown as `Vault {id}`.
+
+## Vault passphrase
 
 Change the vault passphrase. Because the passphrase wraps the [Master Key](/concepts/security-model#keys), changing it re-wraps that key under the new passphrase.
 
@@ -21,21 +32,30 @@ Change the vault passphrase. Because the passphrase wraps the [Master Key](/conc
 
 Passphrase changes require a recent password confirmation (a short 15-minute window) and are rate-limited, because this action can lock you out of your own secrets.
 
-## Auto-lock
+## Locking
 
-Set how long the vault stays unlocked while idle before it locks itself.
+- **Auto-lock after (minutes)** sets how long the vault stays unlocked while idle before it locks itself. The default is 10 minutes.
+- **Top secret reveal window (seconds)** sets how long top secrets stay revealable after an email code and passkey tap. See [Top-tier secrets](/vault/top-secrets#reveal-a-top-secret).
 
-- **Default:** 10 minutes.
-- Applies per vault.
+Choose **Save vault settings** to apply. murmurvault may ask you to confirm your account password.
 
-When the timeout elapses, cached keys and any revealed top-secret plaintext are cleared. See [Unlocking & auto-lock](/vault/unlocking#auto-lock).
+When the auto-lock timeout elapses, cached keys and any revealed top-secret plaintext are cleared. See [Unlocking & auto-lock](/vault/unlocking#auto-lock).
 
-## Top-secret passkeys
+## Backup checklist
 
-Grant or manage which passkeys hold the [Top Key](/concepts/security-model#keys):
+There is no server-side recovery, so the checklist tracks the steps that let you survive losing one device:
 
-- Granting the Top Key to a passkey **enables the top tier** for this vault.
-- Top secrets can then be created and revealed with that passkey.
+- A passkey linked to the vault.
+- A second passkey as backup.
+- Once the top tier is on, the Top Key held by at least two passkeys.
+
+## Vault passkeys
+
+Link and unlink the passkeys that unlock this vault, and choose which of them hold the [Top Key](/concepts/security-model#keys):
+
+- **Enable top tier** on a linked passkey creates the Top Key and **enables the top tier** for this vault.
+- **Grant top key** gives the Top Key to another linked passkey.
+- **Remove top key** removes only the Top Key from a passkey. The passkey still unlocks the vault.
 
 <Warning>
   murmurvault blocks removing the **last** passkey that holds the Top Key while top secrets exist — otherwise those secrets would become permanently unreadable. Keep more than one Top-Key passkey.
@@ -43,13 +63,30 @@ Grant or manage which passkeys hold the [Top Key](/concepts/security-model#keys)
 
 See [Top-tier secrets](/vault/top-secrets) and [Passkeys](/vault/passkeys).
 
-## Delete the vault
+## Delete vault
 
-You can also delete a vault from the **Private vaults** list. Deletion is immediate and irreversible, and asks you to type the vault's confirmation name. See [Vaults → Delete a vault](/vault/vaults#delete-a-vault).
+Deleting a vault erases it and every secret inside. Type the vault's confirmation name and choose **Delete vault**. See [Vaults → Delete a vault](/vault/vaults#delete-a-vault).
+
+You can't delete your only private vault. Create another one first.
+
+## What needs an unlocked vault
+
+| Section | Works while locked |
+| --- | --- |
+| **Name** | Yes |
+| **Locking** | Yes |
+| **Delete vault** | Yes |
+| **Vault passphrase** | No — unlock the vault first |
+| **Vault passkeys** | No — unlock the vault first |
+
+Because deleting works while the vault is locked, you can still remove a vault whose passphrase and passkeys are lost.
 
 ## Related
 
 <CardGroup cols={2}>
+  <Card title="Vaults" icon="vault" href="/vault/vaults">
+    Create, reorder, and delete vaults.
+  </Card>
   <Card title="Passkeys" icon="fingerprint" href="/vault/passkeys">
     Link and manage vault passkeys.
   </Card>

@@ -16,7 +16,7 @@ You can't turn a private vault into a team vault. To share secrets, create a tea
 
 ## Create a vault
 
-1. Open the vault area. If you have none yet, you land on the setup screen. To add another, choose **Add vault**: the **+** next to **Private vaults** in the sidebar, or the button in [Settings → Vault](/settings/vault).
+1. Open the vault area. If you have none yet, you land on the setup screen. To add another, choose **Add vault**: the **+** next to **Private vaults** in the sidebar.
 2. Choose **Create vault** and give it a name (optional) and a passphrase.
 3. Save. The vault's keys are generated in your browser and wrapped by your passphrase.
 
@@ -31,10 +31,11 @@ A vault without a name is shown as `Vault {id}` in the sidebar.
 You can create up to **50 private vaults** per account. Each has independent keys, a passphrase, passkeys, and auto-lock settings. Team vaults have their own limit; see [Team vaults](/vault/team-vaults#limits).
 
 - Private vaults appear in the sidebar under **Private vaults**, in their saved order.
-- To **reorder** them, drag them in the **Private vaults** list in [Settings → Vault](/settings/vault). The order is saved per account.
+- To **reorder** them, choose **Reorder vaults** (⇅) next to the **+** on the **Private vaults** sidebar header, then drag the vaults into place. The button appears once you have two or more private vaults. The order is saved per account.
+- To **rename** a vault, use **Name** in the vault's [settings](/vault/settings).
 - Your first private vault by position is your **default** — where you land when you open the app.
 
-When you reach the limit, **Add vault** disappears, the **Private vaults** list shows **Vault limit reached (50).**, and the server rejects further creation.
+When you reach the limit, **Add vault** disappears from the sidebar and the server rejects further creation.
 
 ## Switch and filter
 
@@ -46,11 +47,11 @@ When you reach the limit, **Add vault** disappears, the **Private vaults** list 
 
 Deleting a vault permanently destroys it and every secret inside. To delete a team vault, see [Team vaults](/vault/team-vaults#delete-a-team-vault).
 
-1. Open [Settings → Vault](/settings/vault).
-2. In the **Private vaults** list, choose **Delete vault** (the bin icon) next to the vault, and **type the vault's confirmation name** (its display name in kebab-case) to confirm.
+1. Open the vault's [settings](/vault/settings): the gear icon (**Vault settings**) in the vault header, or the cog next to the vault in the sidebar.
+2. Under **Delete vault**, **type the vault's confirmation name** (its display name in kebab-case) and choose **Delete vault**.
 3. Re-confirm your **account password** if prompted.
 
-The vault doesn't need to be unlocked, so you can also delete a vault whose passphrase and passkeys are lost. You can't delete your only private vault.
+The vault doesn't need to be unlocked, so you can also delete a vault whose passphrase and passkeys are lost. You can't delete your only private vault; the settings page says so instead of showing the form.
 
 <Warning>
   Deletion is immediate and irreversible. There is no trash and no recovery. Export or move anything you need first.
@@ -61,8 +62,8 @@ Because deletion can lock you out of your own data, murmurvault requires a recen
 ## Related
 
 <CardGroup cols={2}>
-  <Card title="Vault settings" icon="gear" href="/settings/vault">
-    Change the passphrase, auto-lock, and top-tier passkeys.
+  <Card title="Vault settings" icon="gear" href="/vault/settings">
+    Rename a vault, change its passphrase, locking, and passkeys.
   </Card>
   <Card title="Manage secrets" icon="key" href="/vault/secrets">
     Add and organize secrets within a vault.
