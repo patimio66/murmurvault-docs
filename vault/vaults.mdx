@@ -9,14 +9,14 @@ A vault is an encrypted container for your secrets, protected by its own passphr
 
 There are two kinds of vault:
 
-- **Private vaults** are the vaults described on this page. Only you can open them, and their keys are yours alone. Every vault you create with **Create vault** is private, and it stays private.
+- **Private vaults** are the vaults described on this page. Only you can open them, and their keys are yours alone. Every vault you create with **Create vault** is private, and it stays private. Private vaults appear in the sidebar under **Private vaults**.
 - **Team vaults** are shared. The owner invites people by email and chooses what each person can access and do. Everyone unlocks with their own passphrase or passkey. Team vaults appear in the sidebar under **Team vaults**. See [Team vaults](/vault/team-vaults).
 
 You can't turn a private vault into a team vault. To share secrets, create a team vault and add them there.
 
 ## Create a vault
 
-1. Open the vault area. If you have none yet, you land on the setup screen.
+1. Open the vault area. If you have none yet, you land on the setup screen. To add another, choose **Add vault**: the **+** next to **Private vaults** in the sidebar, or the button in [Settings → Vault](/settings/vault).
 2. Choose **Create vault** and give it a name (optional) and a passphrase.
 3. Save. The vault's keys are generated in your browser and wrapped by your passphrase.
 
@@ -30,11 +30,11 @@ A vault without a name is shown as `Vault {id}` in the sidebar.
 
 You can create up to **50 private vaults** per account. Each has independent keys, a passphrase, passkeys, and auto-lock settings. Team vaults have their own limit; see [Team vaults](/vault/team-vaults#limits).
 
-- Vaults appear in the sidebar in their saved order.
-- Drag to **reorder** them; the order is saved per account.
-- The first vault by position is your **default** — where you land when you open the app.
+- Private vaults appear in the sidebar under **Private vaults**, in their saved order.
+- To **reorder** them, drag them in the **Private vaults** list in [Settings → Vault](/settings/vault). The order is saved per account.
+- Your first private vault by position is your **default** — where you land when you open the app.
 
-When you reach the limit, the **Add vault** action is disabled and further creation is rejected by the server.
+When you reach the limit, **Add vault** disappears, the **Private vaults** list shows **Vault limit reached (50).**, and the server rejects further creation.
 
 ## Switch and filter
 
@@ -46,9 +46,11 @@ When you reach the limit, the **Add vault** action is disabled and further creat
 
 Deleting a vault permanently destroys it and every secret inside. To delete a team vault, see [Team vaults](/vault/team-vaults#delete-a-team-vault).
 
-1. Open the vault's settings.
-2. Choose to delete, and **type the vault's confirmation name** (its display name in kebab-case) to confirm.
+1. Open [Settings → Vault](/settings/vault).
+2. In the **Private vaults** list, choose **Delete vault** (the bin icon) next to the vault, and **type the vault's confirmation name** (its display name in kebab-case) to confirm.
 3. Re-confirm your **account password** if prompted.
+
+The vault doesn't need to be unlocked, so you can also delete a vault whose passphrase and passkeys are lost. You can't delete your only private vault.
 
 <Warning>
   Deletion is immediate and irreversible. There is no trash and no recovery. Export or move anything you need first.
